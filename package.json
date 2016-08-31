@@ -1,0 +1,38 @@
+{
+  "name": "geojson2svg",
+  "version": "1.0.0",
+  "description": "primitive SVG renderer for geojson with feature styles",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w8r/geojson2svg.git"
+  },
+  "keywords": [
+    "geojson",
+    "renderer",
+    "svg",
+    "stylesheet",
+    "gis"
+  ],
+  "author": "Alexander Milevski <info@w8r.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w8r/geojson2svg/issues"
+  },
+  "homepage": "https://github.com/w8r/geojson2svg#readme",
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "deep-extend": "^0.4.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.0"
+  },
+  "dependencies": {
+    "geojson-project": "^1.0.0"
+  }
+}

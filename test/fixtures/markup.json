@@ -1,0 +1,195 @@
+{
+  "type": "FeatureCollection",
+  "features": [{
+      "type": "Feature",
+      "properties": {
+        "text": "Please, add text",
+        "fontSize": 3,
+        "fontColor": "#000000",
+        "markupType": "textbox"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              57.35452103849593,
+              209.31258154777976
+            ],
+            [
+              57.35452103849593,
+              180.80765764446733
+            ],
+            [
+              97.9740376007162,
+              180.80765764446733
+            ],
+            [
+              97.9740376007162,
+              209.31258154777976
+            ],
+            [
+              57.35452103849593,
+              209.31258154777976
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "color": "#FADD01",
+        "weight": 15,
+        "direction": 0,
+        "opacity": 0.4,
+        "markupType": "highlight"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            35.26320501342883,
+            164.41732640006268
+          ],
+          [
+            141.5969829843902,
+            164.41732640006268
+          ],
+          [
+            141.44404655326764,
+            245.19874182359615
+          ],
+          [
+            28.84734202138219,
+            244.94373642692034
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "symbol": {
+          "name": "gate valve closed",
+          "width": 9.000837604508,
+          "height": 6.001465988832,
+          "svg": "<svg width=\"200\" height=\"200\" viewBox=\"448.98045206828 282.02753516689 9.000837604508 6.001465988832\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\r\n<metadata>\r\n<rdf:RDF\r\nxmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\r\nxmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\r\nxmlns:dc=\"http://purl.org/dc/elements/1.1/\" >\r\n<rdf:Description\r\ndc:symbolType=\"gate valve\"\r\ndc:cdate=\"11/30/2015 5:19:42 PM\"\r\n>\r\n</rdf:Description>\r\n</rdf:RDF>\r\n</metadata>\r\n<g>\r\n  <polygon id=\"612\" style=\"stroke-linejoin:miter;stroke-linecap:round;fill:black;stroke:black;stroke-width:0.25\" points=\"453.480870870534,285.028268161306 449.981289826315,283.02753516689 449.98045206828,287.02753507916 456.981289672788,283.029001243452 456.980451914753,287.029001155722\"/>\r\n  <polyline id=\"621\" style=\"stroke-linejoin:miter;stroke-linecap:round;fill:none;stroke:black;stroke-width:0.25\" points=\"453.481289749552,283.028268205171 453.480451991517,287.028268117441 \"/>\r\n</g>\r\n</svg>\r\n",
+          "url": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iNDQ4Ljk4MDQ1MjA2ODI4IDI4Mi4wMjc1MzUxNjY4OSA5LjAwMDgzNzYwNDUwOCA2LjAwMTQ2NTk4ODgzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiPg0KPG1ldGFkYXRhPg0KPHJkZjpSREYNCnhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyINCnhtbG5zOnJkZnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDEvcmRmLXNjaGVtYSMiDQp4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iID4NCjxyZGY6RGVzY3JpcHRpb24NCmRjOnN5bWJvbFR5cGU9ImdhdGUgdmFsdmUiDQpkYzpjZGF0ZT0iMTEvMzAvMjAxNSA1OjE5OjQyIFBNIg0KPg0KPC9yZGY6RGVzY3JpcHRpb24+DQo8L3JkZjpSREY+DQo8L21ldGFkYXRhPg0KPGc+DQogIDxwb2x5Z29uIGlkPSI2MTIiIHN0eWxlPSJzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7ZmlsbDpibGFjaztzdHJva2U6YmxhY2s7c3Ryb2tlLXdpZHRoOjAuMjUiIHBvaW50cz0iNDUzLjQ4MDg3MDg3MDUzNCwyODUuMDI4MjY4MTYxMzA2IDQ0OS45ODEyODk4MjYzMTUsMjgzLjAyNzUzNTE2Njg5IDQ0OS45ODA0NTIwNjgyOCwyODcuMDI3NTM1MDc5MTYgNDU2Ljk4MTI4OTY3Mjc4OCwyODMuMDI5MDAxMjQzNDUyIDQ1Ni45ODA0NTE5MTQ3NTMsMjg3LjAyOTAwMTE1NTcyMiIvPg0KICA8cG9seWxpbmUgaWQ9IjYyMSIgc3R5bGU9InN0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbGluZWNhcDpyb3VuZDtmaWxsOm5vbmU7c3Ryb2tlOmJsYWNrO3N0cm9rZS13aWR0aDowLjI1IiBwb2ludHM9IjQ1My40ODEyODk3NDk1NTIsMjgzLjAyODI2ODIwNTE3MSA0NTMuNDgwNDUxOTkxNTE3LDI4Ny4wMjgyNjgxMTc0NDEgIi8+DQo8L2c+DQo8L3N2Zz4NCg=="
+        },
+        "scale": 1,
+        "rotation": 0,
+        "markupType": "symbol"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.62322015334064,
+          182.60904269549837
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "symbol": {
+          "name": "globe valve closed",
+          "width": 9.000837604508,
+          "height": 6.001465988832,
+          "svg": "<svg width=\"200\" height=\"200\" viewBox=\"448.98045206828 282.02753516689 9.000837604508 6.001465988832\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\r\n<metadata>\r\n<rdf:RDF\r\nxmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\r\nxmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\r\nxmlns:dc=\"http://purl.org/dc/elements/1.1/\" >\r\n<rdf:Description\r\ndc:symbolType=\"globe valve\"\r\ndc:cdate=\"11/30/2015 5:19:42 PM\"\r\n>\r\n</rdf:Description>\r\n</rdf:RDF>\r\n</metadata>\r\n<g>\r\n  <polygon id=\"612\" style=\"stroke-linejoin:miter;stroke-linecap:round;fill:black;stroke:black;stroke-width:0.25\" points=\"453.480870870534,285.028268161306 449.981289826315,283.02753516689 449.98045206828,287.02753507916 456.981289672788,283.029001243452 456.980451914753,287.029001155722\"/>\r\n  <circle style=\"stroke-linejoin:miter;stroke-linecap:round;fill:black;stroke:black;stroke-width:0.25\" cx=\"453.481289749552\" cy=\"285.028268205171\" r=\"1\"/>\r\n</g>\r\n</svg>\r\n",
+          "url": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iNDQ4Ljk4MDQ1MjA2ODI4IDI4Mi4wMjc1MzUxNjY4OSA5LjAwMDgzNzYwNDUwOCA2LjAwMTQ2NTk4ODgzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiPg0KPG1ldGFkYXRhPg0KPHJkZjpSREYNCnhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyINCnhtbG5zOnJkZnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDEvcmRmLXNjaGVtYSMiDQp4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iID4NCjxyZGY6RGVzY3JpcHRpb24NCmRjOnN5bWJvbFR5cGU9Imdsb2JlIHZhbHZlIg0KZGM6Y2RhdGU9IjExLzMwLzIwMTUgNToxOTo0MiBQTSINCj4NCjwvcmRmOkRlc2NyaXB0aW9uPg0KPC9yZGY6UkRGPg0KPC9tZXRhZGF0YT4NCjxnPg0KICA8cG9seWdvbiBpZD0iNjEyIiBzdHlsZT0ic3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1saW5lY2FwOnJvdW5kO2ZpbGw6YmxhY2s7c3Ryb2tlOmJsYWNrO3N0cm9rZS13aWR0aDowLjI1IiBwb2ludHM9IjQ1My40ODA4NzA4NzA1MzQsMjg1LjAyODI2ODE2MTMwNiA0NDkuOTgxMjg5ODI2MzE1LDI4My4wMjc1MzUxNjY4OSA0NDkuOTgwNDUyMDY4MjgsMjg3LjAyNzUzNTA3OTE2IDQ1Ni45ODEyODk2NzI3ODgsMjgzLjAyOTAwMTI0MzQ1MiA0NTYuOTgwNDUxOTE0NzUzLDI4Ny4wMjkwMDExNTU3MjIiLz4NCiAgPGNpcmNsZSBzdHlsZT0ic3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1saW5lY2FwOnJvdW5kO2ZpbGw6YmxhY2s7c3Ryb2tlOmJsYWNrO3N0cm9rZS13aWR0aDowLjI1IiBjeD0iNDUzLjQ4MTI4OTc0OTU1MiIgY3k9IjI4NS4wMjgyNjgyMDUxNzEiIHI9IjEiLz4NCjwvZz4NCjwvc3ZnPg0K"
+        },
+        "scale": 1,
+        "rotation": 0,
+        "markupType": "symbol"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.36692223439212,
+          201.7897655870646
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "symbol": {
+          "name": "spectacle blind open",
+          "width": 2.79999999999995,
+          "height": 12.6,
+          "svg": "<svg width=\"200\" height=\"200\" viewBox=\"298.692591843188 -387.8 2.79999999999995 12.6\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\r\n<metadata>\r\n<rdf:RDF\r\nxmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\r\nxmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\r\nxmlns:dc=\"http://purl.org/dc/elements/1.1/\" >\r\n<rdf:Description\r\ndc:symbolType=\"spectacle blind\"\r\ndc:state=\"open\"\r\ndc:cdate=\"10/8/2015 1:40:07 PM\"\r\n>\r\n</rdf:Description>\r\n</rdf:RDF>\r\n</metadata>\r\n<g>\r\n  <polygon style=\"stroke-linejoin:miter;stroke-linecap:round;fill:black;stroke:black;stroke-width:0.25\" points=\"299.168712310677,-385.382683432365 299.385485062002,-385.707106781187 299.709908410823,-385.923879532511 300.092591843188,-386 300.475275275553,-385.923879532511 300.799698624375,-385.707106781187 301.016471375699,-385.382683432365 301.092591843188,-385 301.016471375699,-384.617316567635 300.799698624375,-384.292893218813 300.475275275553,-384.076120467489 300.092591843188,-384 299.709908410823,-384.076120467489 299.385485062002,-384.292893218813 299.168712310677,-384.617316567635 299.092591843188,-385 \"></polygon>\r\n  <polyline style=\"stroke-linejoin:miter;stroke-linecap:round;fill:none;stroke:black;stroke-width:0.25\" points=\"300.092591843188,-382 300.092591843188,-377 \"></polyline>\r\n  <polyline style=\"stroke-linejoin:miter;stroke-linecap:round;fill:none;stroke:black;stroke-width:0.25\" points=\"299.092591843188,-381 299.092591843188,-377 \"></polyline>\r\n  <polyline style=\"stroke-linejoin:miter;stroke-linecap:round;fill:none;stroke:black;stroke-width:0.25\" points=\"301.092591843188,-381 301.092591843188,-377 \"></polyline>\r\n  <circle style=\"stroke-linejoin:miter;stroke-linecap:round;fill:none;stroke:black;stroke-width:0.25\" cx=\"300.092591843188\" cy=\"-383\" r=\"1\"></circle>\r\n</g>\r\n</svg>\r\n",
+          "url": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMjk4LjY5MjU5MTg0MzE4OCAtMzg3LjggMi43OTk5OTk5OTk5OTk5NSAxMi42IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSI+DQo8bWV0YWRhdGE+DQo8cmRmOlJERg0KeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIg0KeG1sbnM6cmRmcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wMS9yZGYtc2NoZW1hIyINCnhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgPg0KPHJkZjpEZXNjcmlwdGlvbg0KZGM6c3ltYm9sVHlwZT0ic3BlY3RhY2xlIGJsaW5kIg0KZGM6c3RhdGU9Im9wZW4iDQpkYzpjZGF0ZT0iMTAvOC8yMDE1IDE6NDA6MDcgUE0iDQo+DQo8L3JkZjpEZXNjcmlwdGlvbj4NCjwvcmRmOlJERj4NCjwvbWV0YWRhdGE+DQo8Zz4NCiAgPHBvbHlnb24gc3R5bGU9InN0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbGluZWNhcDpyb3VuZDtmaWxsOmJsYWNrO3N0cm9rZTpibGFjaztzdHJva2Utd2lkdGg6MC4yNSIgcG9pbnRzPSIyOTkuMTY4NzEyMzEwNjc3LC0zODUuMzgyNjgzNDMyMzY1IDI5OS4zODU0ODUwNjIwMDIsLTM4NS43MDcxMDY3ODExODcgMjk5LjcwOTkwODQxMDgyMywtMzg1LjkyMzg3OTUzMjUxMSAzMDAuMDkyNTkxODQzMTg4LC0zODYgMzAwLjQ3NTI3NTI3NTU1MywtMzg1LjkyMzg3OTUzMjUxMSAzMDAuNzk5Njk4NjI0Mzc1LC0zODUuNzA3MTA2NzgxMTg3IDMwMS4wMTY0NzEzNzU2OTksLTM4NS4zODI2ODM0MzIzNjUgMzAxLjA5MjU5MTg0MzE4OCwtMzg1IDMwMS4wMTY0NzEzNzU2OTksLTM4NC42MTczMTY1Njc2MzUgMzAwLjc5OTY5ODYyNDM3NSwtMzg0LjI5Mjg5MzIxODgxMyAzMDAuNDc1Mjc1Mjc1NTUzLC0zODQuMDc2MTIwNDY3NDg5IDMwMC4wOTI1OTE4NDMxODgsLTM4NCAyOTkuNzA5OTA4NDEwODIzLC0zODQuMDc2MTIwNDY3NDg5IDI5OS4zODU0ODUwNjIwMDIsLTM4NC4yOTI4OTMyMTg4MTMgMjk5LjE2ODcxMjMxMDY3NywtMzg0LjYxNzMxNjU2NzYzNSAyOTkuMDkyNTkxODQzMTg4LC0zODUgIj48L3BvbHlnb24+DQogIDxwb2x5bGluZSBzdHlsZT0ic3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1saW5lY2FwOnJvdW5kO2ZpbGw6bm9uZTtzdHJva2U6YmxhY2s7c3Ryb2tlLXdpZHRoOjAuMjUiIHBvaW50cz0iMzAwLjA5MjU5MTg0MzE4OCwtMzgyIDMwMC4wOTI1OTE4NDMxODgsLTM3NyAiPjwvcG9seWxpbmU+DQogIDxwb2x5bGluZSBzdHlsZT0ic3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1saW5lY2FwOnJvdW5kO2ZpbGw6bm9uZTtzdHJva2U6YmxhY2s7c3Ryb2tlLXdpZHRoOjAuMjUiIHBvaW50cz0iMjk5LjA5MjU5MTg0MzE4OCwtMzgxIDI5OS4wOTI1OTE4NDMxODgsLTM3NyAiPjwvcG9seWxpbmU+DQogIDxwb2x5bGluZSBzdHlsZT0ic3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1saW5lY2FwOnJvdW5kO2ZpbGw6bm9uZTtzdHJva2U6YmxhY2s7c3Ryb2tlLXdpZHRoOjAuMjUiIHBvaW50cz0iMzAxLjA5MjU5MTg0MzE4OCwtMzgxIDMwMS4wOTI1OTE4NDMxODgsLTM3NyAiPjwvcG9seWxpbmU+DQogIDxjaXJjbGUgc3R5bGU9InN0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbGluZWNhcDpyb3VuZDtmaWxsOm5vbmU7c3Ryb2tlOmJsYWNrO3N0cm9rZS13aWR0aDowLjI1IiBjeD0iMzAwLjA5MjU5MTg0MzE4OCIgY3k9Ii0zODMiIHI9IjEiPjwvY2lyY2xlPg0KPC9nPg0KPC9zdmc+DQo="
+        },
+        "scale": 1,
+        "rotation": 0,
+        "markupType": "symbol"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.36692223439212,
+          227.94529680283682
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "color": "#000000",
+        "weight": 1,
+        "direction": 1,
+        "opacity": 1,
+        "markupType": "line"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            34.66922234392115,
+            149.47870315552026
+          ],
+          [
+            165.4933688814418,
+            149.47870315552026
+          ],
+          [
+            165.44687842278205,
+            269.03679060367926
+          ],
+          [
+            31.156344431582795,
+            268.92229570754654
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "color": "#58DD3E",
+        "weight": 15,
+        "direction": 0,
+        "opacity": 0.4,
+        "markupType": "highlight"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            28.566265060240994,
+            181.7371916549726
+          ],
+          [
+            28.566265060240994,
+            228.8494275565744
+          ],
+          [
+            97.4480150853123,
+            228.81714784336253
+          ]
+        ]
+      }
+    }
+  ]
+}
