@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+var fs     = require('fs');
+var path   = require('path');
+var gj2svg = require('../');
+var argv   = require('minimist')(process.argv.slice(2));
+
+var pkg = require('../package.json');
+
+var args = process.argv.slice(2);
+var arg = args[0];
+
+var stream = process.stdin;
+var geoJson = '';
+
+if (arg === '--version') {
+  console.log(pkg.version);
+  process.exit(0)
+} else if (arg === '--help') {
+  console.log('\n GeoJSON to SVG converter', pkg.version, '\n');
+  console.log('  $ cat data.geojson | geojson2svg -s style.json > out.json');
+  console.log('  $ geojson2svg -i data.geojson -s style.json > out.json\n');
+  console.log();
+  process.exit(0);
+} else if (arg) {
+  stream = fs.createReadStream(path.join(process.cwd(), arg));
+}
+
+stream.on('data', function (data) {
+  geoJson += data;
+});
+
+stream.resume();
+
+stream.on('end', function () {
+  var json = gj2svg(xml).toJSON();
+  process.stdout.write(JSON.stringify(json, 0, 2) + '\n');
+});

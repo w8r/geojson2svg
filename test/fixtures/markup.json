@@ -40,7 +40,7 @@
       "type": "Feature",
       "properties": {
         "color": "#FADD01",
-        "weight": 15,
+        "weight": 2,
         "direction": 0,
         "opacity": 0.4,
         "markupType": "highlight"
@@ -168,7 +168,7 @@
       "type": "Feature",
       "properties": {
         "color": "#58DD3E",
-        "weight": 15,
+        "weight": 2,
         "direction": 0,
         "opacity": 0.4,
         "markupType": "highlight"
