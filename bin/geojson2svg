@@ -1,38 +1,73 @@
 #!/usr/bin/env node
+var fs      = require('fs');
+var path    = require('path');
+var gj2svg  = require('../');
+var argv    = require('minimist')(process.argv.slice(2));
 
-var fs     = require('fs');
-var path   = require('path');
-var gj2svg = require('../');
-var argv   = require('minimist')(process.argv.slice(2));
+var pkg     = require('../package.json');
 
-var pkg = require('../package.json');
+var args    = process.argv.slice(2);
 
-var args = process.argv.slice(2);
-var arg = args[0];
-
-var stream = process.stdin;
+var stream  = process.stdin;
+var style   = null;
 var geoJson = '';
+var svg     = '';
+var extent  = null;
+var type    = null;
 
-if (arg === '--version') {
+console.log(argv);
+
+if (argv.v || argv.version) {       // --version, -v
   console.log(pkg.version);
   process.exit(0)
-} else if (arg === '--help') {
+} else if (argv.h || argv.help) {   // --help, -h
   console.log('\n GeoJSON to SVG converter', pkg.version, '\n');
-  console.log('  $ cat data.geojson | geojson2svg -s style.json > out.json');
-  console.log('  $ geojson2svg -i data.geojson -s style.json > out.json\n');
-  console.log();
+  console.log('  $ geojson2svg --input data.geojson --style style.json --output out.svg --extent [0,0,300,300]');
+  console.log('  $ cat data.geojson | geojson2svg -s style.json > out.svg');
+  console.log('  $ geojson2svg -i data.geojson -s style.json > out.svg\n');
+  console.log(' Options:');
+  console.log('   -h, --help                          prints this message');
+  console.log('   -i, --input  file                   file name to read GeoJSON from, otherwise stdin');
+  console.log('   -o, --output file                   file name to write SVG, otherwise stdout');
+  console.log('   -e, --extent [xmin,ymin,xmax,ymax]  extent to force as a viewbox of SVG, optional');
+  console.log('   -t, --type                          field in properties to select style by');
+  console.log('\n');
   process.exit(0);
-} else if (arg) {
-  stream = fs.createReadStream(path.join(process.cwd(), arg));
+} else if (argv.i || argv.input) {  // --input, -i
+  stream = fs.createReadStream(path.join(process.cwd(), argv.i || argv.input));
+}
+
+if (argv.s || argv.style) {        // --style, -s
+  style = JSON.parse(
+    fs.readFileSync(
+      path.join(process.cwd(), argv.s || argv.style), { encoding: 'utf-8'}));
+}
+
+if (argv.e || argv.extent) {       // --extent, -e
+  extent = (argv.e || argv.extent)
+    .replace(/[^0-9.,-]/g, '')
+    .split(/\,/)
+    .map(parseFloat);
+}
+
+if (argv.t || argv.type) {         // --type, -t
+  type = argv.t || argv.type;
 }
 
 stream.on('data', function (data) {
   geoJson += data;
 });
-
 stream.resume();
 
 stream.on('end', function () {
-  var json = gj2svg(xml).toJSON();
-  process.stdout.write(JSON.stringify(json, 0, 2) + '\n');
+  var json = JSON.parse(geoJson);
+  //svg = gj2svg(json, style, extent, null, type);
+  if (argv.o || argv.output) {     // --output, -o
+    fs.writeFile(path.join(process.cwd(), argv.o || argv.output), svg, {
+      encoding: 'utf-8'}, function (err, success) {
+        if (!err) console.log('done');
+      });
+  } else {
+    process.stdout.write(svg + '\n');
+  }
 });
