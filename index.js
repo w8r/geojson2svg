@@ -10,7 +10,9 @@ module.exports.DefaultStyles = DefaultStyles;
 var XMLNS   = 'http://www.w3.org/2000/svg';
 var XLINK   = 'http://www.w3.org/1999/xlink';
 var VERSION = 1.2;
+
 var SYMBOL  = 'symbol';
+var TEXTBOX = 'textbox';
 
 var DefaultStyles = require('./src/default_styles');
 
@@ -199,17 +201,58 @@ Renderer.prototype = {
 
 
   /**
+   * @param  {Feature}        feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number}  bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _renderText: function (feature, accum, bbox, featureBounds) {
+    var properties = extend({}, this._selectStyle(feature), feature.properties);
+    var fontSize   = properties.fontSize;
+    var fontColor  = properties.fontColor;
+    var fontFamily = properties.fontFamily || '';
+
+    var text = properties.text;
+    console.log(feature, featureBounds);
+    var pos = [featureBounds[0], featureBounds[1]];
+
+    if (fontFamily) {
+      fontFamily = 'font-family="' + fontFamily + '" ';
+    }
+
+    accum.push('<text ', fontFamily,
+      'font-size="', fontSize, '" ',
+      'fill="',      fontColor, '" ',
+      'x="',         pos[0], '" ',
+      'y="',         pos[1], '" ',
+      '>',
+        text,
+      '</text>');
+  },
+
+
+  _renderTextContent: function(text, fontSize, featureBounds) {
+    
+  },
+
+
+  /**
    * @param  {Feature} feature
    * @param  {Array.<String>} accum
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
   _renderPolygon: function (feature, accum, bbox, featureBounds) {
-    var properties = feature.properties;
-    var className = ('polygon ' + (properties.className || '')).trim();
-    accum.push('<path class="', className,
-      '" d="', this._getPath(feature, true, bbox, featureBounds), '"',
-      this._getStyles(feature, bbox, featureBounds), '/>');
+
+      var properties = feature.properties;
+      var className = ('polygon ' + (properties.className || '')).trim();
+      accum.push('<path class="', className,
+        '" d="', this._getPath(feature, true, bbox, featureBounds), '"',
+        this._getStyles(feature, bbox, featureBounds), '/>');
+
+    if (this._type && feature.properties[this._type] === TEXTBOX) {
+      this._renderText(feature, accum, bbox, featureBounds);
+    }
   },
 
 
@@ -220,7 +263,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} featureBounds
    */
   _renderPoint: function (feature, accum, bbox, featureBounds) {
-    if (feature.properties.markupType === SYMBOL) {
+    if (this._type && feature.properties[this._type] === SYMBOL) {
       this._renderSymbol(feature, accum, bbox, featureBounds);
     } else {
       var coord = feature.geometry.coordinates;
@@ -324,10 +367,10 @@ Renderer.prototype = {
     var rotation = props.rotation || 0;
 
     var m = Matrix.from(1, 0, 0, 1, 0, 0)
-      .translate(-center[0], -center[1])
+      .translate(center[0], center[1])
       .rotate(rotation)
       .scale(scale, scale)
-      .translate(center[0], center[1]);
+      .translate(-center[0], -center[1]);
 
     return m.toArray();
   },

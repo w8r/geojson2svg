@@ -30,6 +30,7 @@
   "devDependencies": {
     "browserify": "^13.1.0",
     "deep-extend": "^0.4.1",
+    "nightmare": "^2.7.0",
     "nodemon": "^1.10.2",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0"

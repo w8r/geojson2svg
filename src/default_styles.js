@@ -1,4 +1,5 @@
 var FILL    = '#000000';
+var COLOR   = '#333333';
 var WEIGHT  = 1;
 var OPACITY = 0.75;
 
@@ -7,19 +8,26 @@ var Styles = {
 
   'Polygon': {
     stroke: 1,
-    color: '#333333',
+    color: COLOR,
     opacity: OPACITY
   },
 
   'LineString': {
     stroke: 1,
-    color: '#333333',
+    color: COLOR,
     opacity: OPACITY
   },
 
   'Point': {
     radius: 3,
-    color: '#333333'
+    color: COLOR
+  },
+
+  'textbox': {
+    'fontFamily': 'Helvetica, Arial, sans-serif',
+    'fontColor': COLOR,
+    'weight': 0.25,
+    'color': COLOR
   }
 };
 

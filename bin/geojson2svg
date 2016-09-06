@@ -15,7 +15,7 @@ var svg     = '';
 var extent  = null;
 var type    = null;
 
-console.log(argv);
+// console.log(argv);
 
 if (argv.v || argv.version) {       // --version, -v
   console.log(pkg.version);
@@ -59,13 +59,14 @@ stream.on('data', function (data) {
 });
 stream.resume();
 
+// done, render
 stream.on('end', function () {
   var json = JSON.parse(geoJson);
-  //svg = gj2svg(json, style, extent, null, type);
+  svg = gj2svg(json, style, extent, null, type).render();
   if (argv.o || argv.output) {     // --output, -o
     fs.writeFile(path.join(process.cwd(), argv.o || argv.output), svg, {
       encoding: 'utf-8'}, function (err, success) {
-        if (!err) console.log('done');
+        process.exit(0);
       });
   } else {
     process.stdout.write(svg + '\n');
