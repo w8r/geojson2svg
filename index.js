@@ -1,5 +1,7 @@
 var project = require('geojson-project');
 var extend  = require('deep-extend');
+var hash    = require('string-hash');
+var Matrix  = require("transformation-matrix-js").Matrix;
 
 module.exports               = renderer;
 module.exports.Renderer      = Renderer;
@@ -29,11 +31,17 @@ function Renderer (gj, styles, extent, projection, type) {
   this._projection = null;
   this._type       = null;
 
+  this._defs       = null;
+
   if (gj)         this.data(gj);
   if (styles)     this.styles(styles);
   if (extent)     this.extent(extent);
   if (projection) this.projection(project);
   if (type)       this.type(type);
+}
+
+function renderer (gj, styles, extent, project, type) {
+  return new Renderer(gj, styles, extent, project, type);
 }
 
 Renderer.prototype = {
@@ -115,13 +123,14 @@ Renderer.prototype = {
 
     var rendered = [];
     var bbox = getDefaultBBox();
+    this._defs = [];
     for (var i = 0, len = this._data.features.length; i < len; i++) {
       this._renderFeature(this._data.features[i], rendered, bbox);
     }
 
     this._renderContainer(rendered,
       this._extent || this._data.extent || this._data.bbox ||
-      this._data.properties ? this._data.properties.bbox : null || bbox);
+      (this._data.properties ? this._data.properties.bbox : null) || bbox);
     return rendered.join('');
   },
 
@@ -134,9 +143,15 @@ Renderer.prototype = {
    */
   _renderContainer: function (accum, bbox) {
     var viewBox = [bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]];
+    if (this._defs.length !== 0) {
+      accum.unshift('</defs>');
+      accum.unshift.apply(accum, this._defs.slice());
+      accum.unshift('<defs>');
+    }
     accum.unshift(
       ['<svg viewBox="', viewBox.join(' '), '" xmlns="', XMLNS,
        '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''), '<g>');
+
     accum.push('</g>', '</svg>');
   },
 
@@ -223,6 +238,102 @@ Renderer.prototype = {
 
 
   /**
+   * Create symbol for putting into defs
+   *
+   * @param  {Feature} feature
+   * @return {String} symbol id
+   */
+  _getSymbolDef: function (feature) {
+    var src = feature.properties.symbol.src.trim();
+    var viewBox = src.match(/view[Bb]ox\=["']([^"']+)["']/m)[1]
+      .split(' ').map(parseFloat);
+    var id = 'feature-symbol-' + hash(src);
+
+    // strip garbage
+    src = src
+      .replace(/<\/?svg[^>]*>/g, '')
+      .replace(/\<\?xml.+\?\>|\<\!DOCTYPE.+]\>/g, '')
+      .replace(/<metadata>[\s\S]*?<\/metadata>/g, '');
+
+    var symbol = [
+      '<symbol id="', id, '" viewBox="', viewBox.join(' '), '">',
+        src,
+      '</symbol>'
+    ].join('');
+
+    if (this._defs.indexOf(symbol) === -1) {
+      this._defs.push(symbol);
+    }
+
+    return id;
+  },
+
+
+  /**
+   * @param  {Feature}        feature
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   * @return {String}
+   */
+  _createSymbol: function (feature, bbox, featureBounds) {
+    var symbol    = feature.properties.symbol;
+    var symbolDef = this._getSymbolDef(feature);
+    var width     = symbol.width  || '';
+    var height    = symbol.height || '';
+    var coords    = feature.geometry.coordinates;
+
+    var symbolBBox = [
+      coords[0] - width / 2, coords[1] - height / 2,
+      coords[0] + width / 2, coords[1] + height / 2
+    ];
+
+    var transform = this._getSymbolTransform(feature, bbox, featureBounds);
+    symbolBBox = Matrix.from.apply(Matrix, transform).applyToArray(symbolBBox);
+
+    extendBBox(featureBounds, symbolBBox.slice(0, 2));
+    extendBBox(featureBounds, symbolBBox.slice(2, 4));
+
+    extendBBox(bbox,          symbolBBox.slice(0, 2));
+    extendBBox(bbox,          symbolBBox.slice(2, 4));
+
+    var use = [
+      '<use xlink:href="#', symbolDef, '" transform="matrix(',
+        transform.join(' '),   ')" ',
+        'width="',  width,     '" ',
+        'height="', height,    '" ',
+        'x="',      coords[0] ,'" ',
+        'y="',      coords[1] ,'" ',
+        this._getStyles(feature, bbox, featureBounds),
+      '/>'
+    ].join('');
+    return use;
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   * @return {Array.<Number>} matrix
+   */
+  _getSymbolTransform: function (feature, bbox, featureBounds) {
+    var props    = feature.properties;
+    var symbol   = props.symbol;
+    var center   = feature.geometry.coordinates;
+    var scale    = props.scale    || 1;
+    var rotation = props.rotation || 0;
+
+    var m = Matrix.from(1, 0, 0, 1, 0, 0)
+      .translate(-center[0], -center[1])
+      .rotate(rotation)
+      .scale(scale, scale)
+      .translate(center[0], center[1]);
+
+    return m.toArray();
+  },
+
+
+  /**
    * @param  {Feature} feature
    * @param  {Array.<String>} accum
    * @param  {Array.<Number>} bbox
@@ -232,14 +343,19 @@ Renderer.prototype = {
     var coord = feature.geometry.coordinates;
     var className = ('point ' + (feature.properties.className || '')).trim();
     var radius = feature.properties.radius || 1;
+    var symbol;
 
-    extendBBox(bbox, coord);
-    extendBBox(featureBounds, coord);
+    if (feature.properties.symbol.src) {
+      accum.push(this._createSymbol(feature, bbox, featureBounds));
+    } else {
+      extendBBox(bbox, coord);
+      extendBBox(featureBounds, coord);
 
-    accum.push('<circle class="', className,
-      '" cx="', coord[0], '" cy="', coord[1],
-      '" r="',  radius, '" ',
-      this._getStyles(feature, bbox, featureBounds), '/>');
+      accum.push('<circle class="', className,
+        '" cx="', coord[0], '" cy="', coord[1],
+        '" r="',  radius, '" ',
+        this._getStyles(feature, bbox, featureBounds), '/>');
+    }
   },
 
 
@@ -323,7 +439,7 @@ Renderer.prototype = {
       styles = extend({}, feature.properties, this._selectStyle(feature));
     }
 
-    if (styles.stroke) {
+    if (styles.stroke || styles.weight) {
       currentStyle['stroke']          = styles.color;
       currentStyle['stroke-opacity']  = styles.opacity;
       currentStyle['stroke-width']    = styles.weight;
@@ -366,11 +482,6 @@ Renderer.prototype = {
 };
 
 
-function renderer (gj, styles, extent, project, type) {
-  return new Renderer(gj, styles, extent, project, type);
-}
-
-
 /**
  * BBox 'extend' in-place
  *
@@ -401,6 +512,9 @@ function padBBox (bbox, padding) {
 }
 
 
+/**
+ * @return {Array.<Number>}
+ */
 function getDefaultBBox () {
   return [Infinity, Infinity, -Infinity, -Infinity];
 }

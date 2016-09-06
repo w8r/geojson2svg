@@ -36,6 +36,8 @@
   },
   "dependencies": {
     "geojson-project": "^1.0.0",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "string-hash": "^1.1.0",
+    "transformation-matrix-js": "^2.6.5"
   }
 }

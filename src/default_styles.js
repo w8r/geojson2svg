@@ -11,21 +11,21 @@ var Styles = {
     opacity: OPACITY
   },
 
-  LineString: {
+  'LineString': {
     stroke: 1,
     color: '#333333',
     opacity: OPACITY
   },
 
-  Point: {
+  'Point': {
     radius: 3,
     color: '#333333'
   }
 };
 
 
-Styles.MultiPolygon    = Styles.Polygon;
-Styles.MultiLineString = Styles.LineString;
-Styles.MultiPoint      = Styles.Point;
+Styles['MultiPolygon']    = Styles.Polygon;
+Styles['MultiLineString'] = Styles.LineString;
+Styles['MultiPoint']      = Styles.Point;
 
 module.exports = Styles;

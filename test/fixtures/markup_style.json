@@ -1,0 +1,10 @@
+{
+  "highlight": {
+    "opacity": 0.5,
+    "weight": 15
+  },
+  "line": {
+    "opacity": 1,
+    "weight": 0.25
+  }
+}
