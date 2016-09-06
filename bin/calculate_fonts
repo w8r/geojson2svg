@@ -2,6 +2,7 @@
 var Nightmare = require('nightmare');
 var path      = require('path');
 var fs        = require('fs');
+var measure   = require('../src/measure_glyphs');
 var argv      = require('minimist')(process.argv.slice(2));
 
 var nightmare = Nightmare({
@@ -13,7 +14,7 @@ var svgTemplate = fs.readFileSync(
 
 var fontSizes  = [8, 10, 12, 16, 20, 32, 48];
 if (argv.s || argv.sizes) {
-  fontSizes = (argv.e || argv.extent)
+  fontSizes = (argv.s || argv.sizes)
     .replace(/[^0-9.,-]/g, '')
     .split(/\,/)
     .map(parseFloat);
@@ -23,69 +24,14 @@ var verbose = !!(argv.v || argv.verbose);
 
 var fontFamily = argv.f || argv.fontFamily || 'Arial, Helvetica, sans-serif';
 
-
 nightmare
   .goto('about:blank')
-  .evaluate(function (svgTemplate, fontSizes, fontFamily) {
-    document.body.innerHTML = svgTemplate;
-    var a = document.querySelector('#lower');
-    var A = document.querySelector('#upper');
-    var n = document.querySelector('#n');
-    var s = document.querySelector('#s');
-
-    function measure(el) {
-      var symbols = el.innerHTML.length;
-      var length = el.getComputedTextLength();
-      var bbox = el.getBBox();
-      return {
-        length: length,
-        width: bbox.width,
-        height: bbox.height,
-        n: symbols,
-        avg: length / symbols
-      };
-    }
-
-    return fontSizes.map(function(size) {
-      var res = {};
-      var ids = ['a', 'A', 'n', 's'];
-
-      [a, A, n, s].forEach(function (el, i) {
-        el.setAttribute('font-size', size);
-        el.setAttribute('font-family', fontFamily);
-        res[ids[i]] = measure(el);
-      });
-
-      return {
-        size: size,
-        avg: Object.keys(res).reduce(function(acc, id) {
-          return acc + res[id].avg;
-        }, 0) / Object.keys(res).length,
-        height: Object.keys(res).reduce(function(acc, id) {
-          return acc + res[id].height;
-        }, 0) / Object.keys(res).length,
-        measures: res
-      };
-    });
-  }, svgTemplate, fontSizes, fontFamily)
+  .evaluate(function (fontFamily, fontSizes, measure, verbose) {
+    eval(measure);
+    return measureGlyphs(fontFamily, fontSizes, verbose);
+  }, fontFamily, fontSizes, measure.toString(), verbose)
   .end()
   .then(function(res) {
-    var result = JSON.stringify(result, 0, 2);
-    if (!verbose) {
-      result = res.map(function (values) {
-        return {
-          avg: values.avg,
-          size: values.size,
-          height: values.height
-        };
-      });
-    } else {
-      result = res;
-    }
-    result = JSON.stringify({
-      fontFamily: fontFamily,
-      values: result
-    }, 0, 2);
-    process.stdout.write(result);
+    process.stdout.write(JSON.stringify(res, 0, 2));
     process.exit(0);
   });
