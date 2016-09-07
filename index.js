@@ -1,6 +1,7 @@
 var project = require('geojson-project');
 var extend  = require('deep-extend');
 var hash    = require('string-hash');
+var measure = require('./src/measure_glyphs');
 var Matrix  = require("transformation-matrix-js").Matrix;
 
 module.exports               = renderer;
@@ -15,6 +16,12 @@ var SYMBOL  = 'symbol';
 var TEXTBOX = 'textbox';
 
 var DefaultStyles = require('./src/default_styles');
+var DefaultFonts  = [
+  require('./fonts/arial_helvetica_ss'),
+  require('./fonts/georgia_times_s'),
+  require('./fonts/lucida_monaco_mono'),
+  require('./fonts/verdana_geneva_ss')
+];
 
 /**
  *
@@ -25,13 +32,15 @@ var DefaultStyles = require('./src/default_styles');
  * @param {Array.<Number>=} extent
  * @param {Function=} projection
  * @param {String|Function=} type
+ * @param {Object}           fonts
  */
-function Renderer (gj, styles, extent, projection, type) {
+function Renderer (gj, styles, extent, projection, type, fonts) {
   this._data       = null;
   this._extent     = null;
   this._styles     = DefaultStyles;
   this._projection = null;
   this._type       = null;
+  this._fonts      = [];
 
   this._defs       = null;
 
@@ -40,6 +49,7 @@ function Renderer (gj, styles, extent, projection, type) {
   if (extent)     this.extent(extent);
   if (projection) this.projection(project);
   if (type)       this.type(type);
+  this.fonts(fonts || DefaultFonts);
 }
 
 function renderer (gj, styles, extent, project, type) {
@@ -57,6 +67,26 @@ Renderer.prototype = {
   styles: function (styles) {
     this._styles = (typeof styles === 'function') ?
       styles : extend({}, DefaultStyles, styles);
+    return this;
+  },
+
+
+  /**
+   * @param  {Array.<Object>} fonts
+   * @return {Renderer}
+   */
+  fonts: function(fonts) {
+    if (!Array.isArray(fonts)) {
+      fonts = [fonts];
+    }
+
+    for (var i = 0, len = fonts.length; i < len; i++) {
+      fonts[i].values = fonts[i].values.sort(function(a, b) {
+        return a.size - b.size;
+      });
+      this._fonts.push(fonts);
+    }
+
     return this;
   },
 
@@ -213,7 +243,6 @@ Renderer.prototype = {
     var fontFamily = properties.fontFamily || '';
 
     var text = properties.text;
-    console.log(feature, featureBounds);
     var pos = [featureBounds[0], featureBounds[1]];
 
     if (fontFamily) {
@@ -226,13 +255,39 @@ Renderer.prototype = {
       'x="',         pos[0], '" ',
       'y="',         pos[1], '" ',
       '>',
-        text,
+        this._renderTextContent(text, fontSize, fontFamily, featureBounds),
       '</text>');
   },
 
 
-  _renderTextContent: function(text, fontSize, featureBounds) {
-    
+  _getFontData: function (fontFamily, fontSize) {
+    // try and select from available
+    var data = null;
+    for (var i = 0, len = this._fonts.length; i < len; i++) {
+      var font = this._fonts[i];
+      if (font.fontFamily === fontSize) {
+        for (var j = 0, jj = font.values.length; j < jj; j++) {
+          if (font.values[j].size === fontSize) {
+            data = font.values[i];
+            break;
+          }
+        }
+        break;
+      }
+    }
+    console.log(data);
+    // none available
+    // if in browser - calculate
+    // else interpolate
+
+    if (typeof window !== 'undefined') console.log(measure(fontFamily, fontSize));
+  },
+
+
+  _renderTextContent: function(text, fontSize, fontFamily, featureBounds) {
+    var fontData = this._getFontData(fontFamily, fontSize);
+    console.log(fontData);
+    return text;
   },
 
 
@@ -243,12 +298,11 @@ Renderer.prototype = {
    * @param  {Array.<Number>} featureBounds
    */
   _renderPolygon: function (feature, accum, bbox, featureBounds) {
-
-      var properties = feature.properties;
-      var className = ('polygon ' + (properties.className || '')).trim();
-      accum.push('<path class="', className,
-        '" d="', this._getPath(feature, true, bbox, featureBounds), '"',
-        this._getStyles(feature, bbox, featureBounds), '/>');
+    var properties = feature.properties;
+    var className = ('polygon ' + (properties.className || '')).trim();
+    accum.push('<path class="', className,
+      '" d="', this._getPath(feature, true, bbox, featureBounds), '"',
+      this._getStyles(feature, bbox, featureBounds), '/>');
 
     if (this._type && feature.properties[this._type] === TEXTBOX) {
       this._renderText(feature, accum, bbox, featureBounds);
