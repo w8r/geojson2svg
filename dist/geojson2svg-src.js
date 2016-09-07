@@ -232,15 +232,15 @@ module.exports={
 /**
  * @preserve
  * GeoJSON -> SVG text renderer
- * 
+ *
  * @license MIT
  * @copyright 2016 Alexander Milevski <info@w8r.name>
  */
-var project = require('geojson-project');
-var extend  = require('json-extend');
-var hash    = require('string-hash');
-var measure = require('./src/measure_glyphs');
-var Matrix  = require("transformation-matrix-js").Matrix;
+var project     = require('geojson-project');
+var extend      = require('json-extend');
+var hash        = require('string-hash');
+var getFontData = require('./src/get_font_data');
+var Matrix      = require("transformation-matrix-js").Matrix;
 
 module.exports               = renderer;
 module.exports.Renderer      = Renderer;
@@ -252,6 +252,7 @@ var VERSION = 1.2;
 
 var SYMBOL  = 'symbol';
 var TEXTBOX = 'textbox';
+
 
 var DefaultStyles = require('./src/default_styles');
 var DefaultFonts  = [
@@ -501,45 +502,15 @@ Renderer.prototype = {
   },
 
 
-  _getFontData: function (fontFamily, fontSize) {
-    // try and select from available
-    var data = null;
-    var prev, next;
-    for (var i = 0, len = this._fonts.length; i < len; i++) {
-      var font = this._fonts[i];
-      if (font.fontFamily === fontFamily) {
-        for (var j = 0, jj = font.values.length; j < jj; j++) {
-          var values = font.values[j];
-          prev = values;
-          next = (j < jj - 1) ? font.values[(j + 1)] : null;
-          if (values.size === fontSize) {
-            data = values;
-            break;
-          }
-        }
-        break;
-      }
-    }
-
-    console.log(fontFamily, fontSize, data, prev, next);
-
-
-    if (!data) {// none available
-      if (typeof window !== 'undefined') { // if in browser - calculate
-        data = measure(fontFamily, fontSize).values[0];
-      } else { // else interpolate
-
-      }
-    } else {
-
-    }
-
-    return data;
-  },
-
-
+  /**
+   * @param  {String}         text
+   * @param  {Number}         fontSize
+   * @param  {String}         fontFamily
+   * @param  {Array.<Number>} featureBounds
+   * @return {String}
+   */
   _renderTextContent: function(text, fontSize, fontFamily, featureBounds) {
-    var fontData = this._getFontData(fontFamily, fontSize);
+    var fontData = getFontData(fontFamily, fontSize, this._fonts);
     console.log('font data ', fontData);
     return text;
   },
@@ -870,7 +841,7 @@ function getDefaultBBox () {
   return [Infinity, Infinity, -Infinity, -Infinity];
 }
 
-},{"./fonts/arial_helvetica_ss":1,"./fonts/georgia_times_s":2,"./fonts/helvetica_arial_ss":3,"./fonts/lucida_monaco_mono":4,"./fonts/verdana_geneva_ss":5,"./src/default_styles":11,"./src/measure_glyphs":12,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}],7:[function(require,module,exports){
+},{"./fonts/arial_helvetica_ss":1,"./fonts/georgia_times_s":2,"./fonts/helvetica_arial_ss":3,"./fonts/lucida_monaco_mono":4,"./fonts/verdana_geneva_ss":5,"./src/default_styles":11,"./src/get_font_data":12,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}],7:[function(require,module,exports){
 
 /**
  * @param  {Object}     data GeoJSON
@@ -2120,6 +2091,85 @@ Styles['MultiPoint']      = Styles.Point;
 module.exports = Styles;
 
 },{}],12:[function(require,module,exports){
+var LINE_RATIO  = 1.1567;
+var WIDTH_RATIO = 1 / 1.946;
+var measure     = require('./measure_glyphs');
+
+/**
+ * @param  {String} fontFamily
+ * @param  {Number} fontSize
+ * @param  {Array.<Object>} fontData
+ * @return {Object}
+ */
+module.exports = function getFontData (fontFamily, fontSize, fontData) {
+  // try and select from available
+  var data = null;
+  var prev, next;
+  for (var i = 0, len = fontData.length; i < len; i++) {
+    var font = fontData[i];
+    prev = next = null;
+
+    if (font.fontFamily === fontFamily) {
+      for (var j = 0, jj = font.values.length; j < jj; j++) {
+        var values = font.values[j];
+        if (values.size === fontSize) {
+          data = values;
+          break;
+        } else if (values.size < fontSize) {
+          prev = values;
+        } else if (!next && values.size > fontSize) {
+          next = values;
+        }
+      }
+      break;
+    }
+  }
+
+  if (!data) {               // none available
+    var ratio;
+    if (typeof window !== 'undefined') {  // if in browser - calculate
+      data = measure(fontFamily, fontSize).values[0];
+    } else if (prev) {       // else interpolate
+      if (next) {            // between two values
+        ratio = (fontSize - prev.size) / (next.size - prev.size);
+        data = {
+          avg:    prev.avg + (next.avg - prev.avg) * ratio,
+          height: prev.height + (next.height - prev.height) * ratio,
+          size:   fontSize
+        };
+      } else {               // larger than the largest
+        data = fromOtherValue(fontSize, prev);
+      }
+    } else if (next) {        // smaller than smallest
+      data = fromOtherValue(fontSize, next);
+    } else {                  // not enough data at all, roughly calculate
+      data = {
+        avg:    fontSize * WIDTH_RATIO,
+        height: fontSize * LINE_RATIO,
+        size:   fontSize
+      };
+    }
+  }
+
+  return data;
+};
+
+
+/**
+ * @param  {Number} fontSize
+ * @param  {Object} value
+ * @return {Object} font data
+ */
+function fromOtherValue (fontSize, value) {
+  var ratio = fontSize / value.size;
+  return {
+    avg:    value.avg * ratio,
+    size:   fontSize,
+    height: value.height * ratio
+  };
+}
+
+},{"./measure_glyphs":13}],13:[function(require,module,exports){
 /**
  * The reason for everything inlined is that the function has to have a
  * single body to be `eval`ed in electron context
