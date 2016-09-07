@@ -2,6 +2,11 @@
   "fontFamily": "Verdana, Geneva, sans-serif",
   "values": [
     {
+      "avg": 1.7060499924879808,
+      "height": 3.55078125,
+      "size": 3
+    },
+    {
       "avg": 4.549466646634615,
       "height": 9.54296875,
       "size": 8

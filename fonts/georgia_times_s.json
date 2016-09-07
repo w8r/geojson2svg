@@ -2,6 +2,11 @@
   "fontFamily": "Georgia, Times, serif",
   "values": [
     {
+      "avg": 1.5411266620342547,
+      "height": 3.56640625,
+      "size": 3
+    },
+    {
       "avg": 4.109671098758013,
       "height": 9.5,
       "size": 8

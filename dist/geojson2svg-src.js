@@ -1,0 +1,2248 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports={
+  "fontFamily": "Arial, Helvetica, sans-serif",
+  "values": [
+    {
+      "avg": 1.5294586181640626,
+      "height": 3.03125,
+      "size": 3
+    },
+    {
+      "avg": 4.078556315104167,
+      "height": 8.54296875,
+      "size": 8
+    },
+    {
+      "avg": 5.098195393880208,
+      "height": 11.0234375,
+      "size": 10
+    },
+    {
+      "avg": 6.11783447265625,
+      "height": 13.50390625,
+      "size": 12
+    },
+    {
+      "avg": 8.157112630208333,
+      "height": 18,
+      "size": 16
+    },
+    {
+      "avg": 10.196390787760416,
+      "height": 22.05078125,
+      "size": 20
+    },
+    {
+      "avg": 16.314225260416666,
+      "height": 36,
+      "size": 32
+    },
+    {
+      "avg": 24.471337890625,
+      "height": 53.5234375,
+      "size": 48
+    }
+  ]
+}
+},{}],2:[function(require,module,exports){
+module.exports={
+  "fontFamily": "Georgia, Times, serif",
+  "values": [
+    {
+      "avg": 1.5411266620342547,
+      "height": 3.56640625,
+      "size": 3
+    },
+    {
+      "avg": 4.109671098758013,
+      "height": 9.5,
+      "size": 8
+    },
+    {
+      "avg": 5.1370888734475155,
+      "height": 11.0390625,
+      "size": 10
+    },
+    {
+      "avg": 6.164506648137019,
+      "height": 13.5234375,
+      "size": 12
+    },
+    {
+      "avg": 8.219342197516026,
+      "height": 18,
+      "size": 16
+    },
+    {
+      "avg": 10.274177746895031,
+      "height": 23,
+      "size": 20
+    },
+    {
+      "avg": 16.438684395032052,
+      "height": 36.5,
+      "size": 32
+    },
+    {
+      "avg": 24.658026592548076,
+      "height": 54.5,
+      "size": 48
+    }
+  ]
+}
+},{}],3:[function(require,module,exports){
+module.exports={
+  "fontFamily": "Helvetica, Arial, sans-serif",
+  "values": [
+    {
+      "avg": 1.5294730846698468,
+      "height": 3.5390625,
+      "size": 3
+    },
+    {
+      "avg": 4.078594892452925,
+      "height": 9,
+      "size": 8
+    },
+    {
+      "avg": 5.098243615566156,
+      "height": 11.5,
+      "size": 10
+    },
+    {
+      "avg": 6.117892338679387,
+      "height": 14,
+      "size": 12
+    },
+    {
+      "avg": 8.15718978490585,
+      "height": 18.5078125,
+      "size": 16
+    },
+    {
+      "avg": 10.196487231132313,
+      "height": 23,
+      "size": 20
+    },
+    {
+      "avg": 16.3143795698117,
+      "height": 37,
+      "size": 32
+    },
+    {
+      "avg": 24.47156935471755,
+      "height": 55,
+      "size": 48
+    }
+  ]
+}
+},{}],4:[function(require,module,exports){
+module.exports={
+  "fontFamily": "\"Lucida Console\", Monaco, monospace",
+  "values": [
+    {
+      "avg": 1.620263671875,
+      "height": 4,
+      "size": 3
+    },
+    {
+      "avg": 4.320703125,
+      "height": 10,
+      "size": 8
+    },
+    {
+      "avg": 5.40087890625,
+      "height": 12.5,
+      "size": 10
+    },
+    {
+      "avg": 6.4810546875,
+      "height": 15,
+      "size": 12
+    },
+    {
+      "avg": 8.64140625,
+      "height": 20,
+      "size": 16
+    },
+    {
+      "avg": 10.8017578125,
+      "height": 25,
+      "size": 20
+    },
+    {
+      "avg": 17.2828125,
+      "height": 40,
+      "size": 32
+    },
+    {
+      "avg": 25.92421875,
+      "height": 60,
+      "size": 48
+    }
+  ]
+}
+},{}],5:[function(require,module,exports){
+module.exports={
+  "fontFamily": "Verdana, Geneva, sans-serif",
+  "values": [
+    {
+      "avg": 1.7060499924879808,
+      "height": 3.55078125,
+      "size": 3
+    },
+    {
+      "avg": 4.549466646634615,
+      "height": 9.54296875,
+      "size": 8
+    },
+    {
+      "avg": 5.686833308293269,
+      "height": 12.015625,
+      "size": 10
+    },
+    {
+      "avg": 6.824199969951923,
+      "height": 14.5,
+      "size": 12
+    },
+    {
+      "avg": 9.09893329326923,
+      "height": 19.5,
+      "size": 16
+    },
+    {
+      "avg": 11.373666616586538,
+      "height": 24.03125,
+      "size": 20
+    },
+    {
+      "avg": 18.19786658653846,
+      "height": 38.52734375,
+      "size": 32
+    },
+    {
+      "avg": 27.296799879807693,
+      "height": 58.5,
+      "size": 48
+    }
+  ]
+}
+},{}],6:[function(require,module,exports){
+/**
+ * @preserve
+ * GeoJSON -> SVG text renderer
+ * 
+ * @license MIT
+ * @copyright 2016 Alexander Milevski <info@w8r.name>
+ */
+var project = require('geojson-project');
+var extend  = require('json-extend');
+var hash    = require('string-hash');
+var measure = require('./src/measure_glyphs');
+var Matrix  = require("transformation-matrix-js").Matrix;
+
+module.exports               = renderer;
+module.exports.Renderer      = Renderer;
+module.exports.DefaultStyles = DefaultStyles;
+
+var XMLNS   = 'http://www.w3.org/2000/svg';
+var XLINK   = 'http://www.w3.org/1999/xlink';
+var VERSION = 1.2;
+
+var SYMBOL  = 'symbol';
+var TEXTBOX = 'textbox';
+
+var DefaultStyles = require('./src/default_styles');
+var DefaultFonts  = [
+  require('./fonts/arial_helvetica_ss'),
+  require('./fonts/helvetica_arial_ss'),
+  require('./fonts/georgia_times_s'),
+  require('./fonts/lucida_monaco_mono'),
+  require('./fonts/verdana_geneva_ss')
+];
+
+/**
+ *
+ * @class Renderer
+ *
+ * @param {GeoJSON=} gj
+ * @param {Object=}  styles
+ * @param {Array.<Number>=} extent
+ * @param {Function=} projection
+ * @param {String|Function=} type
+ * @param {Object}           fonts
+ */
+function Renderer (gj, styles, extent, projection, type, fonts) {
+  this._data       = null;
+  this._extent     = null;
+  this._styles     = DefaultStyles;
+  this._projection = null;
+  this._type       = null;
+  this._fonts      = [];
+
+  this._defs       = null;
+
+  if (gj)         this.data(gj);
+  if (styles)     this.styles(styles);
+  if (extent)     this.extent(extent);
+  if (projection) this.projection(project);
+  if (type)       this.type(type);
+  this.fonts(fonts || DefaultFonts);
+}
+
+function renderer (gj, styles, extent, project, type) {
+  return new Renderer(gj, styles, extent, project, type);
+}
+
+Renderer.prototype = {
+
+  /**
+   * Stores styles for the renderer
+   *
+   * @param  {Object|Function} styles
+   * @return {Renderer}
+   */
+  styles: function (styles) {
+    this._styles = (typeof styles === 'function') ?
+      styles : extend({}, DefaultStyles, styles);
+    return this;
+  },
+
+
+  /**
+   * @param  {Array.<Object>} fonts
+   * @return {Renderer}
+   */
+  fonts: function(fonts) {
+    if (!Array.isArray(fonts)) {
+      fonts = [fonts];
+    }
+
+    for (var i = 0, len = fonts.length; i < len; i++) {
+      fonts[i].values = fonts[i].values.sort(function(a, b) {
+        return a.size - b.size;
+      });
+      this._fonts.push(fonts[i]);
+    }
+
+    return this;
+  },
+
+
+  /**
+   * Property that is going to be used as for type->style selection
+   * @param  {String|Function} type
+   * @return {Renderer}
+   */
+  type: function(type) {
+    this._type = type;
+    return this;
+  },
+
+
+  /**
+   * Here you can pass GeoJSON
+   *
+   * @param  {GeoJSON} data
+   * @return {Renderer}
+   */
+  data: function (data) {
+    if (data.type !== 'FeatureCollection') {
+      data = { type: 'FeatureCollection', 'features': [data] };
+    }
+
+    this._data = data;
+    return this;
+  },
+
+
+  /**
+   * Projection function for the coordinates
+   *
+   * @param  {Function} proj
+   * @return {Renderer}
+   */
+  projection: function (proj) {
+    this._projection = proj;
+    if (this._data) {
+      this._data = project(this._data, proj);
+    }
+    return this;
+  },
+
+
+  /**
+   * Custom extent to be used as a `viewBox`
+   *
+   * @param  {Array.<Number>} extent
+   * @return {Renderer}
+   */
+  extent: function (extent) {
+    this._extent = extent;
+    return this;
+  },
+
+
+  /**
+   * Main rendering routine
+   * @param {GeoJSON=} data
+   * @return {String}
+   */
+  render: function (data) {
+    if (data) this.data(data);
+
+    var rendered = [];
+    var bbox = getDefaultBBox();
+    this._defs = [];
+    for (var i = 0, len = this._data.features.length; i < len; i++) {
+      this._renderFeature(this._data.features[i], rendered, bbox);
+    }
+
+    this._renderContainer(rendered,
+      this._extent || this._data.extent || this._data.bbox ||
+      (this._data.properties ? this._data.properties.bbox : null) || bbox);
+    return rendered.join('');
+  },
+
+
+  /**
+   * Wraps generated content with the SVG container
+   *
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   */
+  _renderContainer: function (accum, bbox) {
+    var viewBox = [bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]];
+    if (this._defs.length !== 0) {
+      accum.unshift('</defs>');
+      accum.unshift.apply(accum, this._defs.slice());
+      accum.unshift('<defs>');
+    }
+    accum.unshift(
+      ['<svg viewBox="', viewBox.join(' '), '" xmlns="', XMLNS,
+       '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''), '<g>');
+
+    accum.push('</g>', '</svg>');
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   */
+  _renderFeature: function (feature, accum, bbox) {
+    var featureBounds = getDefaultBBox();
+
+    switch (feature.geometry.type) {
+      case 'Polygon':
+      case 'MultiPolygon':
+        this._renderPolygon(feature, accum, bbox, featureBounds);
+        break;
+      case 'LineString':
+      case 'MultiLineString':
+        this._renderLineString(feature, accum, bbox, featureBounds);
+        break;
+      //case 'MultiPoint': TODO
+      case 'Point':
+        this._renderPoint(feature, accum, bbox, featureBounds);
+        break;
+      default:
+        break;
+    }
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _renderLineString: function (feature, accum, bbox, featureBounds) {
+    var properties = feature.properties;
+    var className = ('linestring ' + (properties.className || '')).trim();
+    accum.push('<path class="', className,
+      '" d="', this._getPath(feature, false, bbox, featureBounds), '"',
+      this._getStyles(feature, bbox, featureBounds), ' />');
+  },
+
+
+  /**
+   * @param  {Feature}        feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number}  bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _renderText: function (feature, accum, bbox, featureBounds) {
+    var properties = extend({}, this._selectStyle(feature), feature.properties);
+    var fontSize   = properties.fontSize;
+    var fontColor  = properties.fontColor;
+    var fontFamily = properties.fontFamily || '';
+
+    var text = properties.text;
+    var pos = [featureBounds[0], featureBounds[1]];
+
+    var content = this._renderTextContent(text, fontSize, fontFamily, featureBounds);
+
+    if (fontFamily) {
+      fontFamily = 'font-family="' + fontFamily + '" ';
+    }
+
+    accum.push('<text ', fontFamily,
+      'font-size="', fontSize, '" ',
+      'fill="',      fontColor, '" ',
+      'x="',         pos[0], '" ',
+      'y="',         pos[1], '" ',
+      '>',
+        content,
+      '</text>');
+  },
+
+
+  _getFontData: function (fontFamily, fontSize) {
+    // try and select from available
+    var data = null;
+    var prev, next;
+    for (var i = 0, len = this._fonts.length; i < len; i++) {
+      var font = this._fonts[i];
+      if (font.fontFamily === fontFamily) {
+        for (var j = 0, jj = font.values.length; j < jj; j++) {
+          var values = font.values[j];
+          prev = values;
+          next = (j < jj - 1) ? font.values[(j + 1)] : null;
+          if (values.size === fontSize) {
+            data = values;
+            break;
+          }
+        }
+        break;
+      }
+    }
+
+    console.log(fontFamily, fontSize, data, prev, next);
+
+
+    if (!data) {// none available
+      if (typeof window !== 'undefined') { // if in browser - calculate
+        data = measure(fontFamily, fontSize).values[0];
+      } else { // else interpolate
+
+      }
+    } else {
+
+    }
+
+    return data;
+  },
+
+
+  _renderTextContent: function(text, fontSize, fontFamily, featureBounds) {
+    var fontData = this._getFontData(fontFamily, fontSize);
+    console.log('font data ', fontData);
+    return text;
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _renderPolygon: function (feature, accum, bbox, featureBounds) {
+    var properties = feature.properties;
+    var className = ('polygon ' + (properties.className || '')).trim();
+    accum.push('<path class="', className,
+      '" d="', this._getPath(feature, true, bbox, featureBounds), '"',
+      this._getStyles(feature, bbox, featureBounds), '/>');
+
+    if (this._type && feature.properties[this._type] === TEXTBOX) {
+      this._renderText(feature, accum, bbox, featureBounds);
+    }
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _renderPoint: function (feature, accum, bbox, featureBounds) {
+    if (this._type && feature.properties[this._type] === SYMBOL) {
+      this._renderSymbol(feature, accum, bbox, featureBounds);
+    } else {
+      var coord = feature.geometry.coordinates;
+      var className = ('point ' + (feature.properties.className || '')).trim();
+
+      extendBBox(bbox, coord);
+      extendBBox(featureBounds, coord);
+
+      accum.push('<circle class="', className,
+        '" cx="', coord[0], '" cy="', coord[1],
+        '" r="',  feature.properties.radius || 1,  '" ',
+        this._getStyles(feature, bbox, featureBounds), ' />');
+    }
+  },
+
+
+  /**
+   * Create symbol for putting into defs
+   *
+   * @param  {Feature} feature
+   * @return {String} symbol id
+   */
+  _getSymbolDef: function (feature) {
+    var src = feature.properties.symbol.src.trim();
+    var viewBox = src.match(/view[Bb]ox\=["']([^"']+)["']/m)[1]
+      .split(' ').map(parseFloat);
+    var id = 'feature-symbol-' + hash(src);
+
+    // strip garbage
+    src = src
+      .replace(/<\/?svg[^>]*>/g, '')
+      .replace(/\<\?xml.+\?\>|\<\!DOCTYPE.+]\>/g, '')
+      .replace(/<metadata>[\s\S]*?<\/metadata>/g, '');
+
+    var symbol = [
+      '<symbol id="', id, '" viewBox="', viewBox.join(' '), '">',
+        src,
+      '</symbol>'
+    ].join('');
+
+    if (this._defs.indexOf(symbol) === -1) {
+      this._defs.push(symbol);
+    }
+
+    return id;
+  },
+
+
+  /**
+   * @param  {Feature}        feature
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   * @return {String}
+   */
+  _createSymbol: function (feature, bbox, featureBounds) {
+    var symbol    = feature.properties.symbol;
+    var symbolDef = this._getSymbolDef(feature);
+    var width     = symbol.width  || '';
+    var height    = symbol.height || '';
+    var coords    = feature.geometry.coordinates;
+
+    var symbolBBox = [
+      coords[0] - width / 2, coords[1] - height / 2,
+      coords[0] + width / 2, coords[1] + height / 2
+    ];
+
+    var transform = this._getSymbolTransform(feature, bbox, featureBounds);
+    symbolBBox = Matrix.from.apply(Matrix, transform).applyToArray(symbolBBox);
+
+    extendBBox(featureBounds, symbolBBox.slice(0, 2));
+    extendBBox(featureBounds, symbolBBox.slice(2, 4));
+
+    extendBBox(bbox,          symbolBBox.slice(0, 2));
+    extendBBox(bbox,          symbolBBox.slice(2, 4));
+
+    var use = [
+      '<use xlink:href="#', symbolDef, '" transform="matrix(',
+        transform.join(' '),   ')" ',
+        'width="',  width,     '" ',
+        'height="', height,    '" ',
+        'x="',      coords[0] ,'" ',
+        'y="',      coords[1] ,'" ',
+        this._getStyles(feature, bbox, featureBounds),
+      '/>'
+    ].join('');
+    return use;
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   * @return {Array.<Number>} matrix
+   */
+  _getSymbolTransform: function (feature, bbox, featureBounds) {
+    var props    = feature.properties;
+    var symbol   = props.symbol;
+    var center   = feature.geometry.coordinates;
+    var scale    = props.scale    || 1;
+    var rotation = props.rotation || 0;
+
+    var m = Matrix.from(1, 0, 0, 1, 0, 0)
+      .translate(center[0], center[1])
+      .rotate(rotation)
+      .scale(scale, scale)
+      .translate(-center[0], -center[1]);
+
+    return m.toArray();
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _renderSymbol: function (feature, accum, bbox, featureBounds) {
+    var coord = feature.geometry.coordinates;
+    var className = ('point ' + (feature.properties.className || '')).trim();
+    var radius = feature.properties.radius || 1;
+    var symbol;
+
+    if (feature.properties.symbol.src) {
+      accum.push(this._createSymbol(feature, bbox, featureBounds));
+    } else {
+      extendBBox(bbox, coord);
+      extendBBox(featureBounds, coord);
+
+      accum.push('<circle class="', className,
+        '" cx="', coord[0], '" cy="', coord[1],
+        '" r="',  radius, '" ',
+        this._getStyles(feature, bbox, featureBounds), '/>');
+    }
+  },
+
+
+  /**
+   * @param  {Array.<Array.<Number>>} coords
+   * @param  {Booelean}               closed
+   * @param  {Array.<Number>}         bbox
+   * @param  {Array.<Number>}         featureBounds
+   * @return {String}
+   */
+  _coordinatesToPath: function (coords, closed, bbox, fBounds) {
+    var res = '', i, len, c, x, y;
+    if (!isFinite(coords[0][0])) {
+      for (i = 0, len = coords.length; i < len; i++) {
+        res += ' ' + this._coordinatesToPath(coords[i], closed, bbox, fBounds);
+      }
+    } else {
+      for (i = 0, len = coords.length; i < len; i++) {
+        c = coords[i];
+        x = c[0];
+        y = c[1];
+        res += (i === 0 ? 'M' : 'L') + x + ' ' + y;
+
+        extendBBox(bbox, c);
+        extendBBox(fBounds, c);
+      }
+
+      if (closed) res += 'Z';
+    }
+
+    return res || 'M0 0';
+  },
+
+
+  /**
+   * @param {Feature} feature
+   * @param {Boolean} closed
+   * @param {Array.<Number>}  bbox
+   * @param {Array.<Number>}  fBounds
+   */
+  _getPath: function (feature, closed, bbox, fBounds) {
+    return this
+      ._coordinatesToPath(feature.geometry.coordinates, closed, bbox, fBounds)
+      .trim();
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @return {Object}  style
+   */
+  _selectStyle: function (feature) {
+    if (this._type) {
+      if (typeof this._type === 'function') {
+        return this._type(feature, this._styles);
+      } else {
+        return this._styles[feature.properties[this._type]];
+      }
+    } else {
+      return this._styles[feature.geometry.type];
+    }
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @param  {Array.<Number>}  bbox
+   * @param  {Array.<Number>}  featureBounds
+   * @return {String} styles
+   */
+  _getStyles: function(feature, bbox, featureBounds) {
+    var styles = {
+      'stroke-width': 1
+    };
+    var currentStyle = {};
+    var styleString = '';
+
+    if (typeof this._styles === 'function') {
+      styles = this._styles(feature);
+    } else {
+      styles = extend({}, feature.properties, this._selectStyle(feature));
+    }
+
+    if (styles.stroke || styles.weight) {
+      currentStyle['stroke']          = styles.color;
+      currentStyle['stroke-opacity']  = styles.opacity;
+      currentStyle['stroke-width']    = styles.weight;
+      currentStyle['stroke-linecap']  = styles.lineCap  || 'round';
+      currentStyle['stroke-linejoin'] = styles.lineJoin || 'round';
+
+      if (styles.dashArray) {
+        currentStyle['stroke-dasharray'] = styles.dashArray;
+      }
+
+      if (styles.dashOffset) {
+        currentStyle['stroke-dashoffset'] = styles.dashOffset;
+      }
+
+      if (styles.weight) {
+        padBBox(featureBounds, styles.weight);
+
+        extendBBox(bbox, featureBounds.slice(0, 2));
+        extendBBox(bbox, featureBounds.slice(2, 4));
+      }
+    } else {
+      currentStyle['stroke'] = 'none';
+    }
+
+    if (styles.fill) {
+      currentStyle['fill']         = styles.fillColor   || styles.color;
+      currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity || 0;
+      currentStyle['fill-rule']    = styles.fillRule    || 'evenodd';
+    } else {
+      currentStyle['fill'] = 'none';
+    }
+
+    for (var rule in currentStyle) {
+      if (currentStyle[rule] !== undefined) {
+        styleString += ' ' + rule + '="' + currentStyle[rule] + '"';
+      }
+    }
+    return styleString;
+  }
+};
+
+
+/**
+ * BBox 'extend' in-place
+ *
+ * @param  {Array.<Number>} bbox
+ * @param  {Array.<Number>} coord
+ */
+function extendBBox (bbox, coord) {
+  var x = coord[0];
+  var y = coord[1];
+  bbox[0] = Math.min(x, bbox[0]);
+  bbox[1] = Math.min(y, bbox[1]);
+  bbox[2] = Math.max(x, bbox[2]);
+  bbox[3] = Math.max(y, bbox[3]);
+}
+
+
+/**
+ * BBox 'extend' in-place
+ *
+ * @param  {Array.<Number>} bbox
+ * @param  {Number}         padding
+ */
+function padBBox (bbox, padding) {
+  bbox[0] -= padding;
+  bbox[1] -= padding;
+  bbox[2] += padding;
+  bbox[3] += padding;
+}
+
+
+/**
+ * @return {Array.<Number>}
+ */
+function getDefaultBBox () {
+  return [Infinity, Infinity, -Infinity, -Infinity];
+}
+
+},{"./fonts/arial_helvetica_ss":1,"./fonts/georgia_times_s":2,"./fonts/helvetica_arial_ss":3,"./fonts/lucida_monaco_mono":4,"./fonts/verdana_geneva_ss":5,"./src/default_styles":11,"./src/measure_glyphs":12,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}],7:[function(require,module,exports){
+
+/**
+ * @param  {Object}     data GeoJSON
+ * @param  {Function}   project
+ * @param  {*=}         context
+ * @return {Object}
+ */
+module.exports = function(data, project, context) {
+  data = JSON.parse(JSON.stringify(data));
+  if (data.type === 'FeatureCollection') {
+    // That's a huge hack to get things working with both ArcGIS server
+    // and GeoServer. Geoserver provides crs reference in GeoJSON, ArcGIS —
+    // doesn't.
+    //if (data.crs) delete data.crs;
+    for (var i = data.features.length - 1; i >= 0; i--) {
+      data.features[i] = projectFeature(data.features[i], project, context);
+    }
+  } else {
+    data = projectFeature(data, project, context);
+  }
+  return data;
+};
+
+module.exports.projectFeature  = projectFeature;
+module.exports.projectGeometry = projectGeometry;
+
+
+/**
+ * @param  {Object}     data GeoJSON
+ * @param  {Function}   project
+ * @param  {*=}         context
+ * @return {Object}
+ */
+function projectFeature(feature, project, context) {
+  if (feature.type === 'GeometryCollection') {
+    for (var i = 0, len = feature.geometries.length; i < len; i++) {
+      feature.geometries[i] =
+        projectGeometry(feature.geometries[i], project, context);
+    }
+  } else {
+    feature.geometry = projectGeometry(feature.geometry, project, context);
+  }
+  return feature;
+}
+
+
+/**
+ * @param  {Object}     data GeoJSON
+ * @param  {Function}   project
+ * @param  {*=}         context
+ * @return {Object}
+ */
+function projectGeometry(geometry, project, context) {
+  var coords = geometry.coordinates;
+  switch (geometry.type) {
+    case 'Point':
+      geometry.coordinates = project.call(context, coords);
+      break;
+
+    case 'MultiPoint':
+    case 'LineString':
+      for (var i = 0, len = coords.length; i < len; i++) {
+        coords[i] = project.call(context, coords[i]);
+      }
+      geometry.coordinates = coords;
+      break;
+
+    case 'Polygon':
+      geometry.coordinates = projectCoords(coords, 1, project, context);
+      break;
+
+    case 'MultiLineString':
+      geometry.coordinates = projectCoords(coords, 1, project, context);
+      break;
+
+    case 'MultiPolygon':
+      geometry.coordinates = projectCoords(coords, 2, project, context);
+      break;
+
+    default:
+      break;
+  }
+  return geometry;
+}
+
+
+/**
+ * @param  {*}         coords Coords arrays
+ * @param  {Number}    levelsDeep
+ * @param  {Function}  project
+ * @param  {*=}         context
+ * @return {*}
+ */
+function projectCoords(coords, levelsDeep, project, context) {
+  var coord, i, len;
+  var result = [];
+
+  for (i = 0, len = coords.length; i < len; i++) {
+    coord = levelsDeep ?
+      projectCoords(coords[i], levelsDeep - 1, project, context) :
+      project.call(context, coords[i]);
+
+    result.push(coord);
+  }
+
+  return result;
+}
+
+},{}],8:[function(require,module,exports){
+(function ( GLOBAL ) {
+
+    'use strict';
+
+    if ( !Array.isArray ) {
+        Array.isArray = function ( arg ) {
+            return Object.prototype.toString.call( arg ) === '[object Array]';
+        };
+    }
+
+    function isPrimitive( val ) {
+        return val !== Object( val );
+    }
+
+    function copyValue( source ) {
+        if ( isPrimitive( source ) ) {
+            return source;
+        }
+        if ( Array.isArray( source ) ) {
+            return mergeArray( source.slice( 0 ), source );
+        }
+        return mergeObject( {}, source );
+    }
+
+    function mergeArray( target, source ) {
+        var i, len;
+        for ( i = 0, len = source.length; i < len; i += 1 ) {
+            target[i] = copyValue( source[i] );
+        }
+        return target;
+    }
+
+    function mergeObject( target, source ) {
+        var prop;
+        for ( prop in source ) {
+            if ( source.hasOwnProperty( prop ) ) {
+                target[prop] = copyValue( source[prop] );
+            }
+        }
+        return target;
+    }
+
+    function extend( target /*, obj1, obj2, ... objN */ ) {
+        var i, len, source;
+        if ( !target || isPrimitive( target ) ) {
+            return;
+        }
+        for ( i = 1, len = arguments.length; i < len; i += 1 ) {
+            source = arguments[i];
+            if ( !isPrimitive( source ) ) {
+                if ( Array.isArray( source ) ) {
+                    mergeArray( target, source );
+                } else {
+                    mergeObject( target, source );
+                }
+            }
+        }
+        return target;
+    }
+
+    if ( typeof module === 'undefined' ) {
+
+        GLOBAL.extend = extend;
+
+    } else {
+
+        module.exports = extend;
+
+    }
+
+}( this ));
+
+},{}],9:[function(require,module,exports){
+module.exports = function(str) {
+  var hash = 5381,
+      i    = str.length
+
+  while(i)
+    hash = (hash * 33) ^ str.charCodeAt(--i)
+
+  /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
+   * integers. Since we want the results to be always positive, if the high bit
+   * is set, unset it and add it back in through (64-bit IEEE) addition. */
+  return hash >= 0 ? hash : (hash & 0x7FFFFFFF) + 0x80000000
+}
+
+},{}],10:[function(require,module,exports){
+/*!
+	2D Transformation Matrix v2.6.5
+	(c) Epistemex.com 2014-2016
+	License: MIT, header required.
+*/
+
+/* --- To see contributors: please see readme.md and Change.log --- */
+
+/**
+ * 2D transformation matrix object initialized with identity matrix.
+ *
+ * The matrix can synchronize a canvas 2D context by supplying the context
+ * as an argument, or later apply current absolute transform to an
+ * existing context.
+ *
+ * To synchronize a DOM element you can use [`toCSS()`]{@link Matrix#toCSS} or [`toCSS3D()`]{@link Matrix#toCSS3D}.
+ *
+ * @param {CanvasRenderingContext2D} [context] - Optional context to sync with Matrix
+ * @prop {number} a - scale x
+ * @prop {number} b - shear y
+ * @prop {number} c - shear x
+ * @prop {number} d - scale y
+ * @prop {number} e - translate x
+ * @prop {number} f - translate y
+ * @prop {CanvasRenderingContext2D|null} [context=null] - set or get current canvas context
+ * @constructor
+ * @license MIT license (header required)
+ * @copyright Epistemex.com 2014-2016
+ */
+function Matrix(context) {
+
+	var me = this;
+	me._t = me.transform;
+
+	me.a = me.d = 1;
+	me.b = me.c = me.e = me.f = 0;
+
+	// reset canvas to enable 100% sync.
+	if (context)
+		(me.context = context).setTransform(1, 0, 0, 1, 0, 0);
+}
+
+/**
+ * Returns a new matrix that transforms a triangle `t1` into another triangle
+ * `t2`, or throws an exception if it is impossible.
+ *
+ * Note: the method can take both arrays as well as literal objects.
+ * Just make sure that both arguments (`t1`, `t2`) are of the same type.
+ *
+ * @param {{px: number, py: number, qx: number, qy: number, rx: number, ry: number}|Array} t1 - Object or array containing the three points for the triangle.
+ * For object use obj.px, obj.py, obj.qx, obj.qy, obj.rx and obj.ry. For arrays provide the points in the order [px, py, qx, qy, rx, ry], or as point array [{x:,y:}, {x:,y:}, {x:,y:}]
+ * @param {{px: number, py: number, qx: number, qy: number, rx: number, ry: number}|Array} t2 - See description for t1.
+ * @param {CanvasRenderingContext2D} [context] - optional canvas 2D context to use for the matrix
+ * @returns {Matrix}
+ * @throws Exception is matrix becomes not invertible
+ * @static
+ */
+Matrix.fromTriangles = function(t1, t2, context) {
+
+	var m1 = new Matrix(),
+		m2 = new Matrix(context),
+		r1, r2, rx1, ry1, rx2, ry2;
+
+	if (Array.isArray(t1)) {
+		if (typeof t1[0] === "number") {
+			rx1 = t1[4]; ry1 = t1[5]; rx2 = t2[4]; ry2 = t2[5];
+			r1 = [t1[0] - rx1, t1[1] - ry1, t1[2] - rx1, t1[3] - ry1, rx1, ry1];
+			r2 = [t2[0] - rx2, t2[1] - ry2, t2[2] - rx2, t2[3] - ry2, rx2, ry2]
+		}
+		else {
+			rx1 = t1[2].x; ry1 = t1[2].y; rx2 = t2[2].x; ry2 = t2[2].y;
+			r1 = [t1[0].x - rx1, t1[0].y - ry1, t1[1].x - rx1, t1[1].y - ry1, rx1, ry1];
+			r2 = [t2[0].x - rx2, t2[0].y - ry2, t2[1].x - rx2, t1[1].y - ry2, rx2, ry2]
+		}
+	}
+	else {
+		r1 = [t1.px - t1.rx, t1.py - t1.ry, t1.qx - t1.rx, t1.qy - t1.ry, t1.rx, t1.ry];
+		r2 = [t2.px - t2.rx, t2.py - t2.ry, t2.qx - t2.rx, t2.qy - t2.ry, t2.rx, t2.ry]
+	}
+
+	m1.setTransform.apply(m1, r1);
+	m2.setTransform.apply(m2, r2);
+
+	return m2.multiply(m1.inverse())
+};
+
+/**
+ * Create a new matrix from a SVGMatrix
+ *
+ * @param {SVGMatrix} svgMatrix - source SVG Matrix
+ * @param {CanvasRenderingContext2D} [context] - optional canvas 2D context to use for the matrix
+ * @returns {Matrix}
+ * @static
+ * @private
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/SVGMatrix|MDN / SVGMatrix}
+ */
+Matrix.fromSVGMatrix = function(svgMatrix, context) {
+	console.warn("Obsolete. Use Matrix.from()");
+	return new Matrix(context).multiply(svgMatrix)
+};
+
+/**
+ * Create a new matrix from a DOMMatrix
+ *
+ * @param {DOMMatrix} domMatrix - source DOMMatrix
+ * @param {CanvasRenderingContext2D} [context] - optional canvas 2D context to use for the matrix
+ * @returns {Matrix}
+ * @static
+ * @private
+ * @see {@link https://drafts.fxtf.org/geometry/#dommatrix|MDN / DOMMatrix}
+ */
+Matrix.fromDOMMatrix = function(domMatrix, context) {
+	console.warn("Obsolete. Use Matrix.from()");
+	if (!domMatrix.is2D) throw "Cannot use 3D matrix.";
+	return new Matrix(context).multiply(domMatrix)
+};
+
+/**
+ * Create a matrix from a transform list from an SVG shape. The list
+ * can be for example baseVal (i.e. `shape.transform.baseVal`).
+ *
+ * The resulting matrix has all transformations from that list applied
+ * in the same order as the list.
+ *
+ * @param {SVGTransformList} tList - transform list from an SVG shape.
+ * @param {CanvasRenderingContext2D} [context] - optional canvas 2D context to use for the matrix
+ * @returns {Matrix}
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/SVGTransformList|MDN / SVGTransformList}
+ */
+Matrix.fromSVGTransformList = function(tList, context) {
+
+	var m = new Matrix(context),
+		i = 0;
+
+	while(i < tList.length)
+		m.multiply(tList[i++].matrix);
+
+	return m
+};
+
+/**
+ * Create and transform a new matrix based on given matrix values, or
+ * provide SVGMatrix or a (2D) DOMMatrix or another instance of a Matrix
+ * (in fact, any 2D matrix object using properties a-f can be used as source).
+ *
+ * @example
+ *
+ *     var m = Matrix.from(1, 0.2, 0, 2, 120, 97);
+ *     var m = Matrix.from(domMatrix, ctx);
+ *     var m = Matrix.from(svgMatrix);
+ *     var m = Matrix.from(matrix);
+ *
+ * @param {number|DOMMatrix|SVGMatrix|Matrix} a - number representing a in [a-f], or a Matrix object containing properties a-f
+ * @param {number|CanvasRenderingContext2D} [b] - b property if a is not a matrix object, or optional canvas 2D context
+ * @param {number} [c]
+ * @param {number} [d]
+ * @param {number} [e]
+ * @param {number} [f]
+ * @param {CanvasRenderingContext2D} [context] - optional canvas context to synchronize
+ * @returns {Matrix}
+ * @static
+ */
+Matrix.from = function(a, b, c, d, e, f, context) {
+
+	var m = new Matrix(context);
+
+	if (typeof a === "number")
+		m.setTransform(a, b, c, d, e, f);
+
+	else {
+		if (typeof a.is2D === "boolean" && !a.is2D) throw "Cannot use 3D DOMMatrix.";
+		if (b) m.context = b;
+		m.multiply(a)
+	}
+
+	return m
+};
+
+Matrix.prototype = {
+
+	/**
+	 * Concatenates transforms of this matrix onto the given child matrix and
+	 * returns a new matrix. This instance is used on left side.
+	 *
+	 * @param {Matrix|SVGMatrix} cm - child matrix to apply concatenation to
+	 * @returns {Matrix} - new Matrix instance
+	 */
+	concat: function(cm) {
+		return this.clone().multiply(cm)
+	},
+
+	/**
+	 * Flips the horizontal values.
+	 * @returns {Matrix}
+	 */
+	flipX: function() {
+		return this._t(-1, 0, 0, 1, 0, 0)
+	},
+
+	/**
+	 * Flips the vertical values.
+	 * @returns {Matrix}
+	 */
+	flipY: function() {
+		return this._t(1, 0, 0, -1, 0, 0)
+	},
+
+	/**
+	 * Reflects incoming (velocity) vector on the normal which will be the
+	 * current transformed x axis. Call when a trigger condition is met.
+	 *
+	 * @param {number} x - vector end point for x (start = 0)
+	 * @param {number} y - vector end point for y (start = 0)
+	 * @returns {{x: number, y: number}}
+	 */
+	reflectVector: function(x, y) {
+
+		var v = this.applyToPoint(0, 1),
+			d = (v.x * x + v.y * y) * 2;
+
+		x -= d * v.x;
+		y -= d * v.y;
+
+		return {x: x, y: y}
+	},
+
+	/**
+	 * Short-hand to reset current matrix to an identity matrix.
+	 * @returns {Matrix}
+	 */
+	reset: function() {
+		return this.setTransform(1, 0, 0, 1, 0, 0)
+	},
+
+	/**
+	 * Rotates current matrix by angle (accumulative).
+	 * @param {number} angle - angle in radians
+	 * @returns {Matrix}
+	 */
+	rotate: function(angle) {
+		var cos = Math.cos(angle),
+			sin = Math.sin(angle);
+		return this._t(cos, sin, -sin, cos, 0, 0)
+	},
+
+	/**
+	 * Converts a vector given as `x` and `y` to angle, and
+	 * rotates (accumulative).
+	 * @param x
+	 * @param y
+	 * @returns {Matrix}
+	 */
+	rotateFromVector: function(x, y) {
+		return this.rotate(Math.atan2(y, x))
+	},
+
+	/**
+	 * Helper method to make a rotation based on an angle in degrees.
+	 * @param {number} angle - angle in degrees
+	 * @returns {Matrix}
+	 */
+	rotateDeg: function(angle) {
+		return this.rotate(angle * Math.PI / 180)
+	},
+
+	/**
+	 * Scales current matrix uniformly and accumulative.
+	 * @param {number} f - scale factor for both x and y (1 does nothing)
+	 * @returns {Matrix}
+	 */
+	scaleU: function(f) {
+		return this._t(f, 0, 0, f, 0, 0)
+	},
+
+	/**
+	 * Scales current matrix accumulative.
+	 * @param {number} sx - scale factor x (1 does nothing)
+	 * @param {number} sy - scale factor y (1 does nothing)
+	 * @returns {Matrix}
+	 */
+	scale: function(sx, sy) {
+		return this._t(sx, 0, 0, sy, 0, 0)
+	},
+
+	/**
+	 * Scales current matrix on x axis accumulative.
+	 * @param {number} sx - scale factor x (1 does nothing)
+	 * @returns {Matrix}
+	 */
+	scaleX: function(sx) {
+		return this._t(sx, 0, 0, 1, 0, 0)
+	},
+
+	/**
+	 * Scales current matrix on y axis accumulative.
+	 * @param {number} sy - scale factor y (1 does nothing)
+	 * @returns {Matrix}
+	 */
+	scaleY: function(sy) {
+		return this._t(1, 0, 0, sy, 0, 0)
+	},
+
+	/**
+	 * Apply shear to the current matrix accumulative.
+	 * @param {number} sx - amount of shear for x
+	 * @param {number} sy - amount of shear for y
+	 * @returns {Matrix}
+	 */
+	shear: function(sx, sy) {
+		return this._t(1, sy, sx, 1, 0, 0)
+	},
+
+	/**
+	 * Apply shear for x to the current matrix accumulative.
+	 * @param {number} sx - amount of shear for x
+	 * @returns {Matrix}
+	 */
+	shearX: function(sx) {
+		return this._t(1, 0, sx, 1, 0, 0)
+	},
+
+	/**
+	 * Apply shear for y to the current matrix accumulative.
+	 * @param {number} sy - amount of shear for y
+	 * @returns {Matrix}
+	 */
+	shearY: function(sy) {
+		return this._t(1, sy, 0, 1, 0, 0)
+	},
+
+	/**
+	 * Apply skew to the current matrix accumulative. Angles in radians.
+	 * Also see [`skewDeg()`]{@link Matrix#skewDeg}.
+	 * @param {number} ax - angle of skew for x
+	 * @param {number} ay - angle of skew for y
+	 * @returns {Matrix}
+	 */
+	skew: function(ax, ay) {
+		return this.shear(Math.tan(ax), Math.tan(ay))
+	},
+
+	/**
+	 * Apply skew to the current matrix accumulative. Angles in degrees.
+	 * Also see [`skew()`]{@link Matrix#skew}.
+	 * @param {number} ax - angle of skew for x
+	 * @param {number} ay - angle of skew for y
+	 * @returns {Matrix}
+	 */
+	skewDeg: function(ax, ay) {
+		return this.shear(Math.tan(ax / 180 * Math.PI), Math.tan(ay / 180 * Math.PI))
+	},
+
+	/**
+	 * Apply skew for x to the current matrix accumulative. Angles in radians.
+	 * Also see [`skewDeg()`]{@link Matrix#skewDeg}.
+	 * @param {number} ax - angle of skew for x
+	 * @returns {Matrix}
+	 */
+	skewX: function(ax) {
+		return this.shearX(Math.tan(ax))
+	},
+
+	/**
+	 * Apply skew for y to the current matrix accumulative. Angles in radians.
+	 * Also see [`skewDeg()`]{@link Matrix#skewDeg}.
+	 * @param {number} ay - angle of skew for y
+	 * @returns {Matrix}
+	 */
+	skewY: function(ay) {
+		return this.shearY(Math.tan(ay))
+	},
+
+	/**
+	 * Set current matrix to new absolute matrix.
+	 * @param {number} a - scale x
+	 * @param {number} b - shear y
+	 * @param {number} c - shear x
+	 * @param {number} d - scale y
+	 * @param {number} e - translate x
+	 * @param {number} f - translate y
+	 * @returns {Matrix}
+	 */
+	setTransform: function(a, b, c, d, e, f) {
+		var me = this;
+		me.a = a;
+		me.b = b;
+		me.c = c;
+		me.d = d;
+		me.e = e;
+		me.f = f;
+		return me._x()
+	},
+
+	/**
+	 * Translate current matrix accumulative.
+	 * @param {number} tx - translation for x
+	 * @param {number} ty - translation for y
+	 * @returns {Matrix}
+	 */
+	translate: function(tx, ty) {
+		return this._t(1, 0, 0, 1, tx, ty)
+	},
+
+	/**
+	 * Translate current matrix on x axis accumulative.
+	 * @param {number} tx - translation for x
+	 * @returns {Matrix}
+	 */
+	translateX: function(tx) {
+		return this._t(1, 0, 0, 1, tx, 0)
+	},
+
+	/**
+	 * Translate current matrix on y axis accumulative.
+	 * @param {number} ty - translation for y
+	 * @returns {Matrix}
+	 */
+	translateY: function(ty) {
+		return this._t(1, 0, 0, 1, 0, ty)
+	},
+
+	/**
+	 * Multiplies current matrix with new matrix values. Also see [`multiply()`]{@link Matrix#multiply}.
+	 *
+	 * @param {number} a2 - scale x
+	 * @param {number} b2 - shear y
+	 * @param {number} c2 - shear x
+	 * @param {number} d2 - scale y
+	 * @param {number} e2 - translate x
+	 * @param {number} f2 - translate y
+	 * @returns {Matrix}
+	 */
+	transform: function(a2, b2, c2, d2, e2, f2) {
+
+		var me = this,
+			a1 = me.a,
+			b1 = me.b,
+			c1 = me.c,
+			d1 = me.d,
+			e1 = me.e,
+			f1 = me.f;
+
+		/* matrix order (canvas compatible):
+		* ace
+		* bdf
+		* 001
+		*/
+		me.a = a1 * a2 + c1 * b2;
+		me.b = b1 * a2 + d1 * b2;
+		me.c = a1 * c2 + c1 * d2;
+		me.d = b1 * c2 + d1 * d2;
+		me.e = a1 * e2 + c1 * f2 + e1;
+		me.f = b1 * e2 + d1 * f2 + f1;
+
+		return me._x()
+	},
+
+	/**
+	 * Multiplies current matrix with source matrix.
+	 * @param {Matrix|SVGMatrix} m - source matrix to multiply with.
+	 * @returns {Matrix}
+	 */
+	multiply: function(m) {
+		return this._t(m.a, m.b, m.c, m.d, m.e, m.f)
+	},
+
+	/**
+	 * Divide this matrix on input matrix which must be invertible.
+	 * @param {Matrix} m - matrix to divide on (divisor)
+	 * @throws Exception is input matrix is not invertible
+	 * @returns {Matrix}
+	 */
+	divide: function(m) {
+
+		if (!m.isInvertible())
+			throw "Matrix not invertible";
+
+		return this.multiply(m.inverse())
+	},
+
+	/**
+	 * Divide current matrix on scalar value != 0.
+	 * @param {number} d - divisor (can not be 0)
+	 * @returns {Matrix}
+	 */
+	divideScalar: function(d) {
+
+		var me = this;
+		me.a /= d;
+		me.b /= d;
+		me.c /= d;
+		me.d /= d;
+		me.e /= d;
+		me.f /= d;
+
+		return me._x()
+	},
+
+	/**
+	 * Get an inverse matrix of current matrix. The method returns a new
+	 * matrix with values you need to use to get to an identity matrix.
+	 * Context from parent matrix is not applied to the returned matrix.
+	 *
+	 * @param {boolean} [cloneContext=false] - clone current context to resulting matrix
+	 * @throws Exception is input matrix is not invertible
+	 * @returns {Matrix} - new Matrix instance
+	 */
+	inverse: function(cloneContext) {
+
+		var me = this,
+			m  = new Matrix(cloneContext ? me.context : null),
+			dt = me.determinant();
+
+		if (me._q(dt, 0))
+			throw "Matrix not invertible.";
+
+		m.a = me.d / dt;
+		m.b = -me.b / dt;
+		m.c = -me.c / dt;
+		m.d = me.a / dt;
+		m.e = (me.c * me.f - me.d * me.e) / dt;
+		m.f = -(me.a * me.f - me.b * me.e) / dt;
+
+		return m
+	},
+
+	/**
+	 * Interpolate this matrix with another and produce a new matrix.
+	 * `t` is a value in the range [0.0, 1.0] where 0 is this instance and
+	 * 1 is equal to the second matrix. The `t` value is not clamped.
+	 *
+	 * Context from parent matrix is not applied to the returned matrix.
+	 *
+	 * Note: this interpolation is naive. For animation containing rotation,
+	 * shear or skew use the [`interpolateAnim()`]{@link Matrix#interpolateAnim} method instead
+	 * to avoid unintended flipping.
+	 *
+	 * @param {Matrix|SVGMatrix} m2 - the matrix to interpolate with.
+	 * @param {number} t - interpolation [0.0, 1.0]
+	 * @param {CanvasRenderingContext2D} [context] - optional context to affect
+	 * @returns {Matrix} - new Matrix instance with the interpolated result
+	 */
+	interpolate: function(m2, t, context) {
+
+		var me = this,
+			m  = context ? new Matrix(context) : new Matrix();
+
+		m.a = me.a + (m2.a - me.a) * t;
+		m.b = me.b + (m2.b - me.b) * t;
+		m.c = me.c + (m2.c - me.c) * t;
+		m.d = me.d + (m2.d - me.d) * t;
+		m.e = me.e + (m2.e - me.e) * t;
+		m.f = me.f + (m2.f - me.f) * t;
+
+		return m._x()
+	},
+
+	/**
+	 * Interpolate this matrix with another and produce a new matrix.
+	 * `t` is a value in the range [0.0, 1.0] where 0 is this instance and
+	 * 1 is equal to the second matrix. The `t` value is not constrained.
+	 *
+	 * Context from parent matrix is not applied to the returned matrix.
+	 *
+	 * To obtain easing `t` can be preprocessed using easing-functions
+	 * before being passed to this method.
+	 *
+	 * Note: this interpolation method uses decomposition which makes
+	 * it suitable for animations (in particular where rotation takes
+	 * places).
+	 *
+	 * @param {Matrix} m2 - the matrix to interpolate with.
+	 * @param {number} t - interpolation [0.0, 1.0]
+	 * @param {CanvasRenderingContext2D} [context] - optional context to affect
+	 * @returns {Matrix} - new Matrix instance with the interpolated result
+	 */
+	interpolateAnim: function(m2, t, context) {
+
+		var m          = new Matrix(context ? context : null),
+			d1         = this.decompose(),
+			d2         = m2.decompose(),
+			t1         = d1.translate,
+			t2         = d2.translate,
+			s1         = d1.scale,
+			rotation   = d1.rotation + (d2.rotation - d1.rotation) * t,
+			translateX = t1.x + (t2.x - t1.x) * t,
+			translateY = t1.y + (t2.y - t1.y) * t,
+			scaleX     = s1.x + (d2.scale.x - s1.x) * t,
+			scaleY     = s1.y + (d2.scale.y - s1.y) * t
+			;
+
+		// QR order (t-r-s-sk)
+		m.translate(translateX, translateY);
+		m.rotate(rotation);
+		m.scale(scaleX, scaleY);
+		//todo test skew scenarios
+
+		return m._x()
+	},
+
+	/**
+	 * Decompose the current matrix into simple transforms using either
+	 * QR (default) or LU decomposition.
+	 *
+	 * @param {boolean} [useLU=false] - set to true to use LU rather than QR decomposition
+	 * @returns {*} - an object containing current decomposed values (translate, rotation, scale, skew)
+	 * @see {@link http://www.maths-informatique-jeux.com/blog/frederic/?post/2013/12/01/Decomposition-of-2D-transform-matrices|Adoption based on this code}
+	 * @see {@link https://en.wikipedia.org/wiki/QR_decomposition|More on QR decomposition}
+	 * @see {@link https://en.wikipedia.org/wiki/LU_decomposition|More on LU decomposition}
+	 */
+	decompose: function(useLU) {
+
+		var me        = this,
+			a         = me.a,
+			b         = me.b,
+			c         = me.c,
+			d         = me.d,
+			acos      = Math.acos,
+			atan      = Math.atan,
+			sqrt      = Math.sqrt,
+			pi        = Math.PI,
+
+			translate = {x: me.e, y: me.f},
+			rotation  = 0,
+			scale     = {x: 1, y: 1},
+			skew      = {x: 0, y: 0},
+
+			determ    = a * d - b * c;	// determinant(), skip DRY here...
+
+		if (useLU) {
+			if (a) {
+				skew = {x: atan(c / a), y: atan(b / a)};
+				scale = {x: a, y: determ / a};
+			}
+			else if (b) {
+				rotation = pi * 0.5;
+				scale = {x: b, y: determ / b};
+				skew.x = atan(d / b);
+			}
+			else { // a = b = 0
+				scale = {x: c, y: d};
+				skew.x = pi * 0.25;
+			}
+		}
+		else {
+			// Apply the QR-like decomposition.
+			if (a || b) {
+				var r = sqrt(a * a + b * b);
+				rotation = b > 0 ? acos(a / r) : -acos(a / r);
+				scale = {x: r, y: determ / r};
+				skew.x = atan((a * c + b * d) / (r * r));
+			}
+			else if (c || d) {
+				var s = sqrt(c * c + d * d);
+				rotation = pi * 0.5 - (d > 0 ? acos(-c / s) : -acos(c / s));
+				scale = {x: determ / s, y: s};
+				skew.y = atan((a * c + b * d) / (s * s));
+			}
+			else { // a = b = c = d = 0
+				scale = {x: 0, y: 0};
+			}
+		}
+
+		return {
+			translate: translate,
+			rotation : rotation,
+			scale    : scale,
+			skew     : skew
+		}
+	},
+
+	/**
+	 * Returns the determinant of the current matrix.
+	 * @returns {number}
+	 */
+	determinant: function() {
+		return this.a * this.d - this.b * this.c
+	},
+
+	/**
+	 * Apply current matrix to `x` and `y` of a point.
+	 * Returns a point object.
+	 *
+	 * @param {number} x - value for x
+	 * @param {number} y - value for y
+	 * @returns {{x: number, y: number}} A new transformed point object
+	 */
+	applyToPoint: function(x, y) {
+
+		var me = this;
+
+		return {
+			x: x * me.a + y * me.c + me.e,
+			y: x * me.b + y * me.d + me.f
+		}
+	},
+
+	/**
+	 * Apply current matrix to array with point objects or point pairs.
+	 * Returns a new array with points in the same format as the input array.
+	 *
+	 * A point object is an object literal:
+	 *
+	 *     {x: x, y: y}
+	 *
+	 * so an array would contain either:
+	 *
+	 *     [{x: x1, y: y1}, {x: x2, y: y2}, ... {x: xn, y: yn}]
+	 *
+	 * or
+	 *
+	 *     [x1, y1, x2, y2, ... xn, yn]
+	 *
+	 * @param {Array} points - array with point objects or pairs
+	 * @returns {Array} A new array with transformed points
+	 */
+	applyToArray: function(points) {
+
+		var i = 0, p, l,
+			mxPoints = [];
+
+		if (typeof points[0] === 'number') {
+
+			l = points.length;
+
+			while(i < l) {
+				p = this.applyToPoint(points[i++], points[i++]);
+				mxPoints.push(p.x, p.y);
+			}
+		}
+		else {
+			while(p = points[i++]) {
+				mxPoints.push(this.applyToPoint(p.x, p.y));
+			}
+		}
+
+		return mxPoints
+	},
+
+	/**
+	 * Apply current matrix to a typed array with point pairs. Although
+	 * the input array may be an ordinary array, this method is intended
+	 * for more performant use where typed arrays are used. The returned
+	 * array is regardless always returned as a `Float32Array`.
+	 *
+	 * @param {*} points - (typed) array with point pairs [x1, y1, ..., xn, yn]
+	 * @param {boolean} [use64=false] - use Float64Array instead of Float32Array
+	 * @returns {*} A new typed array with transformed points
+	 */
+	applyToTypedArray: function(points, use64) {
+
+		var i = 0, p,
+			l = points.length,
+			mxPoints = use64 ? new Float64Array(l) : new Float32Array(l);
+
+		while(i < l) {
+			p = this.applyToPoint(points[i], points[i + 1]);
+			mxPoints[i++] = p.x;
+			mxPoints[i++] = p.y;
+		}
+
+		return mxPoints
+	},
+
+	/**
+	 * Apply to any canvas 2D context object. This does not affect the
+	 * context that optionally was referenced in constructor unless it is
+	 * the same context.
+	 *
+	 * @param {CanvasRenderingContext2D} context - target context
+	 * @returns {Matrix}
+	 */
+	applyToContext: function(context) {
+		var me = this;
+		context.setTransform(me.a, me.b, me.c, me.d, me.e, me.f);
+		return me
+	},
+
+	/**
+	 * Returns true if matrix is an identity matrix (no transforms applied).
+	 * @returns {boolean}
+	 */
+	isIdentity: function() {
+		var me = this;
+		return me._q(me.a, 1) &&
+			me._q(me.b, 0) &&
+			me._q(me.c, 0) &&
+			me._q(me.d, 1) &&
+			me._q(me.e, 0) &&
+			me._q(me.f, 0)
+	},
+
+	/**
+	 * Returns true if matrix is invertible
+	 * @returns {boolean}
+	 */
+	isInvertible: function() {
+		return !this._q(this.determinant(), 0)
+	},
+
+	/**
+	 * The method is intended for situations where scale is accumulated
+	 * via multiplications, to detect situations where scale becomes
+	 * "trapped" with a value of zero. And in which case scale must be
+	 * set explicitly to a non-zero value.
+	 *
+	 * @returns {boolean}
+	 */
+	isValid: function() {
+		return !(this.a * this.d)
+	},
+
+	/**
+	 * Compares current matrix with another matrix. Returns true if equal
+	 * (within epsilon tolerance).
+	 * @param {Matrix|SVGMatrix} m - matrix to compare this matrix with
+	 * @returns {boolean}
+	 */
+	isEqual: function(m) {
+
+		var me = this,
+			q = me._q;
+
+		return  q(me.a, m.a) &&
+				q(me.b, m.b) &&
+				q(me.c, m.c) &&
+				q(me.d, m.d) &&
+				q(me.e, m.e) &&
+				q(me.f, m.f)
+	},
+
+	/**
+	 * Clones current instance and returning a new matrix.
+	 * @param {boolean} [noContext=false] don't clone context reference if true
+	 * @returns {Matrix} - a new Matrix instance with identical transformations as this instance
+	 */
+	clone: function(noContext) {
+		return new Matrix(noContext ? null : this.context).multiply(this)
+	},
+
+	/**
+	 * Returns an array with current matrix values.
+	 * @returns {Array}
+	 */
+	toArray: function() {
+		var me = this;
+		return [me.a, me.b, me.c, me.d, me.e, me.f]
+	},
+
+	/**
+	 * Returns a binary typed array, either as 32-bit (default) or
+	 * 64-bit.
+	 * @param {boolean} [use64=false] chose whether to use 32-bit or 64-bit typed array
+	 * @returns {*}
+	 */
+	toTypedArray: function(use64) {
+
+		var a  = use64 ? new Float64Array(6) : new Float32Array(6),
+			me = this;
+
+		a[0] = me.a;
+		a[1] = me.b;
+		a[2] = me.c;
+		a[3] = me.d;
+		a[4] = me.e;
+		a[5] = me.f;
+
+		return a
+	},
+
+	/**
+	 * Generates a string that can be used with CSS `transform`.
+	 * @example
+	 *     element.style.transform = m.toCSS();
+	 * @returns {string}
+	 */
+	toCSS: function() {
+		return "matrix(" + this.toArray() + ")"
+	},
+
+	/**
+	 * Generates a `matrix3d()` string that can be used with CSS `transform`.
+	 * Although the matrix is for 2D use you may see performance benefits
+	 * on some devices using a 3D CSS transform instead of a 2D.
+	 * @example
+	 *     element.style.transform = m.toCSS3D();
+	 * @returns {string}
+	 */
+	toCSS3D: function() {
+		var me = this;
+		return "matrix3d(" + me.a + "," + me.b + ",0,0," + me.c + "," + me.d + ",0,0,0,0,1,0," + me.e + "," + me.f + ",0,1)"
+	},
+
+	/**
+	 * Returns a JSON compatible string of current matrix.
+	 * @returns {string}
+	 */
+	toJSON: function() {
+		var me = this;
+		return '{"a":' + me.a + ',"b":' + me.b + ',"c":' + me.c + ',"d":' + me.d + ',"e":' + me.e + ',"f":' + me.f + '}'
+	},
+
+	/**
+	 * Returns a string with current matrix as comma-separated list.
+	 * @param {number} [fixLen=4] - truncate decimal values to number of digits
+	 * @returns {string}
+	 */
+	toString: function(fixLen) {
+		var me = this;
+		fixLen = fixLen || 4;
+		return 	 "a=" + me.a.toFixed(fixLen) +
+				" b=" + me.b.toFixed(fixLen) +
+				" c=" + me.c.toFixed(fixLen) +
+				" d=" + me.d.toFixed(fixLen) +
+				" e=" + me.e.toFixed(fixLen) +
+				" f=" + me.f.toFixed(fixLen)
+	},
+
+	/**
+	 * Returns a string with current matrix as comma-separated values
+	 * string with line-end (CR+LF).
+	 * @returns {string}
+	 */
+	toCSV: function() {
+		return this.toArray().join() + "\r\n"
+	},
+
+	/**
+	 * Convert current matrix into a `DOMMatrix`. If `DOMMatrix` is not
+	 * supported, a `null` is returned.
+	 *
+	 * @returns {DOMMatrix}
+	 * @see {@link https://drafts.fxtf.org/geometry/#dommatrix|MDN / SVGMatrix}
+	 */
+	toDOMMatrix: function() {
+		var m = null;
+		if ("DOMMatrix" in window) {
+			m = new DOMMatrix();
+			m.a = this.a;
+			m.b = this.b;
+			m.c = this.c;
+			m.d = this.d;
+			m.e = this.e;
+			m.f = this.f;
+		}
+		return m
+	},
+
+	/**
+	 * Convert current matrix into a `SVGMatrix`. If `SVGMatrix` is not
+	 * supported, a `null` is returned.
+	 *
+	 * Note: BETA
+	 *
+	 * @returns {SVGMatrix}
+	 * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/SVGMatrix|MDN / SVGMatrix}
+	 */
+	toSVGMatrix: function() {
+
+		// as we can not set transforms directly on SVG matrices we need
+		// to decompose our own matrix first:
+		var dc = this.decompose(),
+			translate = dc.translate,
+			scale = dc.scale,
+			skew = dc.skew,
+			eq = this._q,
+			svgMatrix = document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGMatrix();
+
+		if (!svgMatrix) return null;
+
+		// apply transformations in the correct order (see decompose()), QR: translate -> rotate -> scale -> skew
+		svgMatrix = svgMatrix.translate(translate.x, translate.y);
+		svgMatrix = svgMatrix.rotate(dc.rotation / Math.PI * 180);		// SVGMatrix uses degrees
+		svgMatrix = svgMatrix.scaleNonUniform(scale.x, scale.y);
+
+		if (!eq(0, skew.x))
+			svgMatrix = svgMatrix.skewX(skew.x);
+
+		if (!eq(0, skew.y))
+			svgMatrix = svgMatrix.skewY(skew.y);
+
+		return svgMatrix
+	},
+
+	/**
+	 * Compares floating point values with some tolerance (epsilon)
+	 * @param {number} f1 - float 1
+	 * @param {number} f2 - float 2
+	 * @returns {boolean}
+	 * @private
+	 */
+	_q: function(f1, f2) {
+		return Math.abs(f1 - f2) < 1e-14
+	},
+
+	/**
+	 * Apply current absolute matrix to context if defined, to sync it.
+	 * @returns {Matrix}
+	 * @private
+	 */
+	_x: function() {
+		var me = this;
+		if (me.context)
+			me.context.setTransform(me.a, me.b, me.c, me.d, me.e, me.f);
+		return me
+	}
+};
+
+// Node support
+if (typeof exports !== "undefined") exports.Matrix = Matrix;
+
+},{}],11:[function(require,module,exports){
+var FILL    = '#000000';
+var COLOR   = '#333333';
+var WEIGHT  = 1;
+var OPACITY = 0.75;
+
+
+var Styles = {
+
+  'Polygon': {
+    stroke: 1,
+    color: COLOR,
+    opacity: OPACITY
+  },
+
+  'LineString': {
+    stroke: 1,
+    color: COLOR,
+    opacity: OPACITY
+  },
+
+  'Point': {
+    radius: 3,
+    color: COLOR
+  },
+
+  'textbox': {
+    'fontFamily': 'Helvetica, Arial, sans-serif',
+    'fontColor': COLOR,
+    'weight': 0.25,
+    'color': COLOR
+  }
+};
+
+
+Styles['MultiPolygon']    = Styles.Polygon;
+Styles['MultiLineString'] = Styles.LineString;
+Styles['MultiPoint']      = Styles.Point;
+
+module.exports = Styles;
+
+},{}],12:[function(require,module,exports){
+/**
+ * The reason for everything inlined is that the function has to have a
+ * single body to be `eval`ed in electron context
+ *
+ * @param  {String}                fontFamily
+ * @param  {Array.<Number>|Number} fontSizes
+ * @param  {Boolean}               details  More details about measurements
+ * @return {Object}
+ */
+module.exports = function measureGlyphs(fontFamily, fontSizes, details) {
+
+  /**
+   * @param  {Number}  size
+   * @param  {Boolean} details
+   * @param  {...els}  SVGElement
+   * @return {Object}
+   */
+  function measure (size, details) {
+    var combinedWidth = 0;
+    var combinedHeight = 0;
+    var measurements = [];
+    var groups = arguments.length - 2;
+
+    for (var i = 2, len = arguments.length; i < len; i++) {
+      var el = arguments[i];
+      el.setAttribute('font-size', size);
+      var symbols = el.innerHTML.length;
+      var length = el.getComputedTextLength();
+      var bbox = el.getBBox();
+
+      combinedWidth  += length / symbols;
+      combinedHeight += bbox.height;
+
+      if (details) {
+        measurements.push({
+          length: length,
+          width:  bbox.width,
+          height: bbox.height,
+          n:      symbols,
+          avg:    length / symbols
+        });
+      }
+    }
+
+    var res = {
+      avg: combinedWidth / groups,
+      height: combinedHeight / groups,
+      size: size
+    };
+
+    if (details) {
+      res.measurements = measurements;
+    }
+
+    return res;
+  }
+
+  /**
+   * Generates a significant range of special HTML chars
+   * @return {String}
+   */
+  function getSpecialChars() {
+    var chars = '';
+    for (var i = 160; i < 256; i++) {
+      chars += '&#' + i + ';';
+    }
+    return chars;
+  }
+
+
+  /**
+   * Creates text element of a specific font-family and content
+   * inside of the container
+   * @inlined
+   * @param  {String} text
+   * @param  {String} fontFamily
+   * @param  {String} container
+   * @return {SVGElement}
+   */
+  function createText(text, fontFamily, container) {
+    var textElement = create('text');
+    textElement.setAttribute('font-family', fontFamily);
+
+    var textNode = document.createTextNode(text || '');
+    textElement.appendChild(textNode);
+    container.appendChild(textElement);
+
+    return textElement;
+  }
+
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+
+  function create(tag) {
+     return document.createElementNS(SVG_NS, tag);
+  }
+  
+
+  var svg = create('svg');
+
+  if (typeof fontSizes === 'number') {
+    fontSizes = [fontSizes];
+  }
+
+  var a = createText('abcdefghijklmnopqrstuvwxyz', fontFamily, svg);
+  var A = createText('ABCDEFGHIJKLMNOPQRTSUVWXYZ', fontFamily, svg);
+  var n = createText('0123456789',                 fontFamily, svg);
+  var s = createText(getSpecialChars(),            fontFamily, svg);
+
+  svg.style.position = 'absolute';
+  svg.style.top = svg.style.left = '-9999px';
+  document.body.appendChild(svg);
+
+  var values = [];
+  for (var i = 0, len = fontSizes.length; i < len; i++) {
+    values.push(measure(fontSizes[i], details, a, A, n, s));
+  }
+
+  svg.parentNode.removeChild(svg);
+
+  return {
+    fontFamily: fontFamily,
+    values: values
+  };
+};
+
+},{}]},{},[6]);

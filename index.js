@@ -1,8 +1,15 @@
-var project = require('geojson-project');
-var extend  = require('deep-extend');
-var hash    = require('string-hash');
-var measure = require('./src/measure_glyphs');
-var Matrix  = require("transformation-matrix-js").Matrix;
+/**
+ * @preserve
+ * GeoJSON -> SVG text renderer
+ *
+ * @license MIT
+ * @copyright 2016 Alexander Milevski <info@w8r.name>
+ */
+var project     = require('geojson-project');
+var extend      = require('json-extend');
+var hash        = require('string-hash');
+var getFontData = require('./src/get_font_data');
+var Matrix      = require("transformation-matrix-js").Matrix;
 
 module.exports               = renderer;
 module.exports.Renderer      = Renderer;
@@ -15,9 +22,11 @@ var VERSION = 1.2;
 var SYMBOL  = 'symbol';
 var TEXTBOX = 'textbox';
 
+
 var DefaultStyles = require('./src/default_styles');
 var DefaultFonts  = [
   require('./fonts/arial_helvetica_ss'),
+  require('./fonts/helvetica_arial_ss'),
   require('./fonts/georgia_times_s'),
   require('./fonts/lucida_monaco_mono'),
   require('./fonts/verdana_geneva_ss')
@@ -84,7 +93,7 @@ Renderer.prototype = {
       fonts[i].values = fonts[i].values.sort(function(a, b) {
         return a.size - b.size;
       });
-      this._fonts.push(fonts);
+      this._fonts.push(fonts[i]);
     }
 
     return this;
@@ -245,6 +254,8 @@ Renderer.prototype = {
     var text = properties.text;
     var pos = [featureBounds[0], featureBounds[1]];
 
+    var content = this._renderTextContent(text, fontSize, fontFamily, featureBounds);
+
     if (fontFamily) {
       fontFamily = 'font-family="' + fontFamily + '" ';
     }
@@ -255,38 +266,21 @@ Renderer.prototype = {
       'x="',         pos[0], '" ',
       'y="',         pos[1], '" ',
       '>',
-        this._renderTextContent(text, fontSize, fontFamily, featureBounds),
+        content,
       '</text>');
   },
 
 
-  _getFontData: function (fontFamily, fontSize) {
-    // try and select from available
-    var data = null;
-    for (var i = 0, len = this._fonts.length; i < len; i++) {
-      var font = this._fonts[i];
-      if (font.fontFamily === fontSize) {
-        for (var j = 0, jj = font.values.length; j < jj; j++) {
-          if (font.values[j].size === fontSize) {
-            data = font.values[i];
-            break;
-          }
-        }
-        break;
-      }
-    }
-    console.log(data);
-    // none available
-    // if in browser - calculate
-    // else interpolate
-
-    if (typeof window !== 'undefined') console.log(measure(fontFamily, fontSize));
-  },
-
-
+  /**
+   * @param  {String}         text
+   * @param  {Number}         fontSize
+   * @param  {String}         fontFamily
+   * @param  {Array.<Number>} featureBounds
+   * @return {String}
+   */
   _renderTextContent: function(text, fontSize, fontFamily, featureBounds) {
-    var fontData = this._getFontData(fontFamily, fontSize);
-    console.log(fontData);
+    var fontData = getFontData(fontFamily, fontSize, this._fonts);
+    console.log('font data ', fontData);
     return text;
   },
 
@@ -493,7 +487,7 @@ Renderer.prototype = {
    * @param {Array.<Number>}  bbox
    * @param {Array.<Number>}  fBounds
    */
-  _getPath (feature, closed, bbox, fBounds) {
+  _getPath: function (feature, closed, bbox, fBounds) {
     return this
       ._coordinatesToPath(feature.geometry.coordinates, closed, bbox, fBounds)
       .trim();

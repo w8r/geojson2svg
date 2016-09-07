@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "tape test/*.test.js",
-    "test:watch": "nodemon --exec 'npm test'"
+    "test:watch": "nodemon --exec 'npm test'",
+    "build-js": "browserify index.js -v -o dist/geojson2svg-src.js",
+    "compress-js": "uglifyjs dist/geojson2svg-src.js -o dist/geojson2svg.js -m --comments",
+    "build": "npm run build-js && npm run compress-js"
   },
   "repository": {
     "type": "git",
@@ -33,10 +36,12 @@
     "nightmare": "^2.7.0",
     "nodemon": "^1.10.2",
     "tap-spec": "^4.1.1",
-    "tape": "^4.6.0"
+    "tape": "^4.6.0",
+    "uglifyjs": "^2.4.10"
   },
   "dependencies": {
     "geojson-project": "^1.0.0",
+    "json-extend": "^0.1.0",
     "minimist": "^1.2.0",
     "string-hash": "^1.1.0",
     "transformation-matrix-js": "^2.6.5"

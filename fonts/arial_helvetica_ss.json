@@ -2,6 +2,11 @@
   "fontFamily": "Arial, Helvetica, sans-serif",
   "values": [
     {
+      "avg": 1.5294586181640626,
+      "height": 3.03125,
+      "size": 3
+    },
+    {
       "avg": 4.078556315104167,
       "height": 8.54296875,
       "size": 8

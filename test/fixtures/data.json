@@ -89,7 +89,7 @@
       "type": "Feature",
       "properties": {
         "text": "Please, add text",
-        "fontSize": 3,
+        "fontSize": 52.2,
         "fontColor": "#000000",
         "markupType": "textbox"
       },

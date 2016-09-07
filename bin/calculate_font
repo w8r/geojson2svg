@@ -12,7 +12,7 @@ var nightmare = Nightmare({
 var svgTemplate = fs.readFileSync(
   path.join(process.cwd(), 'test/fixtures/fonts.svg'), { encoding: 'utf-8' });
 
-var fontSizes  = [8, 10, 12, 16, 20, 32, 48];
+var fontSizes  = [3, 8, 10, 12, 16, 20, 32, 48];
 if (argv.s || argv.sizes) {
   fontSizes = (argv.s || argv.sizes)
     .replace(/[^0-9.,-]/g, '')

@@ -14,6 +14,7 @@ var geoJson = '';
 var svg     = '';
 var extent  = null;
 var type    = null;
+var fonts   = null;
 
 // console.log(argv);
 
@@ -29,8 +30,9 @@ if (argv.v || argv.version) {       // --version, -v
   console.log('   -h, --help                          prints this message');
   console.log('   -i, --input  file                   file name to read GeoJSON from, otherwise stdin');
   console.log('   -o, --output file                   file name to write SVG, otherwise stdout');
-  console.log('   -e, --extent [xmin,ymin,xmax,ymax]  extent to force as a viewbox of SVG, optional');
-  console.log('   -t, --type                          field in properties to select style by');
+  console.log('   -e, --extent [xmin,ymin,xmax,ymax]  extent to force as a viewbox of SVG, (optional)');
+  console.log('   -t, --type                          field in properties to select style by (optional)');
+  console.log('   -f, --fonts                         fonts measurement file (optional)');
   console.log('\n');
   process.exit(0);
 } else if (argv.i || argv.input) {  // --input, -i
@@ -41,6 +43,12 @@ if (argv.s || argv.style) {        // --style, -s
   style = JSON.parse(
     fs.readFileSync(
       path.join(process.cwd(), argv.s || argv.style), { encoding: 'utf-8'}));
+}
+
+if (argv.f || argv.fonts) {
+  fonts = JSON.parse(
+    fs.readFileSync(
+      path.join(process.cwd(), argv.f || argv.fonts), { encoding: 'utf-8'}));
 }
 
 if (argv.e || argv.extent) {       // --extent, -e
@@ -62,7 +70,7 @@ stream.resume();
 // done, render
 stream.on('end', function () {
   var json = JSON.parse(geoJson);
-  svg = gj2svg(json, style, extent, null, type).render();
+  svg = gj2svg(json, style, extent, null, type, fonts).render();
   if (argv.o || argv.output) {     // --output, -o
     fs.writeFile(path.join(process.cwd(), argv.o || argv.output), svg, {
       encoding: 'utf-8'}, function (err, success) {
