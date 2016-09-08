@@ -1,4 +1,4 @@
-var LINE_RATIO  = 1.1567;
+var LINE_RATIO  = 1.01567;
 var WIDTH_RATIO = 1 / 1.946;
 var measure     = require('./measure_glyphs');
 

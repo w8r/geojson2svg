@@ -25,11 +25,11 @@ var TEXTBOX = 'textbox';
 
 var DefaultStyles = require('./src/default_styles');
 var DefaultFonts  = [
-  require('./fonts/arial_helvetica_ss'),
-  require('./fonts/helvetica_arial_ss'),
-  require('./fonts/georgia_times_s'),
-  require('./fonts/lucida_monaco_mono'),
-  require('./fonts/verdana_geneva_ss')
+  require('./fonts/arial_helvetica_sans-serif'),
+  require('./fonts/helvetica_arial_sans-serif'),
+  require('./fonts/georgia_times_serif'),
+  require('./fonts/lucida_console_monaco_monospace'),
+  require('./fonts/verdana_geneva_sans-serif')
 ];
 
 /**
@@ -254,13 +254,17 @@ Renderer.prototype = {
     var text = properties.text;
     var pos = [featureBounds[0], featureBounds[1]];
 
-    var content = this._renderTextContent(text, fontSize, fontFamily, featureBounds);
+    var content = this._renderTextContent(
+      text, fontSize, fontFamily, featureBounds, properties);
 
     if (fontFamily) {
       fontFamily = 'font-family="' + fontFamily + '" ';
     }
 
+    var className = ('textbox ' + (properties.className || '')).trim();
+
     accum.push('<text ', fontFamily,
+      'class="',     className, '" ',
       'font-size="', fontSize, '" ',
       'fill="',      fontColor, '" ',
       'x="',         pos[0], '" ',
@@ -276,12 +280,57 @@ Renderer.prototype = {
    * @param  {Number}         fontSize
    * @param  {String}         fontFamily
    * @param  {Array.<Number>} featureBounds
+   * @param  {Object}         props
    * @return {String}
    */
-  _renderTextContent: function(text, fontSize, fontFamily, featureBounds) {
-    var fontData = getFontData(fontFamily, fontSize, this._fonts);
-    console.log('font data ', fontData);
+  _renderTextContent: function(text, fontSize, fontFamily, featureBounds, props) {
+    var accum = [];
+    if (Array.isArray(text) && props.lineHeight) { // it's formatted
+      for (var i = 0, len = text.length; i < len; i++) {
+        accum.push('<tspan ',
+          'dy="', props.lineHeight, '" ',
+          'x="',  featureBounds[0], '">',
+          text[i],
+        '</tspan>');
+      }
+      text = accum.join('');
+    } else {
+      var fontData = getFontData(fontFamily, fontSize, this._fonts);
+      text = this._renderMultilineText(text, fontData, featureBounds);
+    }
+
     return text;
+  },
+
+
+  _renderMultilineText: function(text, fontData, bbox) {
+    var width = bbox[2] - bbox[0];
+    var length = text.length;
+    var accum = [];
+    var str = '';
+    var i = 0, dy = fontData.height, lineLength = 0;
+
+    while (i < length) {
+      if (i === 0 || lineLength + fontData.avg > width) {
+        str += ['<tspan ',
+          'dy="', dy, '" ',
+          'x="', bbox[0] ,'"',
+        '>'].join('');
+        lineLength = 0;
+      }
+
+      str += text[i++];
+      lineLength += fontData.avg;
+
+      if (i === length || (lineLength + fontData.avg > width)) {
+        str += '</tspan>';
+        accum.push(str);
+        str = '';
+        //dy += fontData.height;
+      }
+    }
+
+    return accum.join('');
   },
 
 

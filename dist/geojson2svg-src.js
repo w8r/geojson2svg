@@ -1,229 +1,229 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Arial, Helvetica, sans-serif",
+  "fontFamily": "Arial,",
   "values": [
     {
-      "avg": 1.5294586181640626,
-      "height": 3.03125,
+      "avg": 1.446909860464243,
+      "height": 3.0546875,
       "size": 3
     },
     {
-      "avg": 4.078556315104167,
-      "height": 8.54296875,
+      "avg": 3.858426294571314,
+      "height": 8.5703125,
       "size": 8
     },
     {
-      "avg": 5.098195393880208,
-      "height": 11.0234375,
+      "avg": 4.823032868214143,
+      "height": 11.0390625,
       "size": 10
     },
     {
-      "avg": 6.11783447265625,
-      "height": 13.50390625,
+      "avg": 5.787639441856972,
+      "height": 13.01953125,
       "size": 12
     },
     {
-      "avg": 8.157112630208333,
+      "avg": 7.716852589142628,
       "height": 18,
       "size": 16
     },
     {
-      "avg": 10.196390787760416,
-      "height": 22.05078125,
+      "avg": 9.646065736428286,
+      "height": 22.5,
       "size": 20
     },
     {
-      "avg": 16.314225260416666,
-      "height": 36,
+      "avg": 15.433705178285257,
+      "height": 35.5,
       "size": 32
     },
     {
-      "avg": 24.471337890625,
-      "height": 53.5234375,
+      "avg": 23.150557767427888,
+      "height": 53.5,
       "size": 48
     }
   ]
 }
 },{}],2:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Georgia, Times, serif",
+  "fontFamily": "Georgia,",
   "values": [
     {
-      "avg": 1.5411266620342547,
-      "height": 3.56640625,
+      "avg": 1.446909860464243,
+      "height": 3.0546875,
       "size": 3
     },
     {
-      "avg": 4.109671098758013,
-      "height": 9.5,
+      "avg": 3.858426294571314,
+      "height": 8.5703125,
       "size": 8
     },
     {
-      "avg": 5.1370888734475155,
+      "avg": 4.823032868214143,
       "height": 11.0390625,
       "size": 10
     },
     {
-      "avg": 6.164506648137019,
-      "height": 13.5234375,
+      "avg": 5.787639441856972,
+      "height": 13.01953125,
       "size": 12
     },
     {
-      "avg": 8.219342197516026,
+      "avg": 7.716852589142628,
       "height": 18,
       "size": 16
     },
     {
-      "avg": 10.274177746895031,
-      "height": 23,
+      "avg": 9.646065736428286,
+      "height": 22.5,
       "size": 20
     },
     {
-      "avg": 16.438684395032052,
-      "height": 36.5,
+      "avg": 15.433705178285257,
+      "height": 35.5,
       "size": 32
     },
     {
-      "avg": 24.658026592548076,
-      "height": 54.5,
+      "avg": 23.150557767427888,
+      "height": 53.5,
       "size": 48
     }
   ]
 }
 },{}],3:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Helvetica, Arial, sans-serif",
+  "fontFamily": "Helvetica,",
   "values": [
     {
-      "avg": 1.5294730846698468,
-      "height": 3.5390625,
+      "avg": 1.446909860464243,
+      "height": 3.0546875,
       "size": 3
     },
     {
-      "avg": 4.078594892452925,
-      "height": 9,
+      "avg": 3.858426294571314,
+      "height": 8.5703125,
       "size": 8
     },
     {
-      "avg": 5.098243615566156,
-      "height": 11.5,
+      "avg": 4.823032868214143,
+      "height": 11.0390625,
       "size": 10
     },
     {
-      "avg": 6.117892338679387,
-      "height": 14,
+      "avg": 5.787639441856972,
+      "height": 13.01953125,
       "size": 12
     },
     {
-      "avg": 8.15718978490585,
-      "height": 18.5078125,
+      "avg": 7.716852589142628,
+      "height": 18,
       "size": 16
     },
     {
-      "avg": 10.196487231132313,
-      "height": 23,
+      "avg": 9.646065736428286,
+      "height": 22.5,
       "size": 20
     },
     {
-      "avg": 16.3143795698117,
-      "height": 37,
+      "avg": 15.433705178285257,
+      "height": 35.5,
       "size": 32
     },
     {
-      "avg": 24.47156935471755,
-      "height": 55,
+      "avg": 23.150557767427888,
+      "height": 53.5,
       "size": 48
     }
   ]
 }
 },{}],4:[function(require,module,exports){
 module.exports={
-  "fontFamily": "\"Lucida Console\", Monaco, monospace",
+  "fontFamily": "\"Lucida",
   "values": [
     {
-      "avg": 1.620263671875,
-      "height": 4,
+      "avg": 1.446909860464243,
+      "height": 3.0546875,
       "size": 3
     },
     {
-      "avg": 4.320703125,
-      "height": 10,
+      "avg": 3.858426294571314,
+      "height": 8.5703125,
       "size": 8
     },
     {
-      "avg": 5.40087890625,
-      "height": 12.5,
+      "avg": 4.823032868214143,
+      "height": 11.0390625,
       "size": 10
     },
     {
-      "avg": 6.4810546875,
-      "height": 15,
+      "avg": 5.787639441856972,
+      "height": 13.01953125,
       "size": 12
     },
     {
-      "avg": 8.64140625,
-      "height": 20,
+      "avg": 7.716852589142628,
+      "height": 18,
       "size": 16
     },
     {
-      "avg": 10.8017578125,
-      "height": 25,
+      "avg": 9.646065736428286,
+      "height": 22.5,
       "size": 20
     },
     {
-      "avg": 17.2828125,
-      "height": 40,
+      "avg": 15.433705178285257,
+      "height": 35.5,
       "size": 32
     },
     {
-      "avg": 25.92421875,
-      "height": 60,
+      "avg": 23.150557767427888,
+      "height": 53.5,
       "size": 48
     }
   ]
 }
 },{}],5:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Verdana, Geneva, sans-serif",
+  "fontFamily": "Verdana,",
   "values": [
     {
-      "avg": 1.7060499924879808,
-      "height": 3.55078125,
+      "avg": 1.446909860464243,
+      "height": 3.0546875,
       "size": 3
     },
     {
-      "avg": 4.549466646634615,
-      "height": 9.54296875,
+      "avg": 3.858426294571314,
+      "height": 8.5703125,
       "size": 8
     },
     {
-      "avg": 5.686833308293269,
-      "height": 12.015625,
+      "avg": 4.823032868214143,
+      "height": 11.0390625,
       "size": 10
     },
     {
-      "avg": 6.824199969951923,
-      "height": 14.5,
+      "avg": 5.787639441856972,
+      "height": 13.01953125,
       "size": 12
     },
     {
-      "avg": 9.09893329326923,
-      "height": 19.5,
+      "avg": 7.716852589142628,
+      "height": 18,
       "size": 16
     },
     {
-      "avg": 11.373666616586538,
-      "height": 24.03125,
+      "avg": 9.646065736428286,
+      "height": 22.5,
       "size": 20
     },
     {
-      "avg": 18.19786658653846,
-      "height": 38.52734375,
+      "avg": 15.433705178285257,
+      "height": 35.5,
       "size": 32
     },
     {
-      "avg": 27.296799879807693,
-      "height": 58.5,
+      "avg": 23.150557767427888,
+      "height": 53.5,
       "size": 48
     }
   ]
@@ -256,11 +256,11 @@ var TEXTBOX = 'textbox';
 
 var DefaultStyles = require('./src/default_styles');
 var DefaultFonts  = [
-  require('./fonts/arial_helvetica_ss'),
-  require('./fonts/helvetica_arial_ss'),
-  require('./fonts/georgia_times_s'),
-  require('./fonts/lucida_monaco_mono'),
-  require('./fonts/verdana_geneva_ss')
+  require('./fonts/arial_helvetica_sans-serif'),
+  require('./fonts/helvetica_arial_sans-serif'),
+  require('./fonts/georgia_times_serif'),
+  require('./fonts/lucida_console_monaco_monospace'),
+  require('./fonts/verdana_geneva_sans-serif')
 ];
 
 /**
@@ -485,13 +485,17 @@ Renderer.prototype = {
     var text = properties.text;
     var pos = [featureBounds[0], featureBounds[1]];
 
-    var content = this._renderTextContent(text, fontSize, fontFamily, featureBounds);
+    var content = this._renderTextContent(
+      text, fontSize, fontFamily, featureBounds, properties);
 
     if (fontFamily) {
       fontFamily = 'font-family="' + fontFamily + '" ';
     }
 
+    var className = ('textbox ' + (properties.className || '')).trim();
+
     accum.push('<text ', fontFamily,
+      'class="',     className, '" ',
       'font-size="', fontSize, '" ',
       'fill="',      fontColor, '" ',
       'x="',         pos[0], '" ',
@@ -507,12 +511,53 @@ Renderer.prototype = {
    * @param  {Number}         fontSize
    * @param  {String}         fontFamily
    * @param  {Array.<Number>} featureBounds
+   * @param  {Object}         props
    * @return {String}
    */
-  _renderTextContent: function(text, fontSize, fontFamily, featureBounds) {
-    var fontData = getFontData(fontFamily, fontSize, this._fonts);
-    console.log('font data ', fontData);
+  _renderTextContent: function(text, fontSize, fontFamily, featureBounds, props) {
+    var accum = [];
+    if (Array.isArray(text) && props.lineHeight) { // it's formatted
+      for (var i = 0, len = text.length; i < len; i++) {
+        accum.push('<tspan>', text[i], '</tspan>');
+      }
+    } else {
+      var fontData = getFontData(fontFamily, fontSize, this._fonts);
+      //text = this._renderMultilineText(str, fontData, featureBounds);
+      text = this._renderMultilineText(text, fontData, featureBounds);
+    }
+
     return text;
+  },
+
+
+  _renderMultilineText: function(text, fontData, bbox) {
+    var width = bbox[2] - bbox[0];
+    var length = text.length;
+    var accum = [];
+    var str = '';
+    var i = 0, dy = fontData.height, lineLength = 0;
+
+    while (i < length) {
+      if (i === 0 || lineLength + fontData.avg > width) {
+        str += ['<tspan ',
+          'dy="', dy, '" ',
+          'x="', bbox[0] ,'" ',
+        '>'].join('');
+        lineLength = 0;
+      }
+
+      str += text[i++];
+      lineLength += fontData.avg;
+
+      if (i === length || (lineLength + fontData.avg > width)) {
+        str += '</tspan>';
+        accum.push(str);
+        str = '';
+        dy += fontData.height;
+      }
+    }
+
+    return accum.join('');
   },
 
 
@@ -841,7 +886,7 @@ function getDefaultBBox () {
   return [Infinity, Infinity, -Infinity, -Infinity];
 }
 
-},{"./fonts/arial_helvetica_ss":1,"./fonts/georgia_times_s":2,"./fonts/helvetica_arial_ss":3,"./fonts/lucida_monaco_mono":4,"./fonts/verdana_geneva_ss":5,"./src/default_styles":11,"./src/get_font_data":12,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}],7:[function(require,module,exports){
+},{"./fonts/arial_helvetica_sans-serif":1,"./fonts/georgia_times_serif":2,"./fonts/helvetica_arial_sans-serif":3,"./fonts/lucida_console_monaco_monospace":4,"./fonts/verdana_geneva_sans-serif":5,"./src/default_styles":11,"./src/get_font_data":12,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}],7:[function(require,module,exports){
 
 /**
  * @param  {Object}     data GeoJSON
@@ -2091,7 +2136,7 @@ Styles['MultiPoint']      = Styles.Point;
 module.exports = Styles;
 
 },{}],12:[function(require,module,exports){
-var LINE_RATIO  = 1.1567;
+var LINE_RATIO  = 1.01567;
 var WIDTH_RATIO = 1 / 1.946;
 var measure     = require('./measure_glyphs');
 

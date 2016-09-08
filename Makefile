@@ -1,9 +1,21 @@
-fonts:
-	mkdir fonts
-	./bin/calculate_font -f 'Arial, Helvetica, sans-serif' > ./fonts/arial_helvetica_ss.json
-	./bin/calculate_font -f 'Helvetica, Arial, sans-serif' > ./fonts/helvetica_arial_ss.json
-	./bin/calculate_font -f '"Lucida Console", Monaco, monospace' > ./fonts/lucida_monaco_mono.json
-	./bin/calculate_font -f 'Verdana, Geneva, sans-serif' > ./fonts/verdana_geneva_ss.json
-	./bin/calculate_font -f 'Georgia, Times, serif' > ./fonts/georgia_times_s.json
+FONT_FAMILIES = 'Arial, Helvetica, sans-serif' 'Helvetica, Arial, sans-serif' \
+                '"Lucida Console", Monaco, monospace' \
+								'Verdana, Geneva, sans-serif' 'Georgia, Times, serif'
+
+font:
+	@mkdir -p fonts
+	@for ff in $(FONT_FAMILIES); do \
+	  ./bin/calculate_font -f $$ff > \
+		./fonts/`echo $${ff} | tr A-Z a-z | tr -d \" | tr -d \, | tr ' ' _`.json; \
+	done
+	@echo " - fonts measurements exported to ./fonts/"
+
+
 clean:
 	rm -rf fonts
+
+
+all: clean font
+
+
+.PHONY: all

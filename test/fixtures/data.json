@@ -88,8 +88,8 @@
     {
       "type": "Feature",
       "properties": {
-        "text": "Please, add text",
-        "fontSize": 52.2,
+        "text": "Please, add text, more text, more more more of text, more",
+        "fontSize": 3,
         "fontColor": "#000000",
         "markupType": "textbox"
       },
@@ -116,6 +116,43 @@
             [
               508.69590159388815,
               231.98963483252552
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "text": ["Please, add", " text, more", " text, more", " more more ", "of text, mo", "re"],
+        "fontSize": 8,
+        "lineHeight": 8.12536,
+        "fontColor": "#000000",
+        "markupType": "textbox"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              608.69590159388815,
+              271.98963483252552
+            ],
+            [
+              608.69590159388815,
+              210.34330485689483
+            ],
+            [
+              653.4814118882965,
+              210.34330485689483
+            ],
+            [
+              653.4814118882965,
+              271.98963483252552
+            ],
+            [
+              608.69590159388815,
+              271.98963483252552
             ]
           ]
         ]

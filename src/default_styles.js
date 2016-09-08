@@ -26,7 +26,7 @@ var Styles = {
   'textbox': {
     'fontFamily': 'Helvetica, Arial, sans-serif',
     'fontColor': COLOR,
-    'weight': 0.25,
+    'weight': 0,
     'color': COLOR
   }
 };
