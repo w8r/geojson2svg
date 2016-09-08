@@ -299,8 +299,9 @@ function Renderer (gj, styles, extent, projection, type, fonts, transform) {
   this.fonts(fonts || DefaultFonts);
 }
 
-function renderer (gj, styles, extent, project, type) {
-  return new Renderer(gj, styles, extent, project, type);
+// factory
+function renderer (gj, styles, extent, project, type, fonts, transform) {
+  return new Renderer(gj, styles, extent, project, type, fonts, transform);
 }
 
 Renderer.prototype = {
