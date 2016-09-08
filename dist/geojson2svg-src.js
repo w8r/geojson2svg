@@ -518,11 +518,15 @@ Renderer.prototype = {
     var accum = [];
     if (Array.isArray(text) && props.lineHeight) { // it's formatted
       for (var i = 0, len = text.length; i < len; i++) {
-        accum.push('<tspan>', text[i], '</tspan>');
+        accum.push('<tspan ',
+          'dy="', props.lineHeight, '" ',
+          'x="',  featureBounds[0], '">',
+          text[i],
+        '</tspan>');
       }
+      text = accum.join('');
     } else {
       var fontData = getFontData(fontFamily, fontSize, this._fonts);
-      //text = this._renderMultilineText(str, fontData, featureBounds);
       text = this._renderMultilineText(text, fontData, featureBounds);
     }
 
@@ -541,7 +545,7 @@ Renderer.prototype = {
       if (i === 0 || lineLength + fontData.avg > width) {
         str += ['<tspan ',
           'dy="', dy, '" ',
-          'x="', bbox[0] ,'" ',
+          'x="', bbox[0] ,'"',
         '>'].join('');
         lineLength = 0;
       }
@@ -553,7 +557,7 @@ Renderer.prototype = {
         str += '</tspan>';
         accum.push(str);
         str = '';
-        dy += fontData.height;
+        //dy += fontData.height;
       }
     }
 
@@ -2123,7 +2127,7 @@ var Styles = {
   'textbox': {
     'fontFamily': 'Helvetica, Arial, sans-serif',
     'fontColor': COLOR,
-    'weight': 0.25,
+    'weight': 0,
     'color': COLOR
   }
 };
