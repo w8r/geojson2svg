@@ -36,28 +36,35 @@ var DefaultFonts  = [
  *
  * @class Renderer
  *
- * @param {GeoJSON=} gj
- * @param {Object=}  styles
- * @param {Array.<Number>=} extent
- * @param {Function=} projection
- * @param {String|Function=} type
- * @param {Object}           fonts
+ * @param {GeoJSON=}         gj         Input data
+ * @param {Object=}          styles     Styles per feature type
+ * @param {Array.<Number>=}  extent     Forced canvas bbox
+ * @param {Function=}        projection Projection function [x,y] => [x,y]
+ * @param {String|Function=} type       Properties field to be used to select
+ *                                      styles for the feature
+ * @param {Object}           fonts      Font measurement(s)
+ * @param {Function=}        transform  Transform function invoked per feature,
+ *                                      in case you need to perform some
+ *                                      preparation of Feature -> Feature
  */
-function Renderer (gj, styles, extent, projection, type, fonts) {
+function Renderer (gj, styles, extent, projection, type, fonts, transform) {
   this._data       = null;
   this._extent     = null;
   this._styles     = DefaultStyles;
   this._projection = null;
   this._type       = null;
   this._fonts      = [];
+  this._transform  = null;
 
   this._defs       = null;
 
-  if (gj)         this.data(gj);
-  if (styles)     this.styles(styles);
-  if (extent)     this.extent(extent);
-  if (projection) this.projection(project);
-  if (type)       this.type(type);
+  if (gj)           this.data(gj);
+  if (styles)       this.styles(styles);
+  if (extent)       this.extent(extent);
+  if (projection)   this.projection(project);
+  if (type)         this.type(type);
+  if (transform)    this.transform(transform);
+
   this.fonts(fonts || DefaultFonts);
 }
 
@@ -96,6 +103,20 @@ Renderer.prototype = {
       this._fonts.push(fonts[i]);
     }
 
+    return this;
+  },
+
+
+  /**
+   * Sets transformation function
+   * @param  {Function} transform
+   * @return {Renderer}
+   */
+  transform: function(transform) {
+    if (typeof transform !== 'function') {
+      throw new Error('Transform feature must be a function');
+    }
+    this._transform = transform;
     return this;
   },
 
@@ -166,7 +187,7 @@ Renderer.prototype = {
     var bbox = getDefaultBBox();
     this._defs = [];
     for (var i = 0, len = this._data.features.length; i < len; i++) {
-      this._renderFeature(this._data.features[i], rendered, bbox);
+      this._feature(this._data.features[i], rendered, bbox);
     }
 
     this._renderContainer(rendered,
@@ -198,29 +219,93 @@ Renderer.prototype = {
 
 
   /**
-   * @param  {Feature} feature
-   * @param  {Array.<String>} accum
-   * @param  {Array.<Number>} bbox
+   * Renders individual feature
+   * @param  {Feature}         feature
+   * @param  {Array.<String>}  accum
+   * @param  {Array.<Number>}  bbox
+   * @return  {Array.<Number>} featureBounds
    */
-  _renderFeature: function (feature, accum, bbox) {
+  _feature: function (feature, accum, bbox) {
     var featureBounds = getDefaultBBox();
+
+    if (this._transform) feature = this._transform(feature);
 
     switch (feature.geometry.type) {
       case 'Polygon':
       case 'MultiPolygon':
-        this._renderPolygon(feature, accum, bbox, featureBounds);
+        this._polygon(feature, accum, bbox, featureBounds);
         break;
       case 'LineString':
       case 'MultiLineString':
-        this._renderLineString(feature, accum, bbox, featureBounds);
+        this._lineString(feature, accum, bbox, featureBounds);
         break;
-      //case 'MultiPoint': TODO
       case 'Point':
-        this._renderPoint(feature, accum, bbox, featureBounds);
+        this._point(feature, accum, bbox, featureBounds);
+        break;
+      case 'MultiPoint':
+        this._multiPoint(feature, accum, bbox, featureBounds);
+      case 'GeometryCollection':
+        this._geometryCollection(feature, accum, bbox, featureBounds);
         break;
       default:
         break;
     }
+    return featureBounds;
+  },
+
+
+  /**
+   * Render `GeometryCollection` in a group
+   *
+   * @param  {Feature}        feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _geometryCollection: function (feature, accum, bbox, featureBounds) {
+    var className =
+      ('geometrycollection ' + feature.properties.className || '').trim();
+    accum.push('<g class="',className, '">');
+
+    // split geometries into features for rendering
+    for (var i = 0, len = feature.geometry.geometries.length; i < len; i++) {
+      this._feature({
+        type:       'Feature',
+        properties: feature.properties,
+        geometry:   feature.geometry.geometries[i]
+      }, accum, bbox);
+    }
+
+    accum.push('</g>');
+  },
+
+
+  /**
+   * Renders `MultiPoint` in a group
+   *
+   * @param  {Feature}        feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _multiPoint: function(feature, accum, bbox, featureBounds) {
+    var className =
+      ('multipoint ' + feature.properties.className || '').trim();
+    accum.push('<g class="',className, '">');
+
+    // split geometries into features for rendering
+    for (var i = 0, len = feature.geometry.coordinates.length; i < len; i++) {
+      this._point({
+        type:       'Feature',
+        properties: feature.properties,
+        geometry:   {
+          type:        'Point',
+          coordinates: feature.geometry.coordinates[i],
+        }
+      }, accum, bbox, featureBounds);
+    }
+
+    accum.push('</g>');
   },
 
 
@@ -230,7 +315,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderLineString: function (feature, accum, bbox, featureBounds) {
+  _lineString: function (feature, accum, bbox, featureBounds) {
     var properties = feature.properties;
     var className = ('linestring ' + (properties.className || '')).trim();
     accum.push('<path class="', className,
@@ -340,7 +425,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderPolygon: function (feature, accum, bbox, featureBounds) {
+  _polygon: function (feature, accum, bbox, featureBounds) {
     var properties = feature.properties;
     var className = ('polygon ' + (properties.className || '')).trim();
     accum.push('<path class="', className,
@@ -359,7 +444,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderPoint: function (feature, accum, bbox, featureBounds) {
+  _point: function (feature, accum, bbox, featureBounds) {
     if (this._type && feature.properties[this._type] === SYMBOL) {
       this._renderSymbol(feature, accum, bbox, featureBounds);
     } else {
