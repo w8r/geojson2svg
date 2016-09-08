@@ -231,11 +231,11 @@ Renderer.prototype = {
     if (this._transform) feature = this._transform(feature);
 
     switch (feature.geometry.type) {
-      case 'Polygon':
+      case 'Polygon':        // render in one path
       case 'MultiPolygon':
         this._polygon(feature, accum, bbox, featureBounds);
         break;
-      case 'LineString':
+      case 'LineString':      // render in one path
       case 'MultiLineString':
         this._lineString(feature, accum, bbox, featureBounds);
         break;
@@ -244,6 +244,7 @@ Renderer.prototype = {
         break;
       case 'MultiPoint':
         this._multiPoint(feature, accum, bbox, featureBounds);
+        break;
       case 'GeometryCollection':
         this._geometryCollection(feature, accum, bbox, featureBounds);
         break;
@@ -664,6 +665,7 @@ Renderer.prototype = {
       styles = extend({}, feature.properties, this._selectStyle(feature));
     }
 
+    // this code is an mainly an extract from Leaflet
     if (styles.stroke || styles.weight) {
       currentStyle['stroke']          = styles.color;
       currentStyle['stroke-opacity']  = styles.opacity;
@@ -680,6 +682,7 @@ Renderer.prototype = {
       }
 
       if (styles.weight) {
+        // TODO: fix that multiple padding for multipoint
         padBBox(featureBounds, styles.weight);
 
         extendBBox(bbox, featureBounds.slice(0, 2));
@@ -692,7 +695,8 @@ Renderer.prototype = {
     if (styles.fill) {
       currentStyle['fill']         = styles.fillColor   || styles.color;
       currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity || 0;
-      currentStyle['fill-rule']    = styles.fillRule    || 'evenodd';
+      currentStyle['fill-rule']    = styles.fillRule    ||
+        (feature.geometry.type === 'MultiPolygon') ? 'evenodd' : 'nonzero';
     } else {
       currentStyle['fill'] = 'none';
     }
