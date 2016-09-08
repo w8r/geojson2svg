@@ -503,7 +503,9 @@ Renderer.prototype = {
     for (var i = 0, len = feature.geometry.geometries.length; i < len; i++) {
       this._feature({
         type:       'Feature',
-        properties: feature.properties,
+        properties: extend({}, feature.properties, {
+          collectionIndex: i
+        }),
         geometry:   feature.geometry.geometries[i]
       }, accum, bbox);
     }
