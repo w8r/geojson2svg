@@ -1,229 +1,229 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Arial,",
+  "fontFamily": "Arial, Helvetica, sans-serif",
   "values": [
     {
-      "avg": 1.446909860464243,
-      "height": 3.0546875,
+      "avg": 1.5294586181640626,
+      "height": 3.03125,
       "size": 3
     },
     {
-      "avg": 3.858426294571314,
-      "height": 8.5703125,
+      "avg": 4.078556315104167,
+      "height": 8.54296875,
       "size": 8
     },
     {
-      "avg": 4.823032868214143,
-      "height": 11.0390625,
+      "avg": 5.098195393880208,
+      "height": 11.0234375,
       "size": 10
     },
     {
-      "avg": 5.787639441856972,
-      "height": 13.01953125,
+      "avg": 6.11783447265625,
+      "height": 13.50390625,
       "size": 12
     },
     {
-      "avg": 7.716852589142628,
+      "avg": 8.157112630208333,
       "height": 18,
       "size": 16
     },
     {
-      "avg": 9.646065736428286,
-      "height": 22.5,
+      "avg": 10.196390787760416,
+      "height": 22.05078125,
       "size": 20
     },
     {
-      "avg": 15.433705178285257,
-      "height": 35.5,
+      "avg": 16.314225260416666,
+      "height": 36,
       "size": 32
     },
     {
-      "avg": 23.150557767427888,
-      "height": 53.5,
+      "avg": 24.471337890625,
+      "height": 53.5234375,
       "size": 48
     }
   ]
 }
 },{}],2:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Georgia,",
+  "fontFamily": "Georgia, Times, serif",
   "values": [
     {
-      "avg": 1.446909860464243,
-      "height": 3.0546875,
+      "avg": 1.5411266620342547,
+      "height": 3.56640625,
       "size": 3
     },
     {
-      "avg": 3.858426294571314,
-      "height": 8.5703125,
+      "avg": 4.109671098758013,
+      "height": 9.5,
       "size": 8
     },
     {
-      "avg": 4.823032868214143,
+      "avg": 5.1370888734475155,
       "height": 11.0390625,
       "size": 10
     },
     {
-      "avg": 5.787639441856972,
-      "height": 13.01953125,
+      "avg": 6.164506648137019,
+      "height": 13.5234375,
       "size": 12
     },
     {
-      "avg": 7.716852589142628,
+      "avg": 8.219342197516026,
       "height": 18,
       "size": 16
     },
     {
-      "avg": 9.646065736428286,
-      "height": 22.5,
+      "avg": 10.274177746895031,
+      "height": 23,
       "size": 20
     },
     {
-      "avg": 15.433705178285257,
-      "height": 35.5,
+      "avg": 16.438684395032052,
+      "height": 36.5,
       "size": 32
     },
     {
-      "avg": 23.150557767427888,
-      "height": 53.5,
+      "avg": 24.658026592548076,
+      "height": 54.5,
       "size": 48
     }
   ]
 }
 },{}],3:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Helvetica,",
+  "fontFamily": "Helvetica, Arial, sans-serif",
   "values": [
     {
-      "avg": 1.446909860464243,
-      "height": 3.0546875,
+      "avg": 1.5294730846698468,
+      "height": 3.5390625,
       "size": 3
     },
     {
-      "avg": 3.858426294571314,
-      "height": 8.5703125,
+      "avg": 4.078594892452925,
+      "height": 9,
       "size": 8
     },
     {
-      "avg": 4.823032868214143,
-      "height": 11.0390625,
+      "avg": 5.098243615566156,
+      "height": 11.5,
       "size": 10
     },
     {
-      "avg": 5.787639441856972,
-      "height": 13.01953125,
+      "avg": 6.117892338679387,
+      "height": 14,
       "size": 12
     },
     {
-      "avg": 7.716852589142628,
-      "height": 18,
+      "avg": 8.15718978490585,
+      "height": 18.5078125,
       "size": 16
     },
     {
-      "avg": 9.646065736428286,
-      "height": 22.5,
+      "avg": 10.196487231132313,
+      "height": 23,
       "size": 20
     },
     {
-      "avg": 15.433705178285257,
-      "height": 35.5,
+      "avg": 16.3143795698117,
+      "height": 37,
       "size": 32
     },
     {
-      "avg": 23.150557767427888,
-      "height": 53.5,
+      "avg": 24.47156935471755,
+      "height": 55,
       "size": 48
     }
   ]
 }
 },{}],4:[function(require,module,exports){
 module.exports={
-  "fontFamily": "\"Lucida",
+  "fontFamily": "\"Lucida Console\", Monaco, monospace",
   "values": [
     {
-      "avg": 1.446909860464243,
-      "height": 3.0546875,
+      "avg": 1.620263671875,
+      "height": 4,
       "size": 3
     },
     {
-      "avg": 3.858426294571314,
-      "height": 8.5703125,
+      "avg": 4.320703125,
+      "height": 10,
       "size": 8
     },
     {
-      "avg": 4.823032868214143,
-      "height": 11.0390625,
+      "avg": 5.40087890625,
+      "height": 12.5,
       "size": 10
     },
     {
-      "avg": 5.787639441856972,
-      "height": 13.01953125,
+      "avg": 6.4810546875,
+      "height": 15,
       "size": 12
     },
     {
-      "avg": 7.716852589142628,
-      "height": 18,
+      "avg": 8.64140625,
+      "height": 20,
       "size": 16
     },
     {
-      "avg": 9.646065736428286,
-      "height": 22.5,
+      "avg": 10.8017578125,
+      "height": 25,
       "size": 20
     },
     {
-      "avg": 15.433705178285257,
-      "height": 35.5,
+      "avg": 17.2828125,
+      "height": 40,
       "size": 32
     },
     {
-      "avg": 23.150557767427888,
-      "height": 53.5,
+      "avg": 25.92421875,
+      "height": 60,
       "size": 48
     }
   ]
 }
 },{}],5:[function(require,module,exports){
 module.exports={
-  "fontFamily": "Verdana,",
+  "fontFamily": "Verdana, Geneva, sans-serif",
   "values": [
     {
-      "avg": 1.446909860464243,
-      "height": 3.0546875,
+      "avg": 1.7060499924879808,
+      "height": 3.55078125,
       "size": 3
     },
     {
-      "avg": 3.858426294571314,
-      "height": 8.5703125,
+      "avg": 4.549466646634615,
+      "height": 9.54296875,
       "size": 8
     },
     {
-      "avg": 4.823032868214143,
-      "height": 11.0390625,
+      "avg": 5.686833308293269,
+      "height": 12.015625,
       "size": 10
     },
     {
-      "avg": 5.787639441856972,
-      "height": 13.01953125,
+      "avg": 6.824199969951923,
+      "height": 14.5,
       "size": 12
     },
     {
-      "avg": 7.716852589142628,
-      "height": 18,
+      "avg": 9.09893329326923,
+      "height": 19.5,
       "size": 16
     },
     {
-      "avg": 9.646065736428286,
-      "height": 22.5,
+      "avg": 11.373666616586538,
+      "height": 24.03125,
       "size": 20
     },
     {
-      "avg": 15.433705178285257,
-      "height": 35.5,
+      "avg": 18.19786658653846,
+      "height": 38.52734375,
       "size": 32
     },
     {
-      "avg": 23.150557767427888,
-      "height": 53.5,
+      "avg": 27.296799879807693,
+      "height": 58.5,
       "size": 48
     }
   ]
@@ -267,28 +267,35 @@ var DefaultFonts  = [
  *
  * @class Renderer
  *
- * @param {GeoJSON=} gj
- * @param {Object=}  styles
- * @param {Array.<Number>=} extent
- * @param {Function=} projection
- * @param {String|Function=} type
- * @param {Object}           fonts
+ * @param {GeoJSON=}         gj         Input data
+ * @param {Object=}          styles     Styles per feature type
+ * @param {Array.<Number>=}  extent     Forced canvas bbox
+ * @param {Function=}        projection Projection function [x,y] => [x,y]
+ * @param {String|Function=} type       Properties field to be used to select
+ *                                      styles for the feature
+ * @param {Object}           fonts      Font measurement(s)
+ * @param {Function=}        transform  Transform function invoked per feature,
+ *                                      in case you need to perform some
+ *                                      preparation of Feature -> Feature
  */
-function Renderer (gj, styles, extent, projection, type, fonts) {
+function Renderer (gj, styles, extent, projection, type, fonts, transform) {
   this._data       = null;
   this._extent     = null;
   this._styles     = DefaultStyles;
   this._projection = null;
   this._type       = null;
   this._fonts      = [];
+  this._transform  = null;
 
   this._defs       = null;
 
-  if (gj)         this.data(gj);
-  if (styles)     this.styles(styles);
-  if (extent)     this.extent(extent);
-  if (projection) this.projection(project);
-  if (type)       this.type(type);
+  if (gj)           this.data(gj);
+  if (styles)       this.styles(styles);
+  if (extent)       this.extent(extent);
+  if (projection)   this.projection(project);
+  if (type)         this.type(type);
+  if (transform)    this.transform(transform);
+
   this.fonts(fonts || DefaultFonts);
 }
 
@@ -327,6 +334,20 @@ Renderer.prototype = {
       this._fonts.push(fonts[i]);
     }
 
+    return this;
+  },
+
+
+  /**
+   * Sets transformation function
+   * @param  {Function} transform
+   * @return {Renderer}
+   */
+  transform: function(transform) {
+    if (typeof transform !== 'function') {
+      throw new Error('Transform feature must be a function');
+    }
+    this._transform = transform;
     return this;
   },
 
@@ -397,7 +418,7 @@ Renderer.prototype = {
     var bbox = getDefaultBBox();
     this._defs = [];
     for (var i = 0, len = this._data.features.length; i < len; i++) {
-      this._renderFeature(this._data.features[i], rendered, bbox);
+      this._feature(this._data.features[i], rendered, bbox);
     }
 
     this._renderContainer(rendered,
@@ -429,29 +450,94 @@ Renderer.prototype = {
 
 
   /**
-   * @param  {Feature} feature
-   * @param  {Array.<String>} accum
-   * @param  {Array.<Number>} bbox
+   * Renders individual feature
+   * @param  {Feature}         feature
+   * @param  {Array.<String>}  accum
+   * @param  {Array.<Number>}  bbox
+   * @return  {Array.<Number>} featureBounds
    */
-  _renderFeature: function (feature, accum, bbox) {
+  _feature: function (feature, accum, bbox) {
     var featureBounds = getDefaultBBox();
 
+    if (this._transform) feature = this._transform(feature);
+
     switch (feature.geometry.type) {
-      case 'Polygon':
+      case 'Polygon':        // render in one path
       case 'MultiPolygon':
-        this._renderPolygon(feature, accum, bbox, featureBounds);
+        this._polygon(feature, accum, bbox, featureBounds);
         break;
-      case 'LineString':
+      case 'LineString':      // render in one path
       case 'MultiLineString':
-        this._renderLineString(feature, accum, bbox, featureBounds);
+        this._lineString(feature, accum, bbox, featureBounds);
         break;
-      //case 'MultiPoint': TODO
       case 'Point':
-        this._renderPoint(feature, accum, bbox, featureBounds);
+        this._point(feature, accum, bbox, featureBounds);
+        break;
+      case 'MultiPoint':
+        this._multiPoint(feature, accum, bbox, featureBounds);
+        break;
+      case 'GeometryCollection':
+        this._geometryCollection(feature, accum, bbox, featureBounds);
         break;
       default:
         break;
     }
+    return featureBounds;
+  },
+
+
+  /**
+   * Render `GeometryCollection` in a group
+   *
+   * @param  {Feature}        feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _geometryCollection: function (feature, accum, bbox, featureBounds) {
+    var className =
+      ('geometrycollection ' + feature.properties.className || '').trim();
+    accum.push('<g class="',className, '">');
+
+    // split geometries into features for rendering
+    for (var i = 0, len = feature.geometry.geometries.length; i < len; i++) {
+      this._feature({
+        type:       'Feature',
+        properties: feature.properties,
+        geometry:   feature.geometry.geometries[i]
+      }, accum, bbox);
+    }
+
+    accum.push('</g>');
+  },
+
+
+  /**
+   * Renders `MultiPoint` in a group
+   *
+   * @param  {Feature}        feature
+   * @param  {Array.<String>} accum
+   * @param  {Array.<Number>} bbox
+   * @param  {Array.<Number>} featureBounds
+   */
+  _multiPoint: function(feature, accum, bbox, featureBounds) {
+    var className =
+      ('multipoint ' + feature.properties.className || '').trim();
+    accum.push('<g class="',className, '">');
+
+    // split geometries into features for rendering
+    for (var i = 0, len = feature.geometry.coordinates.length; i < len; i++) {
+      this._point({
+        type:       'Feature',
+        properties: feature.properties,
+        geometry:   {
+          type:        'Point',
+          coordinates: feature.geometry.coordinates[i],
+        }
+      }, accum, bbox, featureBounds);
+    }
+
+    accum.push('</g>');
   },
 
 
@@ -461,7 +547,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderLineString: function (feature, accum, bbox, featureBounds) {
+  _lineString: function (feature, accum, bbox, featureBounds) {
     var properties = feature.properties;
     var className = ('linestring ' + (properties.className || '')).trim();
     accum.push('<path class="', className,
@@ -571,7 +657,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderPolygon: function (feature, accum, bbox, featureBounds) {
+  _polygon: function (feature, accum, bbox, featureBounds) {
     var properties = feature.properties;
     var className = ('polygon ' + (properties.className || '')).trim();
     accum.push('<path class="', className,
@@ -590,7 +676,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderPoint: function (feature, accum, bbox, featureBounds) {
+  _point: function (feature, accum, bbox, featureBounds) {
     if (this._type && feature.properties[this._type] === SYMBOL) {
       this._renderSymbol(feature, accum, bbox, featureBounds);
     } else {
@@ -810,6 +896,7 @@ Renderer.prototype = {
       styles = extend({}, feature.properties, this._selectStyle(feature));
     }
 
+    // this code is an mainly an extract from Leaflet
     if (styles.stroke || styles.weight) {
       currentStyle['stroke']          = styles.color;
       currentStyle['stroke-opacity']  = styles.opacity;
@@ -826,6 +913,7 @@ Renderer.prototype = {
       }
 
       if (styles.weight) {
+        // TODO: fix that multiple padding for multipoint
         padBBox(featureBounds, styles.weight);
 
         extendBBox(bbox, featureBounds.slice(0, 2));
@@ -838,7 +926,8 @@ Renderer.prototype = {
     if (styles.fill) {
       currentStyle['fill']         = styles.fillColor   || styles.color;
       currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity || 0;
-      currentStyle['fill-rule']    = styles.fillRule    || 'evenodd';
+      currentStyle['fill-rule']    = styles.fillRule    ||
+        (feature.geometry.type === 'MultiPolygon') ? 'evenodd' : 'nonzero';
     } else {
       currentStyle['fill'] = 'none';
     }

@@ -24,6 +24,10 @@ var verbose = !!(argv.v || argv.verbose);
 
 var fontFamily = argv.f || argv.fontFamily || 'Arial, Helvetica, sans-serif';
 
+if (argv._) {
+  fontFamily += ' ' + argv._.join(' ');
+}
+
 nightmare
   .goto('about:blank')
   .evaluate(function (fontFamily, fontSizes, measure, verbose) {

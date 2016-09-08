@@ -16,6 +16,6 @@ clean:
 
 
 all: clean font
-
+	
 
 .PHONY: all
