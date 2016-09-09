@@ -219,6 +219,24 @@ Renderer.prototype = {
   },
 
 
+  plugin: function (name, renderer, matcher) {
+    this._plugins[name] = {
+      renderer: renderer,
+      matcher: matcher || function () {
+        function(feature) {
+
+        }).apply(this, arguments);
+      }
+    }
+  },
+
+
+  _getPluginRenderer: function(feature) {
+    var renderer = this._plugins[feature.properties[this._type]];
+    return renderer;
+  },
+
+
   /**
    * Renders individual feature
    * @param  {Feature}         feature
@@ -230,6 +248,12 @@ Renderer.prototype = {
     var featureBounds = getDefaultBBox();
 
     if (this._transform) feature = this._transform(feature);
+
+    var pluginRenderer = this._getPluginRenderer(feature);
+    if (pluginRenderer) {
+      pluginRenderer.call(this, feature, accum, bbox, featureBounds);
+      return featureBounds;
+    }
 
     switch (feature.geometry.type) {
       case 'Polygon':        // render in one path
@@ -269,13 +293,18 @@ Renderer.prototype = {
       ('geometrycollection ' + feature.properties.className || '').trim();
     accum.push('<g class="',className, '">');
 
+    var geometriesLength = feature.geometry.geometries.length;
+    var types = feature.properties['geometriesTypes'] || Array(geometriesLength);
+
     // split geometries into features for rendering
-    for (var i = 0, len = feature.geometry.geometries.length; i < len; i++) {
+    for (var i = 0; i < geometriesLength; i++) {
+      var properties = extend({}, feature.properties, {
+        collectionIndex: i
+      });
+      properties[this._type] = types[i];
       this._feature({
         type:       'Feature',
-        properties: extend({}, feature.properties, {
-          collectionIndex: i
-        }),
+        properties: properties,
         geometry:   feature.geometry.geometries[i]
       }, accum, bbox);
     }
@@ -392,6 +421,12 @@ Renderer.prototype = {
   },
 
 
+  /**
+   * @param  {String} text
+   * @param  {Object} fontData
+   * @param  {Array.<Number>} bbox
+   * @return {String}
+   */
   _renderMultilineText: function(text, fontData, bbox) {
     var width = bbox[2] - bbox[0];
     var length = text.length;
@@ -415,7 +450,6 @@ Renderer.prototype = {
         str += '</tspan>';
         accum.push(str);
         str = '';
-        //dy += fontData.height;
       }
     }
 
