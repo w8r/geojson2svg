@@ -221,14 +221,27 @@ Renderer.prototype = {
   },
 
 
-  plugin: function (type, renderer, matcher) {
+  /**
+   * @param  {String}   type
+   * @param  {Function} renderer
+   * @return {Renderer}
+   */
+  plugin: function (type, renderer) {
     this._plugins[type] = renderer;
     return this;
   },
 
 
+  /**
+   * @param  {Feature} feature
+   * @return {Function|null}
+   */
   _getPluginRenderer: function(feature) {
-    var renderer = this._plugins[feature.properties[this._type]];
+    var type = feature.properties[this._type];
+    var renderer = null;
+    if (type) {
+      renderer = this._plugins[type];
+    }
     return renderer;
   },
 
@@ -241,7 +254,7 @@ Renderer.prototype = {
    * @return  {Array.<Number>} featureBounds
    */
   _feature: function (feature, accum, bbox) {
-    console.log(feature);
+    console.log(JSON.stringify(feature));
     var featureBounds = getDefaultBBox();
 
     if (this._transform) feature = this._transform(feature);
@@ -299,6 +312,15 @@ Renderer.prototype = {
         collectionIndex: i
       });
       properties[this._type] = types[i];
+
+      if (feature.properties.styles && feature.properties.styles[types[i]]) {
+        extend(properties, feature.properties.styles[types[i]]);
+      }
+
+      // if (types[i] === TEXTBOX) {
+      //   properties
+      // }
+
       this._feature({
         type:       'Feature',
         properties: properties,
@@ -373,7 +395,7 @@ Renderer.prototype = {
       text, fontSize, fontFamily, featureBounds, properties);
 
     if (fontFamily) {
-      fontFamily = 'font-family="' + fontFamily + '" ';
+      fontFamily = 'font-family="' + fontFamily.replace(/\"/g, '\'').trim() + '" ';
     }
 
     var className = ('textbox ' + (properties.className || '')).trim();
@@ -400,18 +422,19 @@ Renderer.prototype = {
    */
   _renderTextContent: function(text, fontSize, fontFamily, featureBounds, props) {
     var accum = [];
-    if (Array.isArray(text) && props.lineHeight) { // it's formatted
+    var width = featureBounds[2] - featureBounds[0];
+     if (Array.isArray(text) && props.lineHeight) { // it's formatted
       for (var i = 0, len = text.length; i < len; i++) {
         accum.push('<tspan ',
           'dy="', props.lineHeight, '" ',
           'x="',  featureBounds[0], '">',
-          text[i],
+          String(text[i]),
         '</tspan>');
       }
       text = accum.join('');
     } else {
       var fontData = getFontData(fontFamily, fontSize, this._fonts);
-      text = this._renderMultilineText(text, fontData, featureBounds);
+      text = this._renderMultilineText(String(text), fontData, featureBounds);
     }
 
     return text;
@@ -431,11 +454,16 @@ Renderer.prototype = {
     var str = '';
     var i = 0, dy = fontData.height, lineLength = 0;
 
+    if (width === 0) {
+      dy -= fontData.height / 2;
+    }
+
     while (i < length) {
       if (i === 0 || lineLength + fontData.avg > width) {
+        var x = (width === 0) ? (bbox[0] - fontData.avg / 2) : bbox[0];
         str += ['<tspan ',
           'dy="', dy, '" ',
-          'x="', bbox[0] ,'"',
+          'x="', x ,'"',
         '>'].join('');
         lineLength = 0;
       }
@@ -491,16 +519,16 @@ Renderer.prototype = {
 
       extendBBox(bbox, coord);
       extendBBox(featureBounds, coord);
-      padBBox(featureBounds, radius);
 
       if (type && type === TEXTBOX) {
         this._text(feature, accum, bbox, featureBounds);
       } else {
         accum.push('<circle class="', className,
           '" cx="', coord[0], '" cy="', coord[1],
-          '" r="',  feature.properties.radius || 1,  '" ',
+          '" r="',  radius,  '" ',
           this._getStyles(feature, bbox, featureBounds), ' />');
       }
+      padBBox(featureBounds, radius);
     }
   },
 
@@ -735,8 +763,8 @@ Renderer.prototype = {
     }
 
     if (styles.fill) {
-      currentStyle['fill']         = styles.fillColor   || styles.color;
-      currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity || 0;
+      currentStyle['fill']         = styles.fill        || styles.fillColor || styles.color;
+      currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity   || 0;
       currentStyle['fill-rule']    = styles.fillRule    ||
         (feature.geometry.type === 'MultiPolygon') ? 'evenodd' : 'nonzero';
     } else {

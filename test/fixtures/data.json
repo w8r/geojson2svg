@@ -166,7 +166,34 @@
           22.449006580000002
         ],
         "text": 5,
-        "geometriesTypes": ["Point", "LineString", "Point", "textbox"]
+        "fontSize": 5,
+        "fontFamily": "\"Lucida Console\", Monaco, monospace",
+        "geometriesTypes": ["anchor_point", "connection_line", "label", "textbox"],
+        "markupType": "isolation_point",
+        "fill": "#dddddd",
+        "styles": {
+          "anchor_point": {
+            "radius": 1,
+            "color": "red",
+            "stroke": 0.25
+          },
+          "connection_line": {
+            "dashArray": [2, 2],
+            "color": "blue",
+            "stroke": 1
+          },
+          "label": {
+            "fill": "#0000dd",
+            "stroke": 2,
+            "color": "#8888dd",
+            "fillOpacity": 0.8,
+            "radius": 9
+          },
+          "textbox": {
+            "fill": "#ffffff",
+            "fontColor": "#ffffff"
+          }
+        }
       },
       "geometry": {
         "type": "GeometryCollection",
@@ -175,7 +202,7 @@
             "type": "Point",
             "coordinates": [
               114.1452,
-              22.42658
+              92.42658
             ]
           },
           {
@@ -183,26 +210,26 @@
             "coordinates": [
               [
                 114.1452,
-                22.42658
+                92.42658
               ],
               [
-                114.2593452,
-                22.449006580000002
+                154.2593452,
+                52.449006580000002
               ]
             ]
           },
           {
             "type": "Point",
             "coordinates": [
-              114.2593452,
-              22.449006580000002
+              154.2593452,
+              52.449006580000002
             ]
           },
           {
             "type": "Point",
             "coordinates": [
-              114.2593452,
-              22.449006580000002
+              154.2593452,
+              52.449006580000002
             ]
           }
         ]

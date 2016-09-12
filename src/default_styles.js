@@ -20,6 +20,7 @@ var Styles = {
 
   'Point': {
     radius: 3,
+    stroke: 1,
     color: COLOR
   },
 
