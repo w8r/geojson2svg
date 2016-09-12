@@ -157,6 +157,56 @@
           ]
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "labelPosition": [
+          114.2593452,
+          22.449006580000002
+        ],
+        "text": 5,
+        "geometriesTypes": ["Point", "LineString", "Point", "textbox"]
+      },
+      "geometry": {
+        "type": "GeometryCollection",
+        "geometries": [
+          {
+            "type": "Point",
+            "coordinates": [
+              114.1452,
+              22.42658
+            ]
+          },
+          {
+            "type": "LineString",
+            "coordinates": [
+              [
+                114.1452,
+                22.42658
+              ],
+              [
+                114.2593452,
+                22.449006580000002
+              ]
+            ]
+          },
+          {
+            "type": "Point",
+            "coordinates": [
+              114.2593452,
+              22.449006580000002
+            ]
+          },
+          {
+            "type": "Point",
+            "coordinates": [
+              114.2593452,
+              22.449006580000002
+            ]
+          }
+        ]
+      }
     }
   ],
   "properties": {

@@ -50,11 +50,13 @@ var DefaultFonts  = [
 function Renderer (gj, styles, extent, projection, type, fonts, transform) {
   this._data       = null;
   this._extent     = null;
+  this._type       = null;
   this._styles     = DefaultStyles;
   this._projection = null;
   this._type       = null;
   this._fonts      = [];
   this._transform  = null;
+  this._plugins    = {};
 
   this._defs       = null;
 
@@ -219,15 +221,9 @@ Renderer.prototype = {
   },
 
 
-  plugin: function (name, renderer, matcher) {
-    this._plugins[name] = {
-      renderer: renderer,
-      matcher: matcher || function () {
-        function(feature) {
-
-        }).apply(this, arguments);
-      }
-    }
+  plugin: function (type, renderer, matcher) {
+    this._plugins[type] = renderer;
+    return this;
   },
 
 
@@ -245,6 +241,7 @@ Renderer.prototype = {
    * @return  {Array.<Number>} featureBounds
    */
   _feature: function (feature, accum, bbox) {
+    console.log(feature);
     var featureBounds = getDefaultBBox();
 
     if (this._transform) feature = this._transform(feature);
@@ -290,7 +287,7 @@ Renderer.prototype = {
    */
   _geometryCollection: function (feature, accum, bbox, featureBounds) {
     var className =
-      ('geometrycollection ' + feature.properties.className || '').trim();
+      ('geometrycollection ' + (feature.properties.className || '')).trim();
     accum.push('<g class="',className, '">');
 
     var geometriesLength = feature.geometry.geometries.length;
@@ -363,7 +360,7 @@ Renderer.prototype = {
    * @param  {Array.<Number}  bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderText: function (feature, accum, bbox, featureBounds) {
+  _text: function (feature, accum, bbox, featureBounds) {
     var properties = extend({}, this._selectStyle(feature), feature.properties);
     var fontSize   = properties.fontSize;
     var fontColor  = properties.fontColor;
@@ -471,7 +468,7 @@ Renderer.prototype = {
       this._getStyles(feature, bbox, featureBounds), '/>');
 
     if (this._type && feature.properties[this._type] === TEXTBOX) {
-      this._renderText(feature, accum, bbox, featureBounds);
+      this._text(feature, accum, bbox, featureBounds);
     }
   },
 
@@ -483,19 +480,27 @@ Renderer.prototype = {
    * @param  {Array.<Number>} featureBounds
    */
   _point: function (feature, accum, bbox, featureBounds) {
-    if (this._type && feature.properties[this._type] === SYMBOL) {
-      this._renderSymbol(feature, accum, bbox, featureBounds);
+    var type = this._type ? feature.properties[this._type] : '';
+    if (type && type === SYMBOL) {
+      this._symbol(feature, accum, bbox, featureBounds);
     } else {
       var coord = feature.geometry.coordinates;
       var className = ('point ' + (feature.properties.className || '')).trim();
 
+      var radius = feature.properties.radius || 1;
+
       extendBBox(bbox, coord);
       extendBBox(featureBounds, coord);
+      padBBox(featureBounds, radius);
 
-      accum.push('<circle class="', className,
-        '" cx="', coord[0], '" cy="', coord[1],
-        '" r="',  feature.properties.radius || 1,  '" ',
-        this._getStyles(feature, bbox, featureBounds), ' />');
+      if (type && type === TEXTBOX) {
+        this._text(feature, accum, bbox, featureBounds);
+      } else {
+        accum.push('<circle class="', className,
+          '" cx="', coord[0], '" cy="', coord[1],
+          '" r="',  feature.properties.radius || 1,  '" ',
+          this._getStyles(feature, bbox, featureBounds), ' />');
+      }
     }
   },
 
@@ -602,7 +607,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderSymbol: function (feature, accum, bbox, featureBounds) {
+  _symbol: function (feature, accum, bbox, featureBounds) {
     var coord = feature.geometry.coordinates;
     var className = ('point ' + (feature.properties.className || '')).trim();
     var radius = feature.properties.radius || 1;
