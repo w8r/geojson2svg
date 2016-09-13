@@ -17,7 +17,7 @@ module.exports.DefaultStyles = DefaultStyles;
 
 var XMLNS   = 'http://www.w3.org/2000/svg';
 var XLINK   = 'http://www.w3.org/1999/xlink';
-var VERSION = 1.2;
+var VERSION = 1.1;
 
 var SYMBOL  = 'symbol';
 var TEXTBOX = 'textbox';
@@ -57,6 +57,7 @@ function Renderer (gj, styles, extent, projection, type, fonts, transform) {
   this._fonts      = [];
   this._transform  = null;
   this._plugins    = {};
+  this._decorators = {};
 
   this._defs       = null;
 
@@ -179,6 +180,18 @@ Renderer.prototype = {
 
 
   /**
+   * Register a path decorator
+   * @param  {String}   type
+   * @param  {Function} decorator
+   * @return {Renderer}
+   */
+  decorator: function (type, decorator) {
+    this._decorators[type] = decorator;
+    return this;
+  },
+
+
+  /**
    * Main rendering routine
    * @param {GeoJSON=} data
    * @return {String}
@@ -254,7 +267,6 @@ Renderer.prototype = {
    * @return  {Array.<Number>} featureBounds
    */
   _feature: function (feature, accum, bbox) {
-    console.log(JSON.stringify(feature));
     var featureBounds = getDefaultBBox();
 
     if (this._transform) feature = this._transform(feature);
@@ -455,7 +467,7 @@ Renderer.prototype = {
     var i = 0, dy = fontData.height, lineLength = 0;
 
     if (width === 0) {
-      dy -= fontData.height / 2;
+      dy -= fontData.height * 0.68;
     }
 
     while (i < length) {
@@ -662,11 +674,11 @@ Renderer.prototype = {
    * @param  {Array.<Number>}         featureBounds
    * @return {String}
    */
-  _coordinatesToPath: function (coords, closed, bbox, fBounds) {
+  _coordinatesToPath: function (coords, closed, bbox, fBounds, decorator) {
     var res = '', i, len, c, x, y;
     if (!isFinite(coords[0][0])) {
       for (i = 0, len = coords.length; i < len; i++) {
-        res += ' ' + this._coordinatesToPath(coords[i], closed, bbox, fBounds);
+        res += ' ' + this._coordinatesToPath(coords[i], closed, bbox, fBounds, decorator);
       }
     } else {
       for (i = 0, len = coords.length; i < len; i++) {
@@ -693,9 +705,15 @@ Renderer.prototype = {
    * @param {Array.<Number>}  fBounds
    */
   _getPath: function (feature, closed, bbox, fBounds) {
-    return this
-      ._coordinatesToPath(feature.geometry.coordinates, closed, bbox, fBounds)
-      .trim();
+    var path = '';
+    var coordinates = feature.geometry.coordinates;
+    if (this._type && this._decorators[feature.properties[this._type]]) {
+      var decorator = this._decorators[feature.properties[this._type]];
+      path = decorator.call(this, feature, coordinates, closed, bbox, fBounds);
+    } else {
+      path = this._coordinatesToPath(coordinates, closed, bbox, fBounds);
+    }
+    return path.trim();
   },
 
 
@@ -795,6 +813,7 @@ function extendBBox (bbox, coord) {
   bbox[2] = Math.max(x, bbox[2]);
   bbox[3] = Math.max(y, bbox[3]);
 }
+Renderer.extendBBox = extendBBox;
 
 
 /**
@@ -809,6 +828,7 @@ function padBBox (bbox, padding) {
   bbox[2] += padding;
   bbox[3] += padding;
 }
+Renderer.padBBox = padBBox;
 
 
 /**
