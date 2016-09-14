@@ -39,13 +39,16 @@ function wave(rings, radius, closed, bbox, featureBounds) {
 
 tape('geojson2svg', function (t) {
   console.time('svg');
-  var rendered = formatXml(
+  var rendered =
     geojson2svg(data, style, null, null, 'markupType')
        .decorator('cloud', function (feature, coordinates, closed, bbox, fbounds) {
          var radius = feature.properties.radius || 5;
-         return wave(coordinates, radius, closed, bbox, fbounds);
+         console.time('wave');
+         var w = wave(coordinates, radius, closed, bbox, fbounds);
+         console.timeEnd('wave');
+         return w;
        })
-      .render());
+      .render();
   console.timeEnd('svg');
   //console.log(rendered);
 
