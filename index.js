@@ -609,8 +609,8 @@ Renderer.prototype = {
         transform.join(' '),   ')" ',
         'width="',  width,     '" ',
         'height="', height,    '" ',
-        'x="',      coords[0] ,'" ',
-        'y="',      coords[1] ,'" ',
+        'x="',      coords[0] - width  / 2 ,'" ',
+        'y="',      coords[1] - height / 2 ,'" ',
         this._getStyles(feature, bbox, featureBounds),
       '/>'
     ].join('');

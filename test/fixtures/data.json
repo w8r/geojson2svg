@@ -248,7 +248,7 @@
     "markupType": "cloud",
     "stroke": "#333333",
     "weight": 0.25,
-    "radius": 2.5,
+    "radius": 2,
     "color": "#455A64"
   },
   "geometry": {

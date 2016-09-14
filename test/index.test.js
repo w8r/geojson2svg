@@ -41,10 +41,10 @@ tape('geojson2svg', function (t) {
   console.time('svg');
   var rendered = formatXml(
     geojson2svg(data, style, null, null, 'markupType')
-      //  .decorator('cloud', function (feature, coordinates, closed, bbox, fbounds) {
-      //    var radius = feature.properties.cloudRadius || 5;
-      //    return wave(coordinates, radius, closed, bbox, fbounds);
-      //  })
+       .decorator('cloud', function (feature, coordinates, closed, bbox, fbounds) {
+         var radius = feature.properties.radius || 5;
+         return wave(coordinates, radius, closed, bbox, fbounds);
+       })
       .render());
   console.timeEnd('svg');
   //console.log(rendered);
