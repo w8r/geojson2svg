@@ -37,6 +37,7 @@
     "html-validator": "^2.0.1",
     "nightmare": "^2.7.0",
     "nodemon": "^1.10.2",
+    "simplify-js": "^1.2.1",
     "svg-polygon-decorator": "^1.0.7",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0",

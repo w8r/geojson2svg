@@ -9,6 +9,7 @@ var Renderer    = geojson2svg.Renderer;
 var data        = require('./fixtures/data.json');
 var style       = require('./fixtures/markup_style.json');
 var decorator   = require('svg-polygon-decorator');
+var simplify    = require('simplify-js');
 
 function wave(rings, radius, closed, bbox, featureBounds) {
   var str = '';
@@ -16,7 +17,11 @@ function wave(rings, radius, closed, bbox, featureBounds) {
   for (var i = 0, len = rings.length; i < len; ++i) {
     var cloudPoints = [];
     var area = 0;
-    var ring = rings[i];
+    var ring = simplify(rings[i].map(function(p) {
+      return { x: p[0], y: p[1] };
+    })).map(function(p) {
+      return [p.x, p.y];
+    });
     var ringLength = ring.length;
 
     for (var j = 0; j < ringLength; j++) {
