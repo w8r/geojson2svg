@@ -17,7 +17,7 @@ module.exports.DefaultStyles = DefaultStyles;
 
 var XMLNS   = 'http://www.w3.org/2000/svg';
 var XLINK   = 'http://www.w3.org/1999/xlink';
-var VERSION = 1.2;
+var VERSION = 1.1;
 
 var SYMBOL  = 'symbol';
 var TEXTBOX = 'textbox';
@@ -50,11 +50,14 @@ var DefaultFonts  = [
 function Renderer (gj, styles, extent, projection, type, fonts, transform) {
   this._data       = null;
   this._extent     = null;
+  this._type       = null;
   this._styles     = DefaultStyles;
   this._projection = null;
   this._type       = null;
   this._fonts      = [];
   this._transform  = null;
+  this._plugins    = {};
+  this._decorators = {};
 
   this._defs       = null;
 
@@ -177,6 +180,18 @@ Renderer.prototype = {
 
 
   /**
+   * Register a path decorator
+   * @param  {String}   type
+   * @param  {Function} decorator
+   * @return {Renderer}
+   */
+  decorator: function (type, decorator) {
+    this._decorators[type] = decorator;
+    return this;
+  },
+
+
+  /**
    * Main rendering routine
    * @param {GeoJSON=} data
    * @return {String}
@@ -220,6 +235,31 @@ Renderer.prototype = {
 
 
   /**
+   * @param  {String}   type
+   * @param  {Function} renderer
+   * @return {Renderer}
+   */
+  plugin: function (type, renderer) {
+    this._plugins[type] = renderer;
+    return this;
+  },
+
+
+  /**
+   * @param  {Feature} feature
+   * @return {Function|null}
+   */
+  _getPluginRenderer: function(feature) {
+    var type = feature.properties[this._type];
+    var renderer = null;
+    if (type) {
+      renderer = this._plugins[type];
+    }
+    return renderer;
+  },
+
+
+  /**
    * Renders individual feature
    * @param  {Feature}         feature
    * @param  {Array.<String>}  accum
@@ -230,6 +270,12 @@ Renderer.prototype = {
     var featureBounds = getDefaultBBox();
 
     if (this._transform) feature = this._transform(feature);
+
+    var pluginRenderer = this._getPluginRenderer(feature);
+    if (pluginRenderer) {
+      pluginRenderer.call(this, feature, accum, bbox, featureBounds);
+      return featureBounds;
+    }
 
     switch (feature.geometry.type) {
       case 'Polygon':        // render in one path
@@ -266,16 +312,30 @@ Renderer.prototype = {
    */
   _geometryCollection: function (feature, accum, bbox, featureBounds) {
     var className =
-      ('geometrycollection ' + feature.properties.className || '').trim();
+      ('geometrycollection ' + (feature.properties.className || '')).trim();
     accum.push('<g class="',className, '">');
 
+    var geometriesLength = feature.geometry.geometries.length;
+    var types = feature.properties['geometriesTypes'] || Array(geometriesLength);
+
     // split geometries into features for rendering
-    for (var i = 0, len = feature.geometry.geometries.length; i < len; i++) {
+    for (var i = 0; i < geometriesLength; i++) {
+      var properties = extend({}, feature.properties, {
+        collectionIndex: i
+      });
+      properties[this._type] = types[i];
+
+      if (feature.properties.styles && feature.properties.styles[types[i]]) {
+        extend(properties, feature.properties.styles[types[i]]);
+      }
+
+      // if (types[i] === TEXTBOX) {
+      //   properties
+      // }
+
       this._feature({
         type:       'Feature',
-        properties: extend({}, feature.properties, {
-          collectionIndex: i
-        }),
+        properties: properties,
         geometry:   feature.geometry.geometries[i]
       }, accum, bbox);
     }
@@ -334,7 +394,7 @@ Renderer.prototype = {
    * @param  {Array.<Number}  bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderText: function (feature, accum, bbox, featureBounds) {
+  _text: function (feature, accum, bbox, featureBounds) {
     var properties = extend({}, this._selectStyle(feature), feature.properties);
     var fontSize   = properties.fontSize;
     var fontColor  = properties.fontColor;
@@ -347,7 +407,7 @@ Renderer.prototype = {
       text, fontSize, fontFamily, featureBounds, properties);
 
     if (fontFamily) {
-      fontFamily = 'font-family="' + fontFamily + '" ';
+      fontFamily = 'font-family="' + fontFamily.replace(/\"/g, '\'').trim() + '" ';
     }
 
     var className = ('textbox ' + (properties.className || '')).trim();
@@ -374,24 +434,31 @@ Renderer.prototype = {
    */
   _renderTextContent: function(text, fontSize, fontFamily, featureBounds, props) {
     var accum = [];
-    if (Array.isArray(text) && props.lineHeight) { // it's formatted
+    var width = featureBounds[2] - featureBounds[0];
+     if (Array.isArray(text) && props.lineHeight) { // it's formatted
       for (var i = 0, len = text.length; i < len; i++) {
         accum.push('<tspan ',
           'dy="', props.lineHeight, '" ',
           'x="',  featureBounds[0], '">',
-          text[i],
+          String(text[i]),
         '</tspan>');
       }
       text = accum.join('');
     } else {
       var fontData = getFontData(fontFamily, fontSize, this._fonts);
-      text = this._renderMultilineText(text, fontData, featureBounds);
+      text = this._renderMultilineText(String(text), fontData, featureBounds);
     }
 
     return text;
   },
 
 
+  /**
+   * @param  {String} text
+   * @param  {Object} fontData
+   * @param  {Array.<Number>} bbox
+   * @return {String}
+   */
   _renderMultilineText: function(text, fontData, bbox) {
     var width = bbox[2] - bbox[0];
     var length = text.length;
@@ -399,11 +466,16 @@ Renderer.prototype = {
     var str = '';
     var i = 0, dy = fontData.height, lineLength = 0;
 
+    if (width === 0) {
+      dy -= fontData.height * 0.68;
+    }
+
     while (i < length) {
       if (i === 0 || lineLength + fontData.avg > width) {
+        var x = (width === 0) ? (bbox[0] - fontData.avg / 2) : bbox[0];
         str += ['<tspan ',
           'dy="', dy, '" ',
-          'x="', bbox[0] ,'"',
+          'x="', x ,'"',
         '>'].join('');
         lineLength = 0;
       }
@@ -415,7 +487,6 @@ Renderer.prototype = {
         str += '</tspan>';
         accum.push(str);
         str = '';
-        //dy += fontData.height;
       }
     }
 
@@ -437,7 +508,7 @@ Renderer.prototype = {
       this._getStyles(feature, bbox, featureBounds), '/>');
 
     if (this._type && feature.properties[this._type] === TEXTBOX) {
-      this._renderText(feature, accum, bbox, featureBounds);
+      this._text(feature, accum, bbox, featureBounds);
     }
   },
 
@@ -449,19 +520,27 @@ Renderer.prototype = {
    * @param  {Array.<Number>} featureBounds
    */
   _point: function (feature, accum, bbox, featureBounds) {
-    if (this._type && feature.properties[this._type] === SYMBOL) {
-      this._renderSymbol(feature, accum, bbox, featureBounds);
+    var type = this._type ? feature.properties[this._type] : '';
+    if (type && type === SYMBOL) {
+      this._symbol(feature, accum, bbox, featureBounds);
     } else {
       var coord = feature.geometry.coordinates;
       var className = ('point ' + (feature.properties.className || '')).trim();
 
+      var radius = feature.properties.radius || 1;
+
       extendBBox(bbox, coord);
       extendBBox(featureBounds, coord);
 
-      accum.push('<circle class="', className,
-        '" cx="', coord[0], '" cy="', coord[1],
-        '" r="',  feature.properties.radius || 1,  '" ',
-        this._getStyles(feature, bbox, featureBounds), ' />');
+      if (type && type === TEXTBOX) {
+        this._text(feature, accum, bbox, featureBounds);
+      } else {
+        accum.push('<circle class="', className,
+          '" cx="', coord[0], '" cy="', coord[1],
+          '" r="',  radius,  '" ',
+          this._getStyles(feature, bbox, featureBounds), ' />');
+      }
+      padBBox(featureBounds, radius);
     }
   },
 
@@ -530,8 +609,8 @@ Renderer.prototype = {
         transform.join(' '),   ')" ',
         'width="',  width,     '" ',
         'height="', height,    '" ',
-        'x="',      coords[0] ,'" ',
-        'y="',      coords[1] ,'" ',
+        'x="',      coords[0] - width  / 2 ,'" ',
+        'y="',      coords[1] - height / 2 ,'" ',
         this._getStyles(feature, bbox, featureBounds),
       '/>'
     ].join('');
@@ -568,7 +647,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _renderSymbol: function (feature, accum, bbox, featureBounds) {
+  _symbol: function (feature, accum, bbox, featureBounds) {
     var coord = feature.geometry.coordinates;
     var className = ('point ' + (feature.properties.className || '')).trim();
     var radius = feature.properties.radius || 1;
@@ -595,11 +674,11 @@ Renderer.prototype = {
    * @param  {Array.<Number>}         featureBounds
    * @return {String}
    */
-  _coordinatesToPath: function (coords, closed, bbox, fBounds) {
+  _coordinatesToPath: function (coords, closed, bbox, fBounds, decorator) {
     var res = '', i, len, c, x, y;
     if (!isFinite(coords[0][0])) {
       for (i = 0, len = coords.length; i < len; i++) {
-        res += ' ' + this._coordinatesToPath(coords[i], closed, bbox, fBounds);
+        res += ' ' + this._coordinatesToPath(coords[i], closed, bbox, fBounds, decorator);
       }
     } else {
       for (i = 0, len = coords.length; i < len; i++) {
@@ -626,9 +705,15 @@ Renderer.prototype = {
    * @param {Array.<Number>}  fBounds
    */
   _getPath: function (feature, closed, bbox, fBounds) {
-    return this
-      ._coordinatesToPath(feature.geometry.coordinates, closed, bbox, fBounds)
-      .trim();
+    var path = '';
+    var coordinates = feature.geometry.coordinates;
+    if (this._type && this._decorators[feature.properties[this._type]]) {
+      var decorator = this._decorators[feature.properties[this._type]];
+      path = decorator.call(this, feature, coordinates, closed, bbox, fBounds);
+    } else {
+      path = this._coordinatesToPath(coordinates, closed, bbox, fBounds);
+    }
+    return path.trim();
   },
 
 
@@ -696,8 +781,8 @@ Renderer.prototype = {
     }
 
     if (styles.fill) {
-      currentStyle['fill']         = styles.fillColor   || styles.color;
-      currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity || 0;
+      currentStyle['fill']         = styles.fill        || styles.fillColor || styles.color;
+      currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity   || 0;
       currentStyle['fill-rule']    = styles.fillRule    ||
         (feature.geometry.type === 'MultiPolygon') ? 'evenodd' : 'nonzero';
     } else {
@@ -728,6 +813,7 @@ function extendBBox (bbox, coord) {
   bbox[2] = Math.max(x, bbox[2]);
   bbox[3] = Math.max(y, bbox[3]);
 }
+Renderer.extendBBox = extendBBox;
 
 
 /**
@@ -742,6 +828,7 @@ function padBBox (bbox, padding) {
   bbox[2] += padding;
   bbox[3] += padding;
 }
+Renderer.padBBox = padBBox;
 
 
 /**
