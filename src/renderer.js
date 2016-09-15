@@ -4,6 +4,11 @@ var projectgj   = require('geojson-project');
 var getFontData = require('./get_font_data');
 var Matrix      = require('transformation-matrix-js').Matrix;
 
+var bboxUtils       = require('./bbox');
+var extendBBox      = bboxUtils.extend;
+var padBBox         = bboxUtils.pad;
+var getDefaultBBox  = bboxUtils.getDefault;
+
 var XMLNS   = 'http://www.w3.org/2000/svg';
 var XLINK   = 'http://www.w3.org/1999/xlink';
 var VERSION = 1.1;
@@ -790,43 +795,3 @@ Renderer.prototype = {
     return styleString;
   }
 };
-
-
-/**
- * BBox 'extend' in-place
- *
- * @param  {Array.<Number>} bbox
- * @param  {Array.<Number>} coord
- */
-function extendBBox (bbox, coord) {
-  var x = coord[0];
-  var y = coord[1];
-  bbox[0] = Math.min(x, bbox[0]);
-  bbox[1] = Math.min(y, bbox[1]);
-  bbox[2] = Math.max(x, bbox[2]);
-  bbox[3] = Math.max(y, bbox[3]);
-}
-Renderer.extendBBox = extendBBox;
-
-
-/**
- * BBox 'extend' in-place
- *
- * @param  {Array.<Number>} bbox
- * @param  {Number}         padding
- */
-function padBBox (bbox, padding) {
-  bbox[0] -= padding;
-  bbox[1] -= padding;
-  bbox[2] += padding;
-  bbox[3] += padding;
-}
-Renderer.padBBox = padBBox;
-
-
-/**
- * @return {Array.<Number>}
- */
-function getDefaultBBox () {
-  return [Infinity, Infinity, -Infinity, -Infinity];
-}
