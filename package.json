@@ -1,5 +1,5 @@
 {
-  "name": "geojson2svg",
+  "name": "geojson-to-svg",
   "version": "1.0.0",
   "description": "primitive SVG renderer for geojson with feature styles",
   "main": "index.js",
