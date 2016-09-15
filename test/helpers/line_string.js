@@ -7,7 +7,7 @@ function LineString(props, geometry) {
 LineString.prototype = Object.create(Feature.prototype);
 
 
-LineString.prototype.randomGeometry = function (center, bbox, R) {
+LineString.prototype.getPath = function (center, bbox, R) {
   center = center ?
     center :
     bbox ?
@@ -16,7 +16,13 @@ LineString.prototype.randomGeometry = function (center, bbox, R) {
   R = R || 250;
 
   var coords = generatePolygon(
-    center[0], center[1], R, 0.5, 0.3, 10 + Math.random(20 * Math.random()))
+    center[0], center[1], R, 0.5, 0.3, 10 + Math.random(20 * Math.random()));
+  return coords;
+};
+
+
+LineString.prototype.randomGeometry = function (center, bbox, R) {
+  var coords = this.getPath(center, bbox, R);
 
   this.geometry({
     type: 'LineString',
