@@ -748,12 +748,12 @@ Renderer.prototype = {
     if (typeof this._styles === 'function') {
       styles = this._styles(feature);
     } else {
-      styles = extend({}, feature.properties, this._selectStyle(feature));
+      styles = extend({}, this._selectStyle(feature), feature.properties);
     }
 
     // this code is an mainly an extract from Leaflet
     if (styles.stroke || styles.weight) {
-      currentStyle['stroke']          = styles.color;
+      currentStyle['stroke']          = styles.stroke   || styles.color;
       currentStyle['stroke-opacity']  = styles.opacity;
       currentStyle['stroke-width']    = styles.weight;
       currentStyle['stroke-linecap']  = styles.lineCap  || 'round';

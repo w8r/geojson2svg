@@ -4,7 +4,7 @@
  * @param  {Array.<Number>} bbox
  * @param  {Array.<Number>} coord
  */
-function extendBBox (bbox, coord) {
+function extend (bbox, coord) {
   var x = coord[0];
   var y = coord[1];
   bbox[0] = Math.min(x, bbox[0]);
@@ -20,7 +20,7 @@ function extendBBox (bbox, coord) {
  * @param  {Array.<Number>} bbox
  * @param  {Number}         padding
  */
-function padBBox (bbox, padding) {
+function pad (bbox, padding) {
   bbox[0] -= padding;
   bbox[1] -= padding;
   bbox[2] += padding;
@@ -31,12 +31,12 @@ function padBBox (bbox, padding) {
 /**
  * @return {Array.<Number>}
  */
-function getDefaultBBox () {
+function getDefault () {
   return [Infinity, Infinity, -Infinity, -Infinity];
 }
 
 module.exports = {
-  extend:     extendBBox,
-  pad:        padBBox,
-  getDefault: getDefaultBBox
+  extend:     extend,
+  pad:        pad,
+  getDefault: getDefault
 };

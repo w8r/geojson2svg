@@ -1,5 +1,5 @@
 var project = require('geojson-project');
-var bboxutils = require('../../src/bbox');
+var bboxUtils = require('../../src/bbox');
 
 function Feature(props, geometry) {
   this._properties = props || {};
@@ -39,7 +39,7 @@ Feature.prototype = {
 
 
   bbox: function () {
-
+    return bbox(bboxUtils.getDefault(), this._geometry.coordinates);
   },
 
 
@@ -54,8 +54,15 @@ Feature.prototype = {
 
 
 
-function bbox(ring) {
-
+function bbox(b, ring) {
+  if (Array.isArray(ring) && isFinite(ring[0])) {
+    bboxUtils.extend(b, ring);
+  } else {
+    ring.forEach(function (r) {
+      bbox(b, r);
+    });
+  }
+  return b;
 }
 
 
