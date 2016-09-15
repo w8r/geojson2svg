@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "primitive SVG renderer for geojson with feature styles",
   "main": "index.js",
+  "bin": {
+    "geojson2svg": "bin/geojson2svg",
+    "measure-font": "bin/measure_font"
+  },
   "directories": {
     "test": "test"
   },
