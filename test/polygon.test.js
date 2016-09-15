@@ -11,7 +11,6 @@ var data        = require('./fixtures/data.json');
 var style       = require('./fixtures/markup_style.json');
 var decorator   = require('svg-polygon-decorator');
 var simplify    = require('simplify-js');
-var project     = require('geojson-project');
 
 var featureCollection = require('./helpers/feature_collection');
 var Polygon           = require('./helpers/polygon');
@@ -32,8 +31,8 @@ function wave(rings, radius, closed, bbox, featureBounds) {
     for (var j = 0; j < ringLength; j++) {
       var point = ring[j];
 
-      bboxUtils.extend(bbox, point);
-      bboxUtils.extend(featureBounds, point);
+      bboxutils.extend(bbox, point);
+      bboxutils.extend(featureBounds, point);
 
       cloudPoints.push(point.slice());
     }
@@ -46,24 +45,38 @@ function wave(rings, radius, closed, bbox, featureBounds) {
 }
 
 
-tape('geojson2svg', function (t) {
-  /*console.time('svg');
-  var rendered =
-    geojson2svg(data, style, null, null, 'markupType')
-       .decorator('cloud', function (feature, coordinates, closed, bbox, fbounds) {
-         var radius = feature.properties.radius || 5;
-         console.time('wave');
-         var w = wave(coordinates, radius, closed, bbox, fbounds);
-         console.timeEnd('wave');
-         return w;
-       })
-      .render();
-  console.timeEnd('svg');
+tape('polygon', function (t) {
+  var builder = new Polygon()
+    .randomGeometry()
+    .setProperty('weight', 5)
+    .setProperty('stroke', 'red')
+    .setProperty('fill', 'blue')
+    .round();
 
-  fs.writeFileSync(
-    path.resolve(process.cwd(), 'demo/index.html'), rendered, {
-      encoding: 'utf-8'
-    });*/
+  var polygon = builder.build();
+  var svg = geojson2svg(polygon).render();
+
+  var bbox = svg.match(/viewBox=['"]([^"]+)['"]/m)[1].split(' ').map(parseFloat);
+  var path = svg
+    .match(/d=['"]([^"]+)['"]/m)[1]
+    .trim()
+    .split(/[^\d-]/)
+    .filter(function (val) {
+      return val !== '';
+    })
+    .map(parseFloat);
+
+  bbox[2] += bbox[0];
+  bbox[3] += bbox[1];
+
+  var calculatedBBox = builder.bbox();
+  bboxUtils.pad(calculatedBBox, 5);
+  t.deepEquals(path, _.flatten(_.flatten(polygon.geometry.coordinates)), 'correct path');
+  t.deepEquals(bbox, calculatedBBox, 'correct viewBox');
+
+  t.ok(svg.indexOf('stroke-width="5"') !== -1, 'has stroke-width');
+  t.ok(svg.indexOf('stroke="red"') !== -1, 'has stroke color');
+  t.ok(svg.indexOf('fill="blue"') !== -1, 'fill color');
 
   t.end();
 });

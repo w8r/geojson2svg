@@ -174,19 +174,19 @@
           "anchor_point": {
             "radius": 1,
             "color": "red",
-            "stroke": 0.25
+            "weight": 0.25
           },
           "connection_line": {
             "dashArray": [2, 2],
             "color": "blue",
-            "stroke": 1
+            "weight": 1
           },
           "label": {
             "fill": "#0000dd",
-            "stroke": 2,
+            "weight": 2,
             "color": "#8888dd",
             "fillOpacity": 0.8,
-            "radius": 5
+            "radius": 8
           },
           "textbox": {
             "fontSize": 7,

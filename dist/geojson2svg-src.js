@@ -238,7 +238,7 @@ module.exports={
  */
 module.exports = require('./src/renderer');
 
-},{"./src/renderer":14}],7:[function(require,module,exports){
+},{"./src/renderer":15}],7:[function(require,module,exports){
 
 /**
  * @param  {Object}     data GeoJSON
@@ -1447,6 +1447,50 @@ Matrix.prototype = {
 if (typeof exports !== "undefined") exports.Matrix = Matrix;
 
 },{}],11:[function(require,module,exports){
+/**
+ * BBox 'extend' in-place
+ *
+ * @param  {Array.<Number>} bbox
+ * @param  {Array.<Number>} coord
+ */
+function extend (bbox, coord) {
+  var x = coord[0];
+  var y = coord[1];
+  bbox[0] = Math.min(x, bbox[0]);
+  bbox[1] = Math.min(y, bbox[1]);
+  bbox[2] = Math.max(x, bbox[2]);
+  bbox[3] = Math.max(y, bbox[3]);
+}
+
+
+/**
+ * BBox 'extend' in-place
+ *
+ * @param  {Array.<Number>} bbox
+ * @param  {Number}         padding
+ */
+function pad (bbox, padding) {
+  bbox[0] -= padding;
+  bbox[1] -= padding;
+  bbox[2] += padding;
+  bbox[3] += padding;
+}
+
+
+/**
+ * @return {Array.<Number>}
+ */
+function getDefault () {
+  return [Infinity, Infinity, -Infinity, -Infinity];
+}
+
+module.exports = {
+  extend:     extend,
+  pad:        pad,
+  getDefault: getDefault
+};
+
+},{}],12:[function(require,module,exports){
 var FILL    = '#000000';
 var COLOR   = '#333333';
 var WEIGHT  = 1;
@@ -1489,7 +1533,7 @@ Styles['MultiPoint']      = Styles.Point;
 
 module.exports = Styles;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var LINE_RATIO  = 1.01567;
 var WIDTH_RATIO = 1 / 1.946;
 var measure     = require('./measure_glyphs');
@@ -1569,7 +1613,7 @@ function fromOtherValue (fontSize, value) {
   };
 }
 
-},{"./measure_glyphs":13}],13:[function(require,module,exports){
+},{"./measure_glyphs":14}],14:[function(require,module,exports){
 /**
  * The reason for everything inlined is that the function has to have a
  * single body to be `eval`ed in electron context
@@ -1695,12 +1739,17 @@ module.exports = function measureGlyphs(fontFamily, fontSizes, detailed) {
   };
 };
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var extend      = require('json-extend');
 var hash        = require('string-hash');
 var projectgj   = require('geojson-project');
 var getFontData = require('./get_font_data');
 var Matrix      = require('transformation-matrix-js').Matrix;
+
+var bboxUtils       = require('./bbox');
+var extendBBox      = bboxUtils.extend;
+var padBBox         = bboxUtils.pad;
+var getDefaultBBox  = bboxUtils.getDefault;
 
 var XMLNS   = 'http://www.w3.org/2000/svg';
 var XLINK   = 'http://www.w3.org/1999/xlink';
@@ -1752,12 +1801,12 @@ function Renderer (gj, styles, extent, projection, type, fonts, transform) {
 
   this._defs       = null;
 
-  if (gj)           this.data(gj);
   if (styles)       this.styles(styles);
   if (extent)       this.extent(extent);
   if (projection)   this.projection(projection);
   if (type)         this.type(type);
   if (transform)    this.transform(transform);
+  if (gj)           this.data(gj);
 
   this.fonts(fonts || DefaultFonts);
 }
@@ -1835,11 +1884,15 @@ Renderer.prototype = {
    */
   data: function (data) {
     if (data.type !== 'FeatureCollection') {
-      data = { type: 'FeatureCollection', 'features': [data] };
+      if (data.type === 'Feature') {
+        data = { type: 'FeatureCollection', 'features': [data] };
+      } else {
+        throw new Error('Input has to be a FeatureCollection or a Feature');
+      }
     }
 
     if (this._projection) {
-      data = projectgj(this._data, this._projection);
+      data = projectgj(data, this._projection);
     }
 
     this._data = data;
@@ -1854,6 +1907,9 @@ Renderer.prototype = {
    * @return {Renderer}
    */
   projection: function (proj) {
+    if (typeof proj !== 'function') {
+      throw new Error('Projection must be a function [x, y] -> [x, y]');
+    }
     this._projection = proj;
     return this;
   },
@@ -1878,6 +1934,10 @@ Renderer.prototype = {
    * @return {Renderer}
    */
   decorator: function (type, decorator) {
+    if (typeof decorator !== 'function') {
+      throw new Error('Decorator must be a function ' +
+        '(feature, coordinates, closed, bbox, featureBounds) -> SVGPath ');
+    }
     this._decorators[type] = decorator;
     return this;
   },
@@ -1913,14 +1973,17 @@ Renderer.prototype = {
    */
   _renderContainer: function (accum, bbox) {
     var viewBox = [bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]];
+    accum.unshift('<g>');
+
     if (this._defs.length !== 0) {
       accum.unshift('</defs>');
       accum.unshift.apply(accum, this._defs.slice());
       accum.unshift('<defs>');
     }
+
     accum.unshift(
       ['<svg viewBox="', viewBox.join(' '), '" xmlns="', XMLNS,
-       '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''), '<g>');
+       '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''));
 
     accum.push('</g>', '</svg>');
   },
@@ -2441,12 +2504,12 @@ Renderer.prototype = {
     if (typeof this._styles === 'function') {
       styles = this._styles(feature);
     } else {
-      styles = extend({}, feature.properties, this._selectStyle(feature));
+      styles = extend({}, this._selectStyle(feature), feature.properties);
     }
 
     // this code is an mainly an extract from Leaflet
     if (styles.stroke || styles.weight) {
-      currentStyle['stroke']          = styles.color;
+      currentStyle['stroke']          = styles.stroke   || styles.color;
       currentStyle['stroke-opacity']  = styles.opacity;
       currentStyle['stroke-width']    = styles.weight;
       currentStyle['stroke-linecap']  = styles.lineCap  || 'round';
@@ -2489,44 +2552,4 @@ Renderer.prototype = {
   }
 };
 
-
-/**
- * BBox 'extend' in-place
- *
- * @param  {Array.<Number>} bbox
- * @param  {Array.<Number>} coord
- */
-function extendBBox (bbox, coord) {
-  var x = coord[0];
-  var y = coord[1];
-  bbox[0] = Math.min(x, bbox[0]);
-  bbox[1] = Math.min(y, bbox[1]);
-  bbox[2] = Math.max(x, bbox[2]);
-  bbox[3] = Math.max(y, bbox[3]);
-}
-Renderer.extendBBox = extendBBox;
-
-
-/**
- * BBox 'extend' in-place
- *
- * @param  {Array.<Number>} bbox
- * @param  {Number}         padding
- */
-function padBBox (bbox, padding) {
-  bbox[0] -= padding;
-  bbox[1] -= padding;
-  bbox[2] += padding;
-  bbox[3] += padding;
-}
-Renderer.padBBox = padBBox;
-
-
-/**
- * @return {Array.<Number>}
- */
-function getDefaultBBox () {
-  return [Infinity, Infinity, -Infinity, -Infinity];
-}
-
-},{"../fonts/arial_helvetica_sans-serif":1,"../fonts/georgia_times_serif":2,"../fonts/helvetica_arial_sans-serif":3,"../fonts/lucida_console_monaco_monospace":4,"../fonts/verdana_geneva_sans-serif":5,"./default_styles":11,"./get_font_data":12,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}]},{},[6]);
+},{"../fonts/arial_helvetica_sans-serif":1,"../fonts/georgia_times_serif":2,"../fonts/helvetica_arial_sans-serif":3,"../fonts/lucida_console_monaco_monospace":4,"../fonts/verdana_geneva_sans-serif":5,"./bbox":11,"./default_styles":12,"./get_font_data":13,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}]},{},[6]);

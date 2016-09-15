@@ -59,12 +59,12 @@ function Renderer (gj, styles, extent, projection, type, fonts, transform) {
 
   this._defs       = null;
 
-  if (gj)           this.data(gj);
   if (styles)       this.styles(styles);
   if (extent)       this.extent(extent);
   if (projection)   this.projection(projection);
   if (type)         this.type(type);
   if (transform)    this.transform(transform);
+  if (gj)           this.data(gj);
 
   this.fonts(fonts || DefaultFonts);
 }
@@ -142,11 +142,15 @@ Renderer.prototype = {
    */
   data: function (data) {
     if (data.type !== 'FeatureCollection') {
-      data = { type: 'FeatureCollection', 'features': [data] };
+      if (data.type === 'Feature') {
+        data = { type: 'FeatureCollection', 'features': [data] };
+      } else {
+        throw new Error('Input has to be a FeatureCollection or a Feature');
+      }
     }
 
     if (this._projection) {
-      data = projectgj(this._data, this._projection);
+      data = projectgj(data, this._projection);
     }
 
     this._data = data;
@@ -161,6 +165,9 @@ Renderer.prototype = {
    * @return {Renderer}
    */
   projection: function (proj) {
+    if (typeof proj !== 'function') {
+      throw new Error('Projection must be a function [x, y] -> [x, y]');
+    }
     this._projection = proj;
     return this;
   },
@@ -185,6 +192,10 @@ Renderer.prototype = {
    * @return {Renderer}
    */
   decorator: function (type, decorator) {
+    if (typeof decorator !== 'function') {
+      throw new Error('Decorator must be a function ' +
+        '(feature, coordinates, closed, bbox, featureBounds) -> SVGPath ');
+    }
     this._decorators[type] = decorator;
     return this;
   },
@@ -220,14 +231,17 @@ Renderer.prototype = {
    */
   _renderContainer: function (accum, bbox) {
     var viewBox = [bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]];
+    accum.unshift('<g>');
+
     if (this._defs.length !== 0) {
       accum.unshift('</defs>');
       accum.unshift.apply(accum, this._defs.slice());
       accum.unshift('<defs>');
     }
+
     accum.unshift(
       ['<svg viewBox="', viewBox.join(' '), '" xmlns="', XMLNS,
-       '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''), '<g>');
+       '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''));
 
     accum.push('</g>', '</svg>');
   },
