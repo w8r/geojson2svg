@@ -11,7 +11,7 @@ var getDefaultBBox  = bboxUtils.getDefault;
 
 var XMLNS   = 'http://www.w3.org/2000/svg';
 var XLINK   = 'http://www.w3.org/1999/xlink';
-var VERSION = 1.1;
+var VERSION = 1.2;
 
 var SYMBOL  = 'symbol';
 var TEXTBOX = 'textbox';
@@ -367,8 +367,8 @@ Renderer.prototype = {
    */
   _multiPoint: function(feature, accum, bbox, featureBounds) {
     var className =
-      ('multipoint ' + feature.properties.className || '').trim();
-    accum.push('<g class="',className, '">');
+      ('multipoint ' + (feature.properties.className || '')).trim();
+    accum.push('<g class="', className, '">');
 
     // split geometries into features for rendering
     for (var i = 0, len = feature.geometry.coordinates.length; i < len; i++) {
@@ -379,7 +379,7 @@ Renderer.prototype = {
           type:        'Point',
           coordinates: feature.geometry.coordinates[i],
         }
-      }, accum, bbox, featureBounds);
+      }, accum, bbox, getDefaultBBox());
     }
 
     accum.push('</g>');
@@ -553,6 +553,8 @@ Renderer.prototype = {
           this._getStyles(feature, bbox, featureBounds), ' />');
       }
       padBBox(featureBounds, radius);
+      extendBBox(bbox, featureBounds.slice(0, 2));
+      extendBBox(bbox, featureBounds.slice(2, 4));
     }
   },
 
@@ -845,7 +847,6 @@ Renderer.prototype = {
       }
 
       if (styles.weight) {
-        // TODO: fix that multiple padding for multipoint
         padBBox(featureBounds, styles.weight);
 
         extendBBox(bbox, featureBounds.slice(0, 2));

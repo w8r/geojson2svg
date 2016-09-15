@@ -15,6 +15,6 @@ Polygon.prototype.randomGeometry = function (center, bbox, R) {
     coordinates: [coords]
   });
   return this;
-}
+};
 
 module.exports = Polygon;
