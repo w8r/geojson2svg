@@ -794,7 +794,7 @@ Renderer.prototype = {
 
     if (styles.fill) {
       currentStyle['fill']         = styles.fill        || styles.fillColor || styles.color;
-      currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity   || 0;
+      currentStyle['fill-opacity'] = styles.fillOpacity || styles.opacity   || '';
       currentStyle['fill-rule']    = styles.fillRule    ||
         (feature.geometry.type === 'MultiPolygon') ? 'evenodd' : 'nonzero';
     } else {

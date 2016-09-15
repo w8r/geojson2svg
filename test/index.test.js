@@ -47,7 +47,7 @@ function wave(rings, radius, closed, bbox, featureBounds) {
 
 
 tape('geojson2svg', function (t) {
-  /*console.time('svg');
+  console.time('svg');
   var rendered =
     geojson2svg(data, style, null, null, 'markupType')
        .decorator('cloud', function (feature, coordinates, closed, bbox, fbounds) {
@@ -63,7 +63,7 @@ tape('geojson2svg', function (t) {
   fs.writeFileSync(
     path.resolve(process.cwd(), 'demo/index.html'), rendered, {
       encoding: 'utf-8'
-    });*/
+    });
 
   t.end();
 });

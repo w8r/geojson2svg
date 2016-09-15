@@ -1,13 +1,13 @@
-var LineString = require('./feature');
+var Feature = require('./feature');
 var generatePolygon = require('./generate_polygon');
 
-function Polygon(props, geometry) {
-  LineString.call(this, props, geometry);
+function LineString(props, geometry) {
+  Feature.call(this, props, geometry);
 }
-Polygon.prototype = Object.create(LineString.prototype);
+LineString.prototype = Object.create(Feature.prototype);
 
 
-Polygon.prototype.randomGeometry = function (center, bbox, R) {
+LineString.prototype.randomGeometry = function (center, bbox, R) {
   center = center ?
     center :
     bbox ?
@@ -19,10 +19,10 @@ Polygon.prototype.randomGeometry = function (center, bbox, R) {
     center[0], center[1], R, 0.5, 0.3, 10 + Math.random(20 * Math.random()))
 
   this.geometry({
-    type: 'Polygon',
-    coordinates: [coords]
+    type: 'LineString',
+    coordinates: coords.slice(0, coords.length - 1)
   });
   return this;
-}
+};
 
-module.exports = Polygon;
+module.exports = LineString;

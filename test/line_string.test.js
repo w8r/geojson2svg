@@ -13,7 +13,7 @@ var decorator   = require('svg-polygon-decorator');
 var simplify    = require('simplify-js');
 
 var featureCollection = require('./helpers/feature_collection');
-var Polygon           = require('./helpers/polygon');
+var LineString        = require('./helpers/line_string');
 
 function wave(rings, radius, closed, bbox, featureBounds) {
   var str = '';
@@ -45,8 +45,8 @@ function wave(rings, radius, closed, bbox, featureBounds) {
 }
 
 
-tape('Polygon', function (t) {
-  var builder = new Polygon()
+tape('LineString', function (t) {
+  var builder = new LineString()
     .randomGeometry()
     .setProperty('weight', 5)
     .setProperty('stroke', 'red')
@@ -54,15 +54,15 @@ tape('Polygon', function (t) {
     .setProperty('dashArray', [2, 2])
     .round();
 
-  var polygon = builder.build();
-  var svg = geojson2svg(polygon).render();
+  var linestring = builder.build();
+  var svg = geojson2svg(linestring).render();
 
   var bbox = svg.match(/viewBox=['"]([^"]+)['"]/m)[1].split(' ').map(parseFloat);
   var path = svg
     .match(/d=['"]([^"]+)['"]/m)[1]
     .trim();
 
-  t.equals(path[path.length - 1], 'Z', 'closed path');
+  t.notEquals(path[path.length - 1], 'Z', 'path string not closed');
 
   path = path
     .split(/[^\d-]/)
@@ -76,7 +76,7 @@ tape('Polygon', function (t) {
 
   var calculatedBBox = builder.bbox();
   bboxUtils.pad(calculatedBBox, 5);
-  t.deepEquals(path, _.flatten(_.flatten(polygon.geometry.coordinates)), 'correct path');
+  t.deepEquals(path, _.flatten(_.flatten(linestring.geometry.coordinates)), 'correct path');
   t.deepEquals(bbox, calculatedBBox, 'correct viewBox');
 
   t.ok(svg.indexOf('stroke-width="5"') !== -1, 'has stroke-width');
