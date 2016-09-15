@@ -2370,10 +2370,8 @@ Renderer.prototype = {
    * @param  {Feature} feature
    * @return {String} symbol id
    */
-  _getSymbolDef: function (feature) {
+  _getSymbolDef: function (feature, viewBox) {
     var src = feature.properties.symbol.src.trim();
-    var viewBox = src.match(/view[Bb]ox\=["']([^"']+)["']/m)[1]
-      .split(' ').map(parseFloat);
     var id = 'feature-symbol-' + hash(src);
 
     // strip garbage
@@ -2403,19 +2401,24 @@ Renderer.prototype = {
    * @return {String}
    */
   _createSymbol: function (feature, bbox, featureBounds) {
+    var viewBox = feature.properties.symbol
+      .src.match(/view[Bb]ox\=["']([^"']+)["']/m)[1];
+    viewBox = viewBox ? viewBox.split(' ').map(parseFloat) : featureBounds;
     var symbol    = feature.properties.symbol;
-    var symbolDef = this._getSymbolDef(feature);
-    var width     = symbol.width  || '';
-    var height    = symbol.height || '';
+    var symbolDef = this._getSymbolDef(feature, viewBox);
+    var width     = symbol.width  || viewBox[2] || '';
+    var height    = symbol.height || viewBox[3] || '';
     var coords    = feature.geometry.coordinates;
+
+    var className = ('symbol ' + (feature.properties.className || '')).trim();
 
     var symbolBBox = [
       coords[0] - width / 2, coords[1] - height / 2,
       coords[0] + width / 2, coords[1] + height / 2
     ];
 
-    var transform = this._getSymbolTransform(feature, bbox, featureBounds);
-    symbolBBox = Matrix.from.apply(Matrix, transform).applyToArray(symbolBBox);
+    var transform = this._getSymbolTransform(feature, bbox, featureBounds, width, height);
+    //symbolBBox = Matrix.from.apply(Matrix, transform).applyToArray(symbolBBox);
 
     extendBBox(featureBounds, symbolBBox.slice(0, 2));
     extendBBox(featureBounds, symbolBBox.slice(2, 4));
@@ -2430,6 +2433,7 @@ Renderer.prototype = {
         'height="', height,    '" ',
         'x="',      coords[0], '" ',
         'y="',      coords[1], '" ',
+        'class="',  className, '" ',
         this._getStyles(feature, bbox, featureBounds),
       '/>'
     ].join('');
@@ -2438,14 +2442,15 @@ Renderer.prototype = {
 
 
   /**
-   * @param  {Feature} feature
+   * @param  {Feature}        feature
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
+   * @param  {Number}         width
+   * @param  {Number}         height
    * @return {Array.<Number>} matrix
    */
-  _getSymbolTransform: function (feature, bbox, featureBounds) {
+  _getSymbolTransform: function (feature, bbox, featureBounds, width, height) {
     var props    = feature.properties;
-    var symbol   = props.symbol;
     var center   = feature.geometry.coordinates;
     var scale    = props.scale    || 1;
     var rotation = props.rotation || 0;
@@ -2455,7 +2460,7 @@ Renderer.prototype = {
       .rotate(rotation)
       .scale(scale, scale)
       .translate(-center[0], -center[1])
-      .translate(-symbol.width / 2, -symbol.height / 2);
+      .translate(-width / 2, -height / 2);
 
     return m.toArray();
   },
@@ -2472,12 +2477,11 @@ Renderer.prototype = {
     var className = ('point ' + (feature.properties.className || '')).trim();
     var radius = feature.properties.radius || 1;
 
+    extendBBox(bbox, coord);
+    extendBBox(featureBounds, coord);
     if (feature.properties.symbol.src) {
       accum.push(this._createSymbol(feature, bbox, featureBounds));
     } else {
-      extendBBox(bbox, coord);
-      extendBBox(featureBounds, coord);
-
       accum.push('<circle class="', className,
         '" cx="', coord[0], '" cy="', coord[1],
         '" r="',  radius, '" ',
