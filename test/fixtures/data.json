@@ -40,8 +40,8 @@
       "type": "Feature",
       "properties": {
         "color": "#000000",
-        "weight": 1,
-        "direction": 0,
+        "weight": 0.5,
+        "direction": -1,
         "opacity": 1,
         "markupType": "line"
       },
@@ -232,6 +232,35 @@
               52.449006580000002
             ]
           }
+        ]
+      }
+    },
+
+
+    {
+      "type": "Feature",
+      "properties": {
+        "color": "#000000",
+        "weight": 0.5,
+        "direction": 1,
+        "opacity": 1,
+        "markupType": "line"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            400.99196787148594,
+            80.60250571686748
+          ],
+          [
+            507.3579631410131,
+            109.10318825146987
+          ],
+          [
+            492.8813747405273,
+            163.1291759212065
+          ]
         ]
       }
     },

@@ -79,10 +79,20 @@ tape('LineString', function (t) {
   t.deepEquals(path, _.flatten(_.flatten(linestring.geometry.coordinates)), 'correct path');
   t.deepEquals(bbox, calculatedBBox, 'correct viewBox');
 
-  t.ok(svg.indexOf('stroke-width="5"') !== -1, 'has stroke-width');
-  t.ok(svg.indexOf('stroke="red"') !== -1, 'has stroke color');
-  t.ok(svg.indexOf('fill="blue"') !== -1, 'fill color');
-  t.ok(svg.indexOf('stroke-dasharray="2,2"') !== -1, 'dash array');
+  t.notEquals(svg.indexOf('stroke-width="5"'), -1, 'has stroke-width');
+  t.notEquals(svg.indexOf('stroke="red"'), -1, 'has stroke color');
+  t.notEquals(svg.indexOf('fill="blue"'), -1, 'fill color');
+  t.notEquals(svg.indexOf('stroke-dasharray="2,2"'), -1, 'dash array');
+
+  builder
+    .setProperty('direction', 1)
+    .setProperty('arrowThickness', 5)
+    .setProperty('arrowLength', 20);
+
+  linestring = builder.build();
+  svg = geojson2svg(linestring).render();
+
+  t.notEquals(svg.indexOf('marker id="arrow-5-20-1"'), -1, 'marker created');
 
   t.end();
 });

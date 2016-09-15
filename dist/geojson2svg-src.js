@@ -2300,6 +2300,69 @@ Renderer.prototype = {
 
 
   /**
+   * Create arrow at the end of the line
+   * @param  {Object} options
+   * @return {String} SVG marker id
+   */
+  _createArrow: function(options) {
+    var height = options.arrowLength    || (options.weight * 20);
+    var width  = options.arrowThickness || (options.weight * 10);
+    var length = height;
+    var direction = options.direction;
+
+    var id = [
+              'arrow', width, length, direction
+            ].join('-').replace(/\./g, '');
+    var path = this._defs.filter(function (def) {
+      return def.indexOf(id) !== -1;
+    })[0];
+
+    if (!path) { // arrow doesn't exist, create it
+      var refX = 0, refY = width / 2, d = '';
+
+      if (direction === 1) { // LTR
+        refX = length;
+        d = ['M', 0, 0, 'L', 0, width,
+             'L', length, width / 2, 'Z'].join(' ');
+      } else {               // RTL
+        d = ['M', length, 0, 'L', length, width,
+             'L', 0, width / 2, 'Z'].join(' ');
+      }
+
+      path = ['<path id="path-', id, '" class="arrow-path" d="', d , '" />'];
+
+      var marker = this._createMarker(
+        path.join(''), id, height, width, [refX, refY]);
+      this._defs.push(marker);
+    }
+    return id;
+  },
+
+
+  /**
+   * Creates SVG marker
+   * @param  {SVGElement} path Element to use as the marker
+   * @param  {Object}     options
+   * @return {String}
+   */
+  _createMarker: function (path, id, width, height, ref) {
+    var marker = [
+      '<marker id="',     id,     '" ',
+        'markerWidth="',  width,  '" ',
+        'markerHeight="', height, '" ',
+        'orient="auto" '];
+
+    if (ref) {
+      marker.push('refX="', ref[0], '" ',
+                  'refY="', ref[1], '" ');
+    }
+
+    marker.push('>', path, '</marker>');
+    return marker.join('');
+  },
+
+
+  /**
    * Create symbol for putting into defs
    *
    * @param  {Feature} feature
@@ -2529,6 +2592,12 @@ Renderer.prototype = {
 
         extendBBox(bbox, featureBounds.slice(0, 2));
         extendBBox(bbox, featureBounds.slice(2, 4));
+      }
+
+      if (styles.direction) { // arrow
+        var arrow = this._createArrow(styles);
+        currentStyle[styles.direction === 1 ? 'marker-end' : 'marker-start'] =
+          'url(#' + arrow + ')';
       }
     } else {
       currentStyle['stroke'] = 'none';
