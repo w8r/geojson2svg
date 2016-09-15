@@ -5,11 +5,15 @@ var validator = require('html-validator');
 
 var formatXml   = require('./helpers/format_xml');
 var geojson2svg = require('../');
+var bboxutils   = require('../src/bbox');
 var Renderer    = geojson2svg.Renderer;
 var data        = require('./fixtures/data.json');
 var style       = require('./fixtures/markup_style.json');
 var decorator   = require('svg-polygon-decorator');
 var simplify    = require('simplify-js');
+
+var featureCollection = require('./helpers/feature_collection');
+var Polygon           = require('./helpers/polygon');
 
 function wave(rings, radius, closed, bbox, featureBounds) {
   var str = '';
@@ -27,10 +31,8 @@ function wave(rings, radius, closed, bbox, featureBounds) {
     for (var j = 0; j < ringLength; j++) {
       var point = ring[j];
 
-      // console.log();
-      //
-      Renderer.extendBBox(bbox, point);
-      Renderer.extendBBox(featureBounds, point);
+      bboxutils.extend(bbox, point);
+      bboxutils.extend(featureBounds, point);
 
       cloudPoints.push(point.slice());
     }
@@ -41,6 +43,7 @@ function wave(rings, radius, closed, bbox, featureBounds) {
   // SVG complains about empty path strings
   return str || 'M0 0';
 }
+
 
 tape('geojson2svg', function (t) {
   console.time('svg');
@@ -72,6 +75,72 @@ tape('geojson2svg', function (t) {
     path.resolve(process.cwd(), 'demo/index.html'), rendered, {
       encoding: 'utf-8'
     });
+
+  t.test('API', function (t) {
+    t.test('constructor', function (t) {
+      t.end();
+    });
+
+    t.test('type()', function (t) {
+      t.end();
+    });
+
+    t.test('styles()', function (t) {
+      t.end();
+    });
+
+    t.test('fonts()', function (t) {
+      t.end();
+    });
+
+    t.test('data()', function (t) {
+      t.end();
+    });
+
+    t.test('projection()', function(t) {
+      t.end();
+    });
+
+    t.test('decorator()', function(t) {
+      t.end();
+    });
+
+    t.test('plugin()', function (t) {
+      t.end();
+    });
+
+
+
+    t.end();
+  });
+
+
+  t.test('polygon', function (t) {
+    var builder = new Polygon()
+      .randomGeometry()
+      .round();
+
+    var polygon = builder.build();
+    var svg = geojson2svg(polygon).render();
+
+    var bbox = svg.match(/viewBox=['"]([^"]+)['"]/m)[1].split(' ').map(parseFloat);
+
+    console.log(geojson2svg(polygon).render(), bbox);
+
+    // console.log(geojson2svg(data, style, null, null, 'markupType')
+    //   .render(featureCollection()));
+    //
+    // t.test('geometry', function (t) {
+    //
+    //   t.end();
+    // });
+    //
+    // t.test('styling', function (t) {
+    //   t.end();
+    // });
+
+    t.end();
+  });
 
   t.end();
 });
