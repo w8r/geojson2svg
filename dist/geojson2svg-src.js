@@ -1751,12 +1751,13 @@ var extendBBox      = bboxUtils.extend;
 var padBBox         = bboxUtils.pad;
 var getDefaultBBox  = bboxUtils.getDefault;
 
-var XMLNS   = 'http://www.w3.org/2000/svg';
-var XLINK   = 'http://www.w3.org/1999/xlink';
-var VERSION = 1.2;
+var XMLNS     = 'http://www.w3.org/2000/svg';
+var XLINK     = 'http://www.w3.org/1999/xlink';
+var VERSION   = 1.2;
 
-var SYMBOL  = 'symbol';
-var TEXTBOX = 'textbox';
+var SYMBOL    = 'symbol';
+var TEXTBOX   = 'textbox';
+var FONT_SIZE = 10;
 
 
 var DefaultStyles = require('./default_styles');
@@ -2151,8 +2152,8 @@ Renderer.prototype = {
    */
   _text: function (feature, accum, bbox, featureBounds) {
     var properties = extend({}, this._selectStyle(feature), feature.properties);
-    var fontSize   = properties.fontSize;
-    var fontColor  = properties.fontColor;
+    var fontSize   = properties.fontSize   || FONT_SIZE;
+    var fontColor  = properties.fontColor  || properties.color;
     var fontFamily = properties.fontFamily || '';
 
     var text = properties.text;
