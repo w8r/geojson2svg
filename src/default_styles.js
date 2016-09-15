@@ -7,21 +7,22 @@ var OPACITY = 0.75;
 var Styles = {
 
   'Polygon': {
-    stroke: 1,
+    stroke: WEIGHT,
     color: COLOR,
     opacity: OPACITY
   },
 
   'LineString': {
-    stroke: 1,
+    stroke: WEIGHT,
     color: COLOR,
     opacity: OPACITY
   },
 
   'Point': {
     radius: 3,
-    stroke: 1,
-    color: COLOR
+    stroke: WEIGHT,
+    color: COLOR,
+    fill: FILL
   },
 
   'textbox': {

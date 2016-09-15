@@ -4,10 +4,10 @@
  *
  * @param  {String}                fontFamily
  * @param  {Array.<Number>|Number} fontSizes
- * @param  {Boolean}               details  More details about measurements
+ * @param  {Boolean}               detailed  More details about measurements
  * @return {Object}
  */
-module.exports = function measureGlyphs(fontFamily, fontSizes, details) {
+module.exports = function measureGlyphs(fontFamily, fontSizes, detailed) {
 
   /**
    * @param  {Number}  size
@@ -73,13 +73,13 @@ module.exports = function measureGlyphs(fontFamily, fontSizes, details) {
    * inside of the container
    * @inlined
    * @param  {String} text
-   * @param  {String} fontFamily
+   * @param  {String} font
    * @param  {String} container
    * @return {SVGElement}
    */
-  function createText(text, fontFamily, container) {
+  function createText(text, font, container) {
     var textElement = create('text');
-    textElement.setAttribute('font-family', fontFamily);
+    textElement.setAttribute('font-family', font);
 
     var textNode = document.createTextNode(text || '');
     textElement.appendChild(textNode);
@@ -93,7 +93,7 @@ module.exports = function measureGlyphs(fontFamily, fontSizes, details) {
   function create(tag) {
      return document.createElementNS(SVG_NS, tag);
   }
-  
+
 
   var svg = create('svg');
 
@@ -112,7 +112,7 @@ module.exports = function measureGlyphs(fontFamily, fontSizes, details) {
 
   var values = [];
   for (var i = 0, len = fontSizes.length; i < len; i++) {
-    values.push(measure(fontSizes[i], details, a, A, n, s));
+    values.push(measure(fontSizes[i], detailed, a, A, n, s));
   }
 
   svg.parentNode.removeChild(svg);

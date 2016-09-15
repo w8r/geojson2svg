@@ -9,9 +9,10 @@ var measure     = require('./measure_glyphs');
  * @return {Object}
  */
 module.exports = function getFontData (fontFamily, fontSize, fontData) {
-  // try and select from available
   var data = null;
   var prev, next;
+
+  // try and select from available
   for (var i = 0, len = fontData.length; i < len; i++) {
     var font = fontData[i];
     prev = next = null;
