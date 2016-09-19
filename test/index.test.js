@@ -30,7 +30,7 @@ tape('geojson2svg', function (t) {
   console.timeEnd('svg');
 
   fs.writeFileSync(
-    path.resolve(process.cwd(), 'demo/index.html'), rendered, {
+    path.resolve(process.cwd(), 'demo/markup.svg'), rendered, {
       encoding: 'utf-8'
     });
 

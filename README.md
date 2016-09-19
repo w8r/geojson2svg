@@ -2,7 +2,7 @@
 
 Render geojson into SVG using inline or external stylesheet, in Node or in the browser
 
-* [Example of non-cartographic `GeoJSON` rendered with the lib](https://w8r.github.io/geojson2svg/demo/index.html)
+* [Example of non-cartographic `GeoJSON` rendered with the lib](https://w8r.github.io/geojson2svg/demo/markup.svg)
 
 ## Usage
 
@@ -197,15 +197,23 @@ library:
 
  * <a href="#textbox" name="textbox">#</a> **Textbox** (`textbox`)
    Textbox is used to place text on canvas. The geometry of it can be defined by
-   a rectangle (`Polygon`) or a point (`Point`).
+   a rectangle (`Polygon`) or a point (`Point`). Text must be provided as a
+   string in properties, or, preferably, if it's a multiline text, split it into
+   an array of strings. `geojson2svg` is a pure text renderer, so it's not
+   supposed to calculate the positioning and layout for text, though if used
+   in the browser and not provided with enough font data, it would try to render
+   the text within the given rectangle. It is **strongly** recommended to provide
+   `fontFamily`, `fontSize` and `lineHeight` explicitly, if you want the renderer
+   to do the text formatting for you. If geometry type is `Point`, text will
+   simply be centered.
  * <a href="#symbol" name="symbol">#</a> **Symbol** (`symbol`)
    You can think of the symbol as of an icon. It provides a very basic support
    for putting icons on the canvas, symbols are rendered as a combination of
    [SVG Symbol](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol)
    and a `<use>` tag, which allows for symbols to be re-used and the file size to
    remain smaller. Symbol (icon) should be provided in the form of `SVG`
-   document passed as a string. Individual symbols allow `rotation` (in radians) a
-   nd `scale` to be passed via `properties`.
+   document passed as a string. Individual symbols allow `rotation` (in radians)
+   and `scale` to be passed via `properties`.
 
    **Example**
    ```js
