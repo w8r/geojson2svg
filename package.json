@@ -49,7 +49,7 @@
     "uglifyjs": "^2.4.10"
   },
   "dependencies": {
-    "geojson-project": "^1.0.0",
+    "geojson-project": "^1.0.1",
     "json-extend": "^0.1.0",
     "minimist": "^1.2.0",
     "string-hash": "^1.1.0",

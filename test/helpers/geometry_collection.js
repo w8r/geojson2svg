@@ -35,7 +35,6 @@ GeometryCollection.prototype.bbox = function () {
     type: 'Feature',
     geometry: this._geometry
   }, function (coord) {
-    console.log(coord);
     bboxUtils.extend(bbox, coord);
     return coord;
   });

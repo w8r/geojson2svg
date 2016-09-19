@@ -36,18 +36,29 @@ tape('GeometryCollection', function (t) {
 
   t.deepEquals(builder.bbox(), bbox, 'correct bbox');
 
-  console.log(formatXml(svg), bbox, builder.bbox());
+  t.notEquals(svg.indexOf('g class=\"geometrycollection'), -1, 'group present');
+  t.notEquals(svg.indexOf('point special-collection'), -1, 'point present');
+  t.notEquals(svg.indexOf('linestring special-collection'), -1, 'line present');
+  t.notEquals(svg.indexOf('polygon special-collection'), -1, 'polygon present');
+  t.notEquals(svg.indexOf('textbox special-collection'), -1, 'textbox present');
 
-  // t.equals(svg.match(/<tspan/g).length, 2, '2 lines');
-  // t.notEquals(svg.indexOf('fill="' + fontColor + '"'), -1, 'font color');
-  // t.notEquals(svg.indexOf('font-size="' + fontSize + '"'), -1, 'font size');
-  // t.notEquals(svg.indexOf('font-family="' + fontFamily + '"'), -1, 'font family');
-  // t.notEquals(svg.indexOf('class="textbox special-text"'), -1, 'className');
-  //
-  // builder.setProperty('text', Array(400).join('a'));
-  // textbox = builder.build();
-  // svg = geojson2svg(textbox).type('type').render();
-  // t.equals(svg.match(/<tspan/g).length, 25, '25 lines for 400 characters');
+  t.equals(svg.match(/<tspan/g).length, 2, '2 lines in textbox');
+
+  builder
+    .setProperty('geometriesTypes', ["styled-point", "line", "polygon", "textbox"]);
+  var gc = builder.build();
+  var stroke = 18.5;
+  var svg = geojson2svg(gc)
+    .type('type')
+    .styles({
+      "styled-point": {
+        weight: stroke
+      }
+    })
+    .render();
+
+  t.notEquals(svg.indexOf('stroke-width="' + stroke + '"'), -1,
+    'special styling per type available');
 
   t.end();
 });
