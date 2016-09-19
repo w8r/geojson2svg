@@ -1,26 +1,27 @@
 var FILL    = '#000000';
 var COLOR   = '#333333';
-var WEIGHT  = 1;
+var WEIGHT  = 0.25;
 var OPACITY = 0.75;
 
 
 var Styles = {
 
   'Polygon': {
-    stroke: WEIGHT,
+    weight: WEIGHT,
     color: COLOR,
     opacity: OPACITY
   },
 
   'LineString': {
-    stroke: WEIGHT,
+    weight: WEIGHT,
     color: COLOR,
     opacity: OPACITY
   },
 
   'Point': {
     radius: 3,
-    stroke: WEIGHT,
+    stroke: COLOR,
+    weight: WEIGHT,
     color: COLOR,
     fill: FILL
   },
