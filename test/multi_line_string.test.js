@@ -12,28 +12,29 @@ var style       = require('./fixtures/markup_style.json');
 var wave        = require('./helpers/wave');
 
 var featureCollection = require('./helpers/feature_collection');
-var Polygon           = require('./helpers/polygon');
-var MultiPolygon      = require('./helpers/multi_polygon');
+var LineString        = require('./helpers/line_string');
 
-tape('Polygon', function (t) {
-  var builder = new Polygon()
+tape('MultiLineString', function (t) {
+  var builder = new LineString()
     .randomGeometry()
     .setProperty('weight', 5)
     .setProperty('stroke', 'red')
-    .setProperty('fill', 'blue')
     .setProperty('dashArray', [2, 2])
-    .setProperty('className', 'special-polygon')
     .round();
 
-  var polygon = builder.build();
-  var svg = geojson2svg(polygon).render();
+  var linestring = builder.build();
+  var svg = geojson2svg(linestring, {
+    LineString: {
+      opacity: 0.375
+    }
+  }).render();
 
   var bbox = svg.match(/viewBox=['"]([^"]+)['"]/m)[1].split(' ').map(parseFloat);
   var path = svg
     .match(/d=['"]([^"]+)['"]/m)[1]
     .trim();
 
-  t.equals(path[path.length - 1], 'Z', 'closed path');
+  t.equals(path.match(/Z/g), null, 'path rings are not closed');
 
   path = path
     .split(/[^\d-]/)
@@ -47,14 +48,14 @@ tape('Polygon', function (t) {
 
   var calculatedBBox = builder.bbox();
   bboxUtils.pad(calculatedBBox, 5);
-  t.deepEquals(path, _.flatten(_.flatten(polygon.geometry.coordinates)), 'correct path');
+  t.deepEquals(path, _.flatten(_.flatten(linestring.geometry.coordinates)), 'correct path');
   t.deepEquals(bbox, calculatedBBox, 'correct viewBox');
 
-  t.notEquals(svg.indexOf('stroke-width="5"'), -1, 'has stroke-width');
-  t.notEquals(svg.indexOf('stroke="red"'), -1, 'has stroke color');
-  t.notEquals(svg.indexOf('fill="blue"'), -1, 'fill color');
-  t.notEquals(svg.indexOf('stroke-dasharray="2,2"'), -1, 'dash array');
-  t.notEquals(svg.indexOf('class="polygon special-polygon"'), -1, 'className');
+  t.ok(svg.indexOf('stroke-width="5"') !== -1, 'has stroke-width');
+  t.ok(svg.indexOf('stroke="red"') !== -1, 'has stroke color');
+  t.ok(svg.indexOf('fill="none"') !== -1, 'fill color');
+  t.ok(svg.indexOf('stroke-dasharray="2,2"') !== -1, 'dash array');
+  t.ok(svg.indexOf('stroke-opacity="0.375"') !== -1, 'dash array');
 
   t.end();
 });

@@ -14,36 +14,24 @@ var featureCollection = require('./helpers/feature_collection');
 var Point           = require('./helpers/point');
 var MultiPoint      = require('./helpers/multi_point');
 
-
-tape('Point', function (t) {
-  var builder = new Point()
+tape('MultiPoint', function (t) {
+  var builder = new MultiPoint()
     .randomGeometry()
     .setProperty('weight', 5)
     .setProperty('stroke', 'red')
     .setProperty('fill', 'blue')
     .setProperty('dashArray', [2, 2])
-    .setProperty('className', 'special-point')
-    .setProperty('radius', 10)
     .round();
 
-  var point = builder.build();
-  var svg = geojson2svg(point).render();
+  var points = builder.build();
+  var svg = geojson2svg(points).render();
 
   var bbox = svg.match(/viewBox=['"]([^"]+)['"]/m)[1].split(' ').map(parseFloat);
   bbox[2] += bbox[0];
   bbox[3] += bbox[1];
 
-  var calculatedBBox = builder.bbox();
-  bboxUtils.pad(calculatedBBox, 5);
-  //t.deepEquals(path, _.flatten(_.flatten(polygon.geometry.coordinates)), 'correct path');
-  t.deepEquals(bbox, calculatedBBox, 'correct viewBox');
-
-  t.notEquals(svg.indexOf('stroke-width="5"'), -1, 'has stroke-width');
-  t.notEquals(svg.indexOf('stroke="red"'), -1, 'has stroke color');
-  t.notEquals(svg.indexOf('fill="blue"'), -1, 'fill color');
-  t.notEquals(svg.indexOf('r="10"'), -1, 'radius');
-  t.notEquals(svg.indexOf('stroke-dasharray="2,2"'), -1, 'dash array');
-  t.notEquals(svg.indexOf('class="point special-point"'), -1, 'className');
+  t.deepEquals(builder.bbox(), bbox, 'bbox calculated correctly');
+  t.equals(svg.match(/<circle /g).length, 2, 'multiple elements');
 
   t.end();
 });

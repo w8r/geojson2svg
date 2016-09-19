@@ -15,14 +15,13 @@ var featureCollection = require('./helpers/feature_collection');
 var Polygon           = require('./helpers/polygon');
 var MultiPolygon      = require('./helpers/multi_polygon');
 
-tape('Polygon', function (t) {
-  var builder = new Polygon()
+tape('MultiPolygon', function (t) {
+  var builder = new MultiPolygon()
     .randomGeometry()
     .setProperty('weight', 5)
     .setProperty('stroke', 'red')
     .setProperty('fill', 'blue')
     .setProperty('dashArray', [2, 2])
-    .setProperty('className', 'special-polygon')
     .round();
 
   var polygon = builder.build();
@@ -34,6 +33,7 @@ tape('Polygon', function (t) {
     .trim();
 
   t.equals(path[path.length - 1], 'Z', 'closed path');
+  t.equals(path.match(/Z/g).length, 2, 'two contours');
 
   path = path
     .split(/[^\d-]/)
@@ -47,14 +47,13 @@ tape('Polygon', function (t) {
 
   var calculatedBBox = builder.bbox();
   bboxUtils.pad(calculatedBBox, 5);
-  t.deepEquals(path, _.flatten(_.flatten(polygon.geometry.coordinates)), 'correct path');
+  t.deepEquals(path, _.flatten(_.flatten(_.flatten(polygon.geometry.coordinates))), 'correct path');
   t.deepEquals(bbox, calculatedBBox, 'correct viewBox');
 
   t.notEquals(svg.indexOf('stroke-width="5"'), -1, 'has stroke-width');
   t.notEquals(svg.indexOf('stroke="red"'), -1, 'has stroke color');
   t.notEquals(svg.indexOf('fill="blue"'), -1, 'fill color');
   t.notEquals(svg.indexOf('stroke-dasharray="2,2"'), -1, 'dash array');
-  t.notEquals(svg.indexOf('class="polygon special-polygon"'), -1, 'className');
 
   t.end();
 });

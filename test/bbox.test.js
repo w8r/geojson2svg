@@ -1,7 +1,7 @@
-var test = require('tape');
+var tape = require('tape');
 var bboxUtils = require('../src/bbox');
 
-test('BBox utils', function (t) {
+tape('BBox utils', function (t) {
 
   t.test('getDefaultBBox', function (t) {
     t.deepEquals(bboxUtils.getDefault(), [Infinity, Infinity, -Infinity, -Infinity], 'infinity bbox');
