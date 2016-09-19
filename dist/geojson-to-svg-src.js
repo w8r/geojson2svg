@@ -1884,7 +1884,7 @@ Renderer.prototype = {
    */
   transform: function(transform) {
     if (typeof transform !== 'function') {
-      throw new Error('Transform feature must be a function');
+      throw new TypeError('Transform feature must be a function');
     }
     this._transform = transform;
     return this;
@@ -1913,7 +1913,7 @@ Renderer.prototype = {
       if (data.type === 'Feature') {
         data = { type: 'FeatureCollection', 'features': [data] };
       } else {
-        throw new Error('Input has to be a FeatureCollection or a Feature');
+        throw new TypeError('Input has to be a FeatureCollection or a Feature');
       }
     }
 
@@ -1934,7 +1934,7 @@ Renderer.prototype = {
    */
   projection: function (proj) {
     if (typeof proj !== 'function') {
-      throw new Error('Projection must be a function [x, y] -> [x, y]');
+      throw new TypeError('Projection must be a function [x, y] -> [x, y]');
     }
     this._projection = proj;
     return this;
@@ -1961,7 +1961,7 @@ Renderer.prototype = {
    */
   decorator: function (type, decorator) {
     if (typeof decorator !== 'function') {
-      throw new Error('Decorator must be a function ' +
+      throw new TypeError('Decorator must be a function ' +
         '(feature, coordinates, closed, bbox, featureBounds) -> SVGPath ');
     }
     this._decorators[type] = decorator;

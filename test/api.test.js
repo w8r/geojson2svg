@@ -53,7 +53,8 @@ tape('API', function (t) {
   t.test('.data()', function (t) {
     var data = featureCollection();
     var r = new Renderer(data);
-
+    
+    t.plan(4);
     t.equals(r._data, data, 'stored through constructor');
 
     t.equals(r.data(featureCollection())._data.type, 'FeatureCollection', 'allows FeatureCollection');
@@ -62,8 +63,8 @@ tape('API', function (t) {
       properties: {},
       geometry: {}
     })._data.type, 'FeatureCollection', 'allows Feature, turns it into FeatureCollection');
-    t.throws(function () { r.data({ some: 'rubbish'} ) }, 'throws invalid data type');
-    t.end();
+    t.throws(function () { r.data({ some: 'rubbish'} ); }, TypeError, 'throws invalid data type');
+
   });
 
   t.test('.projection()', function(t) {
@@ -74,37 +75,34 @@ tape('API', function (t) {
       .build();
     var r = new Renderer(polygon, null, null, proj);
 
+    t.plan(4);
     t.equals(r._projection, proj, 'sets through constructor');
     t.deepEquals(r._data.features[0], project(polygon, proj), 'projects on data assignment');
     r._projection = null;
     t.equals(r.projection(proj)._projection, proj, 'stores and returns renderer');
     t.throws(function () {
       r.projection({});
-    }, 'validates projection type');
-
-    t.end();
+    }, TypeError, 'validates projection type');
   });
 
   t.test('.decorator()', function(t) {
     var r = new Renderer();
     var decorator = function(f, c, closed, bbox, fbounds) {};
+    t.plan(2);
     t.equals(r.decorator('special', decorator)._decorators.special, decorator, 'stores and returns renderer');
     t.throws(function () {
       r.decorator('special', {});
-    }, 'throws on wrong decorator type');
-
-    t.end();
+    }, TypeError, 'throws on wrong decorator type');
   });
 
   t.test('.transform()', function (t) {
     var r = new Renderer();
     var transform = function(f, c, closed, bbox, fbounds) {};
+    t.plan(2);
     t.equals(r.transform(transform)._transform, transform, 'stores and returns renderer');
     t.throws(function () {
       r.transform({});
-    }, 'throws on wrong transform type');
-
-    t.end();
+    }, TypeError, 'throws on wrong transform type');
   });
 
   t.end();
