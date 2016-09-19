@@ -830,7 +830,7 @@ Renderer.prototype = {
     var styleString = '';
 
     if (typeof this._styles === 'function') {
-      styles = this._styles(feature);
+      styles = this._styles(feature, bbox, featureBounds);
     } else {
       styles = extend({}, this._selectStyle(feature), feature.properties);
     }
