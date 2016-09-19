@@ -30,6 +30,8 @@ var DefaultFonts  = [
 module.exports               = renderer;
 module.exports.Renderer      = Renderer;
 module.exports.DefaultStyles = DefaultStyles;
+module.exports.extendBBox    = extendBBox;
+module.exports.padBBox       = padBBox;
 
 /**
  *
@@ -327,7 +329,7 @@ Renderer.prototype = {
   _geometryCollection: function (feature, accum, bbox, featureBounds) {
     var className =
       ('geometrycollection ' + (feature.properties.className || '')).trim();
-    accum.push('<g class="',className, '">');
+    accum.push('<g class="', className, '">');
 
     var geometriesLength = feature.geometry.geometries.length;
     var types = feature.properties['geometriesTypes'] || Array(geometriesLength);

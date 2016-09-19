@@ -13,6 +13,7 @@ module.exports = function wave(rings, radius, closed, bbox, featureBounds) {
     })).map(function(p) {
       return [p.x, p.y];
     });
+
     var ringLength = ring.length;
 
     for (var j = 0; j < ringLength; j++) {
