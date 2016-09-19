@@ -11,7 +11,7 @@ var Polygon           = require('./helpers/polygon');
 
 
 tape('API', function (t) {
-  t.test('constructor', function (t) {
+  t.test('.constructor', function (t) {
     t.equals(typeof Renderer, 'function', 'exposed');
     var r = new Renderer();
     t.ok(Array.isArray(r._fonts), 'fonts is array');
@@ -24,14 +24,14 @@ tape('API', function (t) {
     t.end();
   });
 
-  t.test('type()', function (t) {
+  t.test('.type()', function (t) {
     var r = new Renderer();
     var type = '_type_';
     t.equals(r.type(type)._type, type, 'sets type and returns renderer');
     t.end();
   });
 
-  t.test('styles()', function (t) {
+  t.test('.styles()', function (t) {
     var styles = { 'SpecialType': { fill: 'none' }};
     var r = new Renderer(null, styles);
     t.deepEquals(r._styles.SpecialType, styles.SpecialType, 'through constructor');
@@ -40,7 +40,7 @@ tape('API', function (t) {
     t.end();
   });
 
-  t.test('fonts()', function (t) {
+  t.test('.fonts()', function (t) {
     var fonts = {name: 'dd', values: [{ size: 1 }, {size: 2}]};
     var r = new Renderer(null, null, null, null, null, fonts);
     t.deepEquals(r._fonts[r._fonts.length - 1], fonts, 'stores through constructor');
@@ -50,7 +50,7 @@ tape('API', function (t) {
     t.end();
   });
 
-  t.test('data()', function (t) {
+  t.test('.data()', function (t) {
     var data = featureCollection();
     var r = new Renderer(data);
 
@@ -66,7 +66,7 @@ tape('API', function (t) {
     t.end();
   });
 
-  t.test('projection()', function(t) {
+  t.test('.projection()', function(t) {
     var proj = function (c) { return [c[0] + 1, c[1] + 1]; };
     var polygon = new Polygon()
       .randomGeometry()
@@ -85,7 +85,7 @@ tape('API', function (t) {
     t.end();
   });
 
-  t.test('decorator()', function(t) {
+  t.test('.decorator()', function(t) {
     var r = new Renderer();
     var decorator = function(f, c, closed, bbox, fbounds) {};
     t.equals(r.decorator('special', decorator)._decorators.special, decorator, 'stores and returns renderer');
@@ -96,7 +96,7 @@ tape('API', function (t) {
     t.end();
   });
 
-  t.test('transform()', function (t) {
+  t.test('.transform()', function (t) {
     var r = new Renderer();
     var transform = function(f, c, closed, bbox, fbounds) {};
     t.equals(r.transform(transform)._transform, transform, 'stores and returns renderer');
