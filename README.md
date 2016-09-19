@@ -2,7 +2,7 @@
 
 Render geojson into SVG using inline or external stylesheet, in Node or in the browser
 
-* [Example of non-cartographic `GeoJSON` rendered with the lib](https://w8r.github.io/geojson2svg/demo/markup.svg) [Source GeoJSON](https://raw.githubusercontent.com/w8r/geojson2svg/master/test/fixtures/data.json)
+* [Example of non-cartographic `GeoJSON` rendered with the lib](https://w8r.github.io/geojson2svg/demo/markup.svg) ([GeoJSON source](https://raw.githubusercontent.com/w8r/geojson2svg/master/test/fixtures/data.json))
 
 ## Usage
 
