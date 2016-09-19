@@ -14,8 +14,8 @@
     "test": "tape test/*.test.js | tap-spec",
     "test:watch": "nodemon --exec 'npm run lint && npm test'",
     "lint": "eslint ./src/",
-    "build-js": "browserify index.js -v -o dist/geojson2svg-src.js",
-    "compress-js": "uglifyjs dist/geojson2svg-src.js -o dist/geojson2svg.js -m --comments",
+    "build-js": "browserify index.js -v -o dist/geojson-to-svg-src.js",
+    "compress-js": "uglifyjs dist/geojson-to-svg-src.js -o dist/geojson-to-svg.js -m --comments",
     "build": "npm run lint && npm run build-js && npm run compress-js"
   },
   "repository": {
