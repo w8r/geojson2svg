@@ -39,7 +39,15 @@ Feature.prototype = {
 
 
   bbox: function () {
-    return bbox(bboxUtils.getDefault(), this._geometry.coordinates);
+    var bbox = bboxUtils.getDefault();
+    project({
+      type: 'Feature',
+      geometry: this._geometry
+    }, function (coord) {
+      bboxUtils.extend(bbox, coord);
+      return coord;
+    });
+    return bbox;
   },
 
 
@@ -52,7 +60,7 @@ Feature.prototype = {
   }
 };
 
-
+Feature.calculateBounds = bbox;
 
 function bbox(b, ring) {
   if (Array.isArray(ring) && isFinite(ring[0])) {

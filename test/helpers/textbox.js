@@ -6,6 +6,16 @@ function Textbox(props, geometry) {
 }
 Textbox.prototype = Object.create(Polygon.prototype);
 
+Textbox.prototype.asPoint = function (center) {
+  center = center || [20, 20];
+  this.setProperty('radius', 30);
+  this.geometry({
+    type: 'Point',
+    coordinates: center
+  });
+  return this;
+};
+
 Textbox.prototype.randomGeometry = function (center, R) {
   center = center || [20, 20];
   R = R || 50;
