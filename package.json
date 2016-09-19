@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "tape test/*.test.js | tap-spec",
-    "test:watch": "nodemon --exec 'npm run lint && npm test'",
+    "test:watch": "nodemon --exec 'npm run lint && npm test && npm run demo'",
+    "demo": "node test/render.js",
     "lint": "eslint ./src/",
     "build-js": "browserify index.js -v -o dist/geojson-to-svg-src.js",
     "compress-js": "uglifyjs dist/geojson-to-svg-src.js -o dist/geojson-to-svg.js -m --comments",

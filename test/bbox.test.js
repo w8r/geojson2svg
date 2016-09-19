@@ -6,7 +6,7 @@ test('BBox utils', function (t) {
   t.test('getDefaultBBox', function (t) {
     t.deepEquals(bboxUtils.getDefault(), [Infinity, Infinity, -Infinity, -Infinity], 'infinity bbox');
     t.end();
-  })
+  });
 
   t.test('extendBBox', function (t) {
     var bbox = bboxUtils.getDefault();

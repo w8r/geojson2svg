@@ -1,4 +1,3 @@
-var tape = require('tape');
 var fs   = require('fs');
 var path = require('path');
 var _    = require('lodash');
@@ -15,7 +14,7 @@ var project     = require('geojson-project');
 var featureCollection = require('./helpers/feature_collection');
 var Polygon           = require('./helpers/polygon');
 
-tape('geojson2svg', function (t) {
+
   console.time('svg');
   var rendered =
     geojson2svg(data, style, null, null, 'markupType')
@@ -33,6 +32,3 @@ tape('geojson2svg', function (t) {
     path.resolve(process.cwd(), 'demo/markup.svg'), rendered, {
       encoding: 'utf-8'
     });
-
-  t.end();
-});
