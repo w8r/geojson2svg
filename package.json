@@ -17,7 +17,7 @@
     "lint": "eslint ./src/",
     "build-js": "browserify index.js -v -o dist/geojson-to-svg-src.js",
     "compress-js": "uglifyjs dist/geojson-to-svg-src.js -o dist/geojson-to-svg.js -m --comments",
-    "build": "npm run lint && npm run build-js && npm run compress-js"
+    "build": "npm run lint && npm run test && npm run build-js && npm run compress-js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "deep-extend": "^0.4.1",
     "eslint": "^3.5.0",
     "lodash": "^4.15.0",
+    "minimist": "^1.2.0",
     "nightmare": "^2.7.0",
     "nodemon": "^1.10.2",
     "simplify-js": "^1.2.1",
@@ -52,7 +53,6 @@
   "dependencies": {
     "geojson-project": "^1.0.1",
     "json-extend": "^0.1.0",
-    "minimist": "^1.2.0",
     "string-hash": "^1.1.0",
     "transformation-matrix-js": "^2.6.5"
   }

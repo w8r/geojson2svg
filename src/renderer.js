@@ -20,11 +20,11 @@ var FONT_SIZE = 10;
 
 var DefaultStyles = require('./default_styles');
 var DefaultFonts  = [
-  require('../fonts/arial_helvetica_sans-serif'),
-  require('../fonts/helvetica_arial_sans-serif'),
-  require('../fonts/georgia_times_serif'),
-  require('../fonts/lucida_console_monaco_monospace'),
-  require('../fonts/verdana_geneva_sans-serif')
+  require('../fonts/arial_helvetica_sans-serif.json'),
+  require('../fonts/helvetica_arial_sans-serif.json'),
+  require('../fonts/georgia_times_serif.json'),
+  require('../fonts/lucida_console_monaco_monospace.json'),
+  require('../fonts/verdana_geneva_sans-serif.json')
 ];
 
 module.exports               = renderer;

@@ -1786,11 +1786,11 @@ var FONT_SIZE = 10;
 
 var DefaultStyles = require('./default_styles');
 var DefaultFonts  = [
-  require('../fonts/arial_helvetica_sans-serif'),
-  require('../fonts/helvetica_arial_sans-serif'),
-  require('../fonts/georgia_times_serif'),
-  require('../fonts/lucida_console_monaco_monospace'),
-  require('../fonts/verdana_geneva_sans-serif')
+  require('../fonts/arial_helvetica_sans-serif.json'),
+  require('../fonts/helvetica_arial_sans-serif.json'),
+  require('../fonts/georgia_times_serif.json'),
+  require('../fonts/lucida_console_monaco_monospace.json'),
+  require('../fonts/verdana_geneva_sans-serif.json')
 ];
 
 module.exports               = renderer;
@@ -2653,4 +2653,4 @@ Renderer.prototype = {
   }
 };
 
-},{"../fonts/arial_helvetica_sans-serif":1,"../fonts/georgia_times_serif":2,"../fonts/helvetica_arial_sans-serif":3,"../fonts/lucida_console_monaco_monospace":4,"../fonts/verdana_geneva_sans-serif":5,"./bbox":11,"./default_styles":12,"./get_font_data":13,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}]},{},[6]);
+},{"../fonts/arial_helvetica_sans-serif.json":1,"../fonts/georgia_times_serif.json":2,"../fonts/helvetica_arial_sans-serif.json":3,"../fonts/lucida_console_monaco_monospace.json":4,"../fonts/verdana_geneva_sans-serif.json":5,"./bbox":11,"./default_styles":12,"./get_font_data":13,"geojson-project":7,"json-extend":8,"string-hash":9,"transformation-matrix-js":10}]},{},[6]);
