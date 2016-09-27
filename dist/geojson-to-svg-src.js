@@ -1664,9 +1664,9 @@ module.exports = function measureGlyphs(fontFamily, fontSizes, detailed) {
     for (var i = 2, len = arguments.length; i < len; i++) {
       var el = arguments[i];
       el.setAttribute('font-size', size);
-      var symbols = el.innerHTML.length;
-      var length = el.getComputedTextLength();
-      var bbox = el.getBBox();
+      var symbols = el.textContent.length;
+      var length  = el.getComputedTextLength();
+      var bbox    = el.getBBox();
 
       combinedWidth  += length / symbols;
       combinedHeight += bbox.height;
