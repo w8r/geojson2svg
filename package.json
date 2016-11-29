@@ -8,7 +8,10 @@
     "measure-font": "bin/measure_font"
   },
   "directories": {
-    "test": "test"
+    "test": "test",
+    "bin": "bin",
+    "src": "src",
+    "fonts": "fonts"
   },
   "scripts": {
     "test": "tape test/*.test.js | tap-spec",
