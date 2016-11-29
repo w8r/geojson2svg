@@ -1,6 +1,6 @@
 {
   "name": "geojson-to-svg",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "primitive SVG renderer for geojson with feature styles",
   "main": "index.js",
   "bin": {
