@@ -20,7 +20,7 @@ var fonts   = null;
 if (argv.v || argv.version) {       // --version, -v
   console.log(pkg.version);
   process.exit(0)
-} else if (argv._.length === 0 || argv.h || argv.help) {   // --help, -h
+} else if (process.argv.length === 2 || argv.h || argv.help) {   // --help, -h
   console.log('\n GeoJSON to SVG converter', pkg.version, '\n');
   console.log('  $ geojson2svg --input data.geojson --style style.json --output out.svg --extent [0,0,300,300]');
   console.log('  $ cat data.geojson | geojson2svg -s style.json > out.svg');
