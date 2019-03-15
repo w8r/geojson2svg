@@ -1,4 +1,4 @@
-# GeoJSON2SVG [![npm version](https://badge.fury.io/js/geojson-to-svg.svg)](https://badge.fury.io/js/geojson-to-svg) [![CircleCI](https://circleci.com/gh/w8r/geojson2svg.svg?style=shield)](https://circleci.com/gh/w8r/geojson2svg)
+# GeoJSON2SVG [![npm version](https://badge.fury.io/js/geojson-to-svg.svg)](https://badge.fury.io/js/geojson-to-svg) [![![Build Status](https://travis-ci.org/w8r/geojson2svg.svg?branch=master)](https://travis-ci.org/w8r/geojson2svg)
 
 Render geojson into SVG using inline or external stylesheet, in Node or in the browser
 
