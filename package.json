@@ -42,7 +42,7 @@
   "devDependencies": {
     "browserify": "^13.1.0",
     "deep-extend": "^0.4.1",
-    "eslint": "^3.5.0",
+    "eslint": "^6.8.0",
     "lodash": "^4.15.0",
     "minimist": "^1.2.0",
     "nightmare": "^2.7.0",
