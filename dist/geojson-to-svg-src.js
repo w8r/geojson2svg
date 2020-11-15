@@ -249,7 +249,7 @@ module.exports = require('./src/renderer');
 	if (typeof define === 'function' && define.amd) { // AMD
 		define(factory);
 	} else if (typeof module         === 'object' &&
-             typeof module.exports === "object") { // Node/CommonJS
+             typeof module.exports === 'object') { // Node/CommonJS
 		module.exports = factory();
 	} else { // Browser globals
 		window.geojsonProject = factory();
@@ -352,15 +352,17 @@ function projectGeometry (geometry, project, context) {
  * @return {*}
  */
 function projectCoords (coords, levelsDeep, project, context) {
-  var coord, i, len;
-  var result = [];
+  var coord, i, len = coords.length;
+  var result = new Array(len);
 
-  for (i = 0, len = coords.length; i < len; i++) {
-    coord = levelsDeep ?
-      projectCoords(coords[i], levelsDeep - 1, project, context) :
-      project.call(context, coords[i]);
-
-    result.push(coord);
+  if (levelsDeep) {
+		for (i = 0; i < len; i++) {
+	    result[i] = projectCoords(coords[i], levelsDeep - 1, project, context);
+	  }
+	} else {
+	  for (i = 0, len = coords.length; i < len; i++) {
+	    result[i] = project.call(context, coords[i]);
+	  }
   }
 
   return result;

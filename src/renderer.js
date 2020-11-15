@@ -1,25 +1,26 @@
-var extend      = require('json-extend');
-var hash        = require('string-hash');
-var projectgj   = require('geojson-project');
-var getFontData = require('./get_font_data');
-var Matrix      = require('transformation-matrix-js').Matrix;
+import extend      from 'json-extend';
+import hash        from 'string-hash';
+import projectgj   from 'geojson-project';
+import getFontData from './get_font_data';
+import { Matrix }  from 'transformation-matrix-js';
 
-var bboxUtils       = require('./bbox');
-var extendBBox      = bboxUtils.extend;
-var padBBox         = bboxUtils.pad;
-var getDefaultBBox  = bboxUtils.getDefault;
+import {
+  extend as extendBBox,
+  pad as padBBox,
+  getDeafult as getDefaultBBox
+} from './bbox';
 
-var XMLNS     = 'http://www.w3.org/2000/svg';
-var XLINK     = 'http://www.w3.org/1999/xlink';
-var VERSION   = 1.2;
+const XMLNS     = 'http://www.w3.org/2000/svg';
+const XLINK     = 'http://www.w3.org/1999/xlink';
+const VERSION   = 1.2;
 
-var SYMBOL    = 'symbol';
-var TEXTBOX   = 'textbox';
-var FONT_SIZE = 10;
+const SYMBOL    = 'symbol';
+const TEXTBOX   = 'textbox';
+const FONT_SIZE = 10;
 
 
-var DefaultStyles = require('./default_styles');
-var DefaultFonts  = [
+import DefaultStyles from './default_styles';
+const DefaultFonts  = [
   require('../fonts/arial_helvetica_sans-serif.json'),
   require('../fonts/helvetica_arial_sans-serif.json'),
   require('../fonts/georgia_times_serif.json'),
@@ -34,7 +35,6 @@ module.exports.extendBBox    = extendBBox;
 module.exports.padBBox       = padBBox;
 
 /**
- *
  * @class Renderer
  *
  * @param {GeoJSON=}         gj         Input data
@@ -48,36 +48,30 @@ module.exports.padBBox       = padBBox;
  *                                      in case you need to perform some
  *                                      preparation of Feature -> Feature
  */
-function Renderer (gj, styles, extent, projection, type, fonts, transform) {
-  this._data       = null;
-  this._extent     = null;
-  this._type       = null;
-  this._styles     = DefaultStyles;
-  this._projection = null;
-  this._type       = null;
-  this._fonts      = [];
-  this._transform  = null;
-  this._plugins    = {};
-  this._decorators = {};
+export class Renderer {
+  constructor(gj, styles, extent, projection, type, fonts, transform) {
+    this._data       = null;
+    this._extent     = null;
+    this._type       = null;
+    this._styles     = DefaultStyles;
+    this._projection = null;
+    this._type       = null;
+    this._fonts      = [];
+    this._transform  = null;
+    this._plugins    = {};
+    this._decorators = {};
 
-  this._defs       = null;
+    this._defs       = null;
 
-  if (styles)       this.styles(styles);
-  if (extent)       this.extent(extent);
-  if (projection)   this.projection(projection);
-  if (type)         this.type(type);
-  if (transform)    this.transform(transform);
-  if (gj)           this.data(gj);
+    if (styles)       this.styles(styles);
+    if (extent)       this.extent(extent);
+    if (projection)   this.projection(projection);
+    if (type)         this.type(type);
+    if (transform)    this.transform(transform);
+    if (gj)           this.data(gj);
 
-  this.fonts(fonts || DefaultFonts);
-}
-
-// factory
-function renderer (gj, styles, extent, project, type, fonts, transform) {
-  return new Renderer(gj, styles, extent, project, type, fonts, transform);
-}
-
-Renderer.prototype = {
+    this.fonts(fonts || DefaultFonts);
+  }
 
   /**
    * Stores styles for the renderer
@@ -85,18 +79,18 @@ Renderer.prototype = {
    * @param  {Object|Function} styles
    * @return {Renderer}
    */
-  styles: function (styles) {
+  styles (styles) {
     this._styles = (typeof styles === 'function') ?
       styles : extend({}, DefaultStyles, styles);
     return this;
-  },
+  }
 
 
   /**
    * @param  {Array.<Object>} fonts
    * @return {Renderer}
    */
-  fonts: function(fonts) {
+  fonts(fonts) {
     if (!Array.isArray(fonts)) {
       fonts = [fonts];
     }
@@ -109,7 +103,7 @@ Renderer.prototype = {
     }
 
     return this;
-  },
+  }
 
 
   /**
@@ -117,13 +111,13 @@ Renderer.prototype = {
    * @param  {Function} transform
    * @return {Renderer}
    */
-  transform: function(transform) {
+  transform (transform) {
     if (typeof transform !== 'function') {
       throw new TypeError('Transform feature must be a function');
     }
     this._transform = transform;
     return this;
-  },
+  }
 
 
   /**
@@ -131,10 +125,10 @@ Renderer.prototype = {
    * @param  {String|Function} type
    * @return {Renderer}
    */
-  type: function(type) {
+  type (type) {
     this._type = type;
     return this;
-  },
+  }
 
 
   /**
@@ -143,7 +137,7 @@ Renderer.prototype = {
    * @param  {GeoJSON} data
    * @return {Renderer}
    */
-  data: function (data) {
+  data (data) {
     if (data.type !== 'FeatureCollection') {
       if (data.type === 'Feature') {
         data = { type: 'FeatureCollection', 'features': [data] };
@@ -158,7 +152,7 @@ Renderer.prototype = {
 
     this._data = data;
     return this;
-  },
+  }
 
 
   /**
@@ -167,13 +161,13 @@ Renderer.prototype = {
    * @param  {Function} proj
    * @return {Renderer}
    */
-  projection: function (proj) {
+  projection (proj) {
     if (typeof proj !== 'function') {
       throw new TypeError('Projection must be a function [x, y] -> [x, y]');
     }
     this._projection = proj;
     return this;
-  },
+  }
 
 
   /**
@@ -182,10 +176,10 @@ Renderer.prototype = {
    * @param  {Array.<Number>} extent
    * @return {Renderer}
    */
-  extent: function (extent) {
+  extent (extent) {
     this._extent = extent;
     return this;
-  },
+  }
 
 
   /**
@@ -194,14 +188,14 @@ Renderer.prototype = {
    * @param  {Function} decorator
    * @return {Renderer}
    */
-  decorator: function (type, decorator) {
+  decorator (type, decorator) {
     if (typeof decorator !== 'function') {
       throw new TypeError('Decorator must be a function ' +
         '(feature, coordinates, closed, bbox, featureBounds) -> SVGPath ');
     }
     this._decorators[type] = decorator;
     return this;
-  },
+  }
 
 
   /**
@@ -209,7 +203,7 @@ Renderer.prototype = {
    * @param {GeoJSON=} data
    * @return {String}
    */
-  render: function (data) {
+  render (data) {
     if (data) this.data(data);
 
     var rendered = [];
@@ -223,7 +217,7 @@ Renderer.prototype = {
       this._extent || this._data.extent || this._data.bbox ||
       (this._data.properties ? this._data.properties.bbox : null) || bbox);
     return rendered.join('');
-  },
+  }
 
 
   /**
@@ -232,7 +226,7 @@ Renderer.prototype = {
    * @param  {Array.<String>} accum
    * @param  {Array.<Number>} bbox
    */
-  _renderContainer: function (accum, bbox) {
+  _renderContainer (accum, bbox) {
     var viewBox = [bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]];
     accum.unshift('<g>');
 
@@ -244,10 +238,10 @@ Renderer.prototype = {
 
     accum.unshift(
       ['<svg viewBox="', viewBox.join(' '), '" xmlns="', XMLNS,
-       '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''));
+        '" xmlns:xlink="', XLINK, '" version="', VERSION, '">'].join(''));
 
     accum.push('</g>', '</svg>');
-  },
+  }
 
 
   /**
@@ -255,24 +249,24 @@ Renderer.prototype = {
    * @param  {Function} pluginRenderer
    * @return {Renderer}
    */
-  plugin: function (type, pluginRenderer) {
+  plugin (type, pluginRenderer) {
     this._plugins[type] = pluginRenderer;
     return this;
-  },
+  }
 
 
   /**
    * @param  {Feature} feature
    * @return {Function|null}
    */
-  _getPluginRenderer: function(feature) {
+  _getPluginRenderer (feature) {
     var type = feature.properties[this._type];
     var pluginRenderer = null;
     if (type) {
       pluginRenderer = this._plugins[type];
     }
     return pluginRenderer;
-  },
+  }
 
 
   /**
@@ -282,7 +276,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>}  bbox
    * @return  {Array.<Number>} featureBounds
    */
-  _feature: function (feature, accum, bbox) {
+  _feature (feature, accum, bbox) {
     var featureBounds = getDefaultBBox();
 
     if (this._transform) feature = this._transform(feature);
@@ -315,7 +309,7 @@ Renderer.prototype = {
         break;
     }
     return featureBounds;
-  },
+  }
 
 
   /**
@@ -326,7 +320,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _geometryCollection: function (feature, accum, bbox, featureBounds) {
+  _geometryCollection (feature, accum, bbox, featureBounds) {
     var className =
       ('geometrycollection ' + (feature.properties.className || '')).trim();
     accum.push('<g class="', className, '">');
@@ -357,7 +351,7 @@ Renderer.prototype = {
     }
 
     accum.push('</g>');
-  },
+  }
 
 
   /**
@@ -368,7 +362,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _multiPoint: function(feature, accum, bbox, featureBounds) {
+  _multiPoint (feature, accum, bbox, featureBounds) {
     var className =
       ('multipoint ' + (feature.properties.className || '')).trim();
     accum.push('<g class="', className, '">');
@@ -386,7 +380,7 @@ Renderer.prototype = {
     }
 
     accum.push('</g>');
-  },
+  }
 
 
   /**
@@ -395,13 +389,13 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _lineString: function (feature, accum, bbox, featureBounds) {
+  _lineString (feature, accum, bbox, featureBounds) {
     var properties = feature.properties;
     var className = ('linestring ' + (properties.className || '')).trim();
     accum.push('<path class="', className,
       '" d="', this._getPath(feature, false, bbox, featureBounds), '"',
       this._getStyles(feature, bbox, featureBounds), ' />');
-  },
+  }
 
 
   /**
@@ -410,7 +404,7 @@ Renderer.prototype = {
    * @param  {Array.<Number}  bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _text: function (feature, accum, bbox, featureBounds) {
+  _text (feature, accum, bbox, featureBounds) {
     var properties = extend({}, this._selectStyle(feature), feature.properties);
     var fontSize   = properties.fontSize   || FONT_SIZE;
     var fontColor  = properties.fontColor  || properties.color;
@@ -437,7 +431,7 @@ Renderer.prototype = {
       '>',
         content,
       '</text>');
-  },
+  }
 
 
   /**
@@ -448,7 +442,7 @@ Renderer.prototype = {
    * @param  {Object}         props
    * @return {String}
    */
-  _renderTextContent: function(text, fontSize, fontFamily, featureBounds, props) {
+  _renderTextContent (text, fontSize, fontFamily, featureBounds, props) {
     var accum = [];
     if (Array.isArray(text) && props.lineHeight) { // it's formatted
       for (var i = 0, len = text.length; i < len; i++) {
@@ -465,7 +459,7 @@ Renderer.prototype = {
     }
 
     return text;
-  },
+  }
 
 
   /**
@@ -474,7 +468,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @return {String}
    */
-  _renderMultilineText: function(text, fontData, bbox) {
+  _renderMultilineText (text, fontData, bbox) {
     var width = bbox[2] - bbox[0];
     var length = text.length;
     var accum = [];
@@ -506,7 +500,7 @@ Renderer.prototype = {
     }
 
     return accum.join('');
-  },
+  }
 
 
   /**
@@ -515,7 +509,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _polygon: function (feature, accum, bbox, featureBounds) {
+  _polygon (feature, accum, bbox, featureBounds) {
     var properties = feature.properties;
     var className = ('polygon ' + (properties.className || '')).trim();
     accum.push('<path class="', className,
@@ -525,7 +519,7 @@ Renderer.prototype = {
     if (this._type && feature.properties[this._type] === TEXTBOX) {
       this._text(feature, accum, bbox, featureBounds);
     }
-  },
+  }
 
 
   /**
@@ -534,7 +528,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _point: function (feature, accum, bbox, featureBounds) {
+  _point (feature, accum, bbox, featureBounds) {
     var type = this._type ? feature.properties[this._type] : '';
     if (type && type === SYMBOL) {
       this._symbol(feature, accum, bbox, featureBounds);
@@ -559,7 +553,7 @@ Renderer.prototype = {
       extendBBox(bbox, featureBounds.slice(0, 2));
       extendBBox(bbox, featureBounds.slice(2, 4));
     }
-  },
+  }
 
 
   /**
@@ -567,7 +561,7 @@ Renderer.prototype = {
    * @param  {Object} options
    * @return {String} SVG marker id
    */
-  _createArrow: function(options) {
+  _createArrow (options) {
     var height = options.arrowLength    || (options.weight * 20);
     var width  = options.arrowThickness || (options.weight * 10);
     var length = height;
@@ -586,10 +580,10 @@ Renderer.prototype = {
       if (direction === 1) { // LTR
         refX = length;
         d = ['M', 0, 0, 'L', 0, width,
-             'L', length, width / 2, 'Z'].join(' ');
+              'L', length, width / 2, 'Z'].join(' ');
       } else {               // RTL
         d = ['M', length, 0, 'L', length, width,
-             'L', 0, width / 2, 'Z'].join(' ');
+              'L', 0, width / 2, 'Z'].join(' ');
       }
 
       path = ['<path id="path-', id, '" class="arrow-path" d="', d , '" />'];
@@ -599,7 +593,7 @@ Renderer.prototype = {
       this._defs.push(marker);
     }
     return id;
-  },
+  }
 
 
   /**
@@ -608,7 +602,7 @@ Renderer.prototype = {
    * @param  {Object}     options
    * @return {String}
    */
-  _createMarker: function (path, id, width, height, ref) {
+  _createMarker (path, id, width, height, ref) {
     var marker = [
       '<marker id="',     id,     '" ',
         'markerWidth="',  width,  '" ',
@@ -622,7 +616,7 @@ Renderer.prototype = {
 
     marker.push('>', path, '</marker>');
     return marker.join('');
-  },
+  }
 
 
   /**
@@ -631,7 +625,7 @@ Renderer.prototype = {
    * @param  {Feature} feature
    * @return {String} symbol id
    */
-  _getSymbolDef: function (feature, viewBox) {
+  _getSymbolDef (feature, viewBox) {
     var src = feature.properties.symbol.src.trim();
     var id = 'feature-symbol-' + hash(src);
 
@@ -652,7 +646,7 @@ Renderer.prototype = {
     }
 
     return id;
-  },
+  }
 
 
   /**
@@ -661,7 +655,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} featureBounds
    * @return {String}
    */
-  _createSymbol: function (feature, bbox, featureBounds) {
+  _createSymbol (feature, bbox, featureBounds) {
     var viewBox = feature.properties.symbol
       .src.match(/view[Bb]ox\=["']([^"']+)["']/m)[1];
     viewBox = viewBox ? viewBox.split(' ').map(parseFloat) : featureBounds;
@@ -699,7 +693,7 @@ Renderer.prototype = {
       '/>'
     ].join('');
     return use;
-  },
+  }
 
 
   /**
@@ -710,7 +704,7 @@ Renderer.prototype = {
    * @param  {Number}         height
    * @return {Array.<Number>} matrix
    */
-  _getSymbolTransform: function (feature, bbox, featureBounds, width, height) {
+  _getSymbolTransform (feature, bbox, featureBounds, width, height) {
     var props    = feature.properties;
     var center   = feature.geometry.coordinates;
     var scale    = props.scale    || 1;
@@ -724,7 +718,7 @@ Renderer.prototype = {
       .translate(-width / 2, -height / 2);
 
     return m.toArray();
-  },
+  }
 
 
   /**
@@ -733,7 +727,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>} bbox
    * @param  {Array.<Number>} featureBounds
    */
-  _symbol: function (feature, accum, bbox, featureBounds) {
+  _symbol (feature, accum, bbox, featureBounds) {
     var coord = feature.geometry.coordinates;
     var className = ('point ' + (feature.properties.className || '')).trim();
     var radius = feature.properties.radius || 1;
@@ -748,7 +742,7 @@ Renderer.prototype = {
         '" r="',  radius, '" ',
         this._getStyles(feature, bbox, featureBounds), '/>');
     }
-  },
+  }
 
 
   /**
@@ -758,7 +752,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>}         featureBounds
    * @return {String}
    */
-  _coordinatesToPath: function (coords, closed, bbox, fBounds, decorator) {
+  _coordinatesToPath (coords, closed, bbox, fBounds, decorator) {
     var res = '', i, len, c, x, y;
     if (!isFinite(coords[0][0])) {
       for (i = 0, len = coords.length; i < len; i++) {
@@ -779,7 +773,7 @@ Renderer.prototype = {
     }
 
     return res || 'M0 0';
-  },
+  }
 
 
   /**
@@ -788,7 +782,7 @@ Renderer.prototype = {
    * @param {Array.<Number>}  bbox
    * @param {Array.<Number>}  fBounds
    */
-  _getPath: function (feature, closed, bbox, fBounds) {
+  _getPath (feature, closed, bbox, fBounds) {
     var path = '';
     var coordinates = feature.geometry.coordinates;
     if (this._type && this._decorators[feature.properties[this._type]]) {
@@ -798,14 +792,14 @@ Renderer.prototype = {
       path = this._coordinatesToPath(coordinates, closed, bbox, fBounds);
     }
     return path.trim();
-  },
+  }
 
 
   /**
    * @param  {Feature} feature
    * @return {Object}  style
    */
-  _selectStyle: function (feature) {
+  _selectStyle (feature) {
     if (this._type) {
       if (typeof this._type === 'function') {
         return this._type(feature, this._styles);
@@ -815,7 +809,7 @@ Renderer.prototype = {
     } else {
       return this._styles[feature.geometry.type];
     }
-  },
+  }
 
 
   /**
@@ -824,7 +818,7 @@ Renderer.prototype = {
    * @param  {Array.<Number>}  featureBounds
    * @return {String} styles
    */
-  _getStyles: function(feature, bbox, featureBounds) {
+  _getStyles (feature, bbox, featureBounds) {
     var styles = {
       'stroke-width': 1
     };
@@ -885,4 +879,21 @@ Renderer.prototype = {
     }
     return styleString;
   }
-};
+}
+
+/**
+ * @param {GeoJSON=}         gj         Input data
+ * @param {Object=}          styles     Styles per feature type
+ * @param {Array.<Number>=}  extent     Forced canvas bbox
+ * @param {Function=}        projection Projection function [x,y] => [x,y]
+ * @param {String|Function=} type       Properties field to be used to select
+ *                                      styles for the feature
+ * @param {Object}           fonts      Font measurement(s)
+ * @param {Function=}        transform  Transform function invoked per feature,
+ *                                      in case you need to perform some
+ *                                      preparation of Feature -> Feature
+ * @returns {Renderer}
+ */
+export function renderer (gj, styles, extent, project, type, fonts, transform) {
+  return new Renderer(gj, styles, extent, project, type, fonts, transform);
+}

@@ -2,7 +2,8 @@
   "name": "geojson-to-svg",
   "version": "1.0.3",
   "description": "primitive SVG renderer for geojson with feature styles",
-  "main": "index.js",
+  "main": "dist/geojson-to-svg.js",
+  "browser": "dist/geojson-to-svg.min.js",
   "bin": {
     "geojson2svg": "bin/geojson2svg",
     "measure-font": "bin/measure_font"
@@ -40,13 +41,16 @@
   },
   "homepage": "https://github.com/w8r/geojson2svg#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
     "browserify": "^13.1.0",
     "deep-extend": "^0.6.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.13.0",
     "lodash": "^4.15.0",
-    "minimist": "^1.2.0",
     "nightmare": "^2.7.0",
-    "nodemon": "^1.10.2",
+    "nodemon": "^2.0.6",
+    "rollup": "^2.33.2",
+    "rollup-plugin-terser": "^7.0.2",
     "simplify-js": "^1.2.1",
     "svg-polygon-decorator": "^1.0.7",
     "tap-spec": "^4.1.1",
@@ -56,6 +60,7 @@
   "dependencies": {
     "geojson-project": "^1.0.1",
     "json-extend": "^0.1.0",
+    "minimist": "^1.2.5",
     "string-hash": "^1.1.0",
     "transformation-matrix-js": "^2.6.5"
   }

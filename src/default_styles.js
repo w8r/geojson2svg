@@ -1,10 +1,10 @@
-var FILL    = '#000000';
-var COLOR   = '#333333';
-var WEIGHT  = 0.25;
-var OPACITY = 0.75;
+const FILL    = '#000000';
+const COLOR   = '#333333';
+const WEIGHT  = 0.25;
+const OPACITY = 0.75;
 
 
-var Styles = {
+const Styles = {
 
   'Polygon': {
     weight: WEIGHT,
@@ -39,4 +39,4 @@ Styles['MultiPolygon']    = Styles.Polygon;
 Styles['MultiLineString'] = Styles.LineString;
 Styles['MultiPoint']      = Styles.Point;
 
-module.exports = Styles;
+export default Styles;
