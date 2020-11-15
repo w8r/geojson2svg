@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports={
   "fontFamily": "Arial, Helvetica, sans-serif",
   "values": [
@@ -234,7 +234,7 @@ module.exports={
  * GeoJSON -> SVG text renderer
  *
  * @license MIT
- * @copyright 2016 Alexander Milevski <info@w8r.name>
+ * @copyright 2020 Alexander Milevski <info@w8r.name>
  */
 module.exports = require('./src/renderer');
 
@@ -249,7 +249,7 @@ module.exports = require('./src/renderer');
 	if (typeof define === 'function' && define.amd) { // AMD
 		define(factory);
 	} else if (typeof module         === 'object' &&
-             typeof module.exports === "object") { // Node/CommonJS
+             typeof module.exports === 'object') { // Node/CommonJS
 		module.exports = factory();
 	} else { // Browser globals
 		window.geojsonProject = factory();
@@ -352,15 +352,17 @@ function projectGeometry (geometry, project, context) {
  * @return {*}
  */
 function projectCoords (coords, levelsDeep, project, context) {
-  var coord, i, len;
-  var result = [];
+  var coord, i, len = coords.length;
+  var result = new Array(len);
 
-  for (i = 0, len = coords.length; i < len; i++) {
-    coord = levelsDeep ?
-      projectCoords(coords[i], levelsDeep - 1, project, context) :
-      project.call(context, coords[i]);
-
-    result.push(coord);
+  if (levelsDeep) {
+		for (i = 0; i < len; i++) {
+	    result[i] = projectCoords(coords[i], levelsDeep - 1, project, context);
+	  }
+	} else {
+	  for (i = 0, len = coords.length; i < len; i++) {
+	    result[i] = project.call(context, coords[i]);
+	  }
   }
 
   return result;
