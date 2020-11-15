@@ -1,7 +1,7 @@
 var tape = require('tape');
 var fs   = require('fs');
 var path = require('path');
-var _    = require('lodash');
+var flatten = require('lodash.flatten');
 
 var formatXml   = require('./helpers/format_xml');
 var geojson2svg = require('../');

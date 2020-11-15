@@ -1,29 +1,29 @@
-var fs   = require('fs');
-var path = require('path');
-var _    = require('lodash');
+const fs   = require('fs');
+const path = require('path');
+const _    = require('lodash');
 
-var formatXml   = require('./helpers/format_xml');
-var geojson2svg = require('../');
-var bboxUtils   = require('../src/bbox');
-var Renderer    = geojson2svg.Renderer;
-var data        = require('./fixtures/data.json');
-var style       = require('./fixtures/markup_style.json');
-var wave        = require('./helpers/wave');
-var project     = require('geojson-project');
+const formatXml   = require('./helpers/format_xml');
+const geojson2svg = require('../');
+const bboxUtils   = require('../src/bbox');
+const Renderer    = geojson2svg.Renderer;
+const data        = require('./fixtures/data.json');
+const style       = require('./fixtures/markup_style.json');
+const wave        = require('./helpers/wave');
+const project     = require('geojson-project');
 
-var featureCollection = require('./helpers/feature_collection');
-var Polygon           = require('./helpers/polygon');
+const featureCollection = require('./helpers/feature_collection');
+const Polygon           = require('./helpers/polygon');
 
 //var geoData     = require('./fixtures/ne_50m_admin_0_countries.geojson');
 
 
 console.time('svg');
-var rendered =
+const rendered =
   geojson2svg(data, style, null, null, 'markupType')
-      .decorator('cloud', function (feature, coordinates, closed, bbox, fbounds) {
-        var radius = feature.properties.radius || 5;
+      .decorator('cloud', (feature, coordinates, closed, bbox, fbounds) => {
+        const radius = feature.properties.radius || 5;
         console.time('wave');
-        var w = wave(coordinates, radius, closed, bbox, fbounds);
+        const w = wave(coordinates, radius, closed, bbox, fbounds);
         console.timeEnd('wave');
         return w;
       })
@@ -38,12 +38,12 @@ fs.writeFileSync(
 // render geo data
 fs.readFile(path.join(process.cwd(), 'test/fixtures/ne_50m_admin_0_countries.geojson'), {
   encoding: 'utf-8'
-}, function (err, data) {
+},  (err, data) => {
   console.log('read');
-  var geoData = JSON.parse(data);
+  const geoData = JSON.parse(data);
 
   console.time('geo');
-  var rendered = geojson2svg(geoData, function (feature) {
+  const rendered = geojson2svg(geoData,  (feature) => {
     return {
       fill: 'rgb(' + [
         Math.round(256 * Math.random()),

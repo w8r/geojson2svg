@@ -1,7 +1,7 @@
 var tape = require('tape');
 var fs   = require('fs');
 var path = require('path');
-var _    = require('lodash');
+var flatten = require('lodash.flatten');
 
 var formatXml   = require('./helpers/format_xml');
 var geojson2svg = require('../');
@@ -48,7 +48,7 @@ tape('MultiLineString', function (t) {
 
   var calculatedBBox = builder.bbox();
   bboxUtils.pad(calculatedBBox, 5);
-  t.deepEquals(path, _.flatten(_.flatten(linestring.geometry.coordinates)), 'correct path');
+  t.deepEquals(path, flatten(flatten(linestring.geometry.coordinates)), 'correct path');
   t.deepEquals(bbox, calculatedBBox, 'correct viewBox');
 
   t.ok(svg.indexOf('stroke-width="5"') !== -1, 'has stroke-width');
