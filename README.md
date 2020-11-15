@@ -277,11 +277,11 @@ and calculate the values. Note that if further on `geojson2svg` will find the
 matching `font-family` but not the size, it will try and interpolate the values.
 
 ```shell
-measure-font --font '\"Times New Roman\", Georgia, serif' --sizes [3, 5, 8, 12] > fonts.json
+measure-font --font '\"Times New Roman\", Georgia, serif' --sizes 3,5,8,12 > fonts.json
 ```
 
 - `--fontFamily, -f <String>` Font family
-- `--sizes, -s [8, 10, 12, ...]` font sizes to measure glyphs for
+- `--sizes, -s 8,10,12,...` font sizes to measure glyphs for
 
 The result file can be passed to the geojson2svg through the `fonts` option. You
 might also want to check out included measurement files in `fonts/` dir.

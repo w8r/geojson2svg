@@ -22,7 +22,8 @@ if (argv.s || argv.sizes) {
 
 var verbose = !!(argv.v || argv.verbose);
 
-var fontFamily = argv.f || argv.fontFamily || 'Arial, Helvetica, sans-serif';
+var fontFamily = (argv.f || argv.fontFamily || 'Arial, Helvetica, sans-serif');
+fontFamily = fontFamily.trim();
 
 if (argv._) {
   fontFamily += ' ' + argv._.join(' ');
