@@ -29,7 +29,7 @@ Alternatively, you can use one of the pre-built versions from the `dist/` direct
 
 ## API
 
-<a href="#constructor" name="constructor">#</a> **new geojson2svg.Renderer(** gj, styles, extent, projection, type, fonts, transform**)**
+<a href="#constructor" name="constructor">#</a> **new geojson2svg.Renderer(** gj, styles, extent, projection, type, fonts, transform **)**
 
 <a href="#factory" name="factory">#</a> **geojson2svg(** gj, styles, extent, projection, type, fonts, transform **)**
 
@@ -66,7 +66,7 @@ geojson2svg()
 
 Main rendering pipe, returns SVG string.
 
-<a href="#fonts" name="fonts">#</a> **geojson2svg().fonts(** Array | Object **)**
+<a href="#fonts" name="fonts">#</a> **geojson2svg().fonts(** Array<Font> | Font **)**
 
 Fonts measurements required for correct text and multi-line text rendering.
 Must be in the same format that the CLI script provides, see
@@ -98,7 +98,7 @@ geojson2svg()
 
 Forced canvas extent, e.g. SVG `viewBox`. It will overwrite what was calculated from the features coordinatesand styles.
 
-<a href="#decorator" name="decorator">#</a> **geojson2svg().decorator(** String, Function**)**
+<a href="#decorator" name="decorator">#</a> **geojson2svg().decorator(** string, (feature, rings, closed, bbox, featuresBbox) => string **)**
 
 Registers a decorator for the special rendering of the `Polygon`/`LineString` path.
 Basically it's a custom `<path>` renderer, it has to return a valid `SVG` path.
