@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/w8r/geojson2svg#readme",
   "devDependencies": {
+    "@types/string-hash": "^1.1.1",
     "browserify": "^17.0.0",
     "deep-extend": "^0.6.0",
     "eslint": "^6.8.0",
@@ -49,10 +50,15 @@
     "svg-polygon-decorator": "^1.0.7",
     "tap-spec": "^5.0.0",
     "tape": "^5.0.1",
-    "uglifyjs": "^2.4.10"
+    "typescript": "^4.9.4",
+    "uglifyjs": "^2.4.10",
+    "vite": "^4.0.4",
+    "vitest": "^0.27.1"
   },
   "dependencies": {
-    "geojson-project": "^1.0.1",
+    "@types/geojson": "^7946.0.10",
+    "geojson-project": "^2.0.0",
+    "gl-matrix": "^3.4.3",
     "json-extend": "^0.1.0",
     "minimist": "^1.2.5",
     "string-hash": "^1.1.0",

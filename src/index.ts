@@ -5,4 +5,4 @@
  * @license MIT
  * @copyright 2020 Alexander Milevski <info@w8r.name>
  */
-module.exports = require('./src/renderer');
+export * from "./renderer";
