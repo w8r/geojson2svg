@@ -23,7 +23,7 @@ function gauss(mu, sigma) {
       v = 2 * Math.random() - 1;
       s = u * u + v * v;
     }
-    w = Math.sqrt(-2 * (Math.log(s)) / s);
+    w = Math.sqrt((-2 * Math.log(s)) / s);
     z = u * w;
     _next_gauss = v * w;
   }
@@ -50,18 +50,25 @@ function gauss(mu, sigma) {
  *
  * @return {Array.<Array<Number>>} list of vertices, in CCW order.
  */
-function generatePolygon(ctrX, ctrY, aveRadius, irregularity, spikeyness, numVerts) {
+export function generatePolygon(
+  ctrX,
+  ctrY,
+  aveRadius,
+  irregularity,
+  spikeyness,
+  numVerts
+) {
   var PIx2 = 2 * Math.PI;
-  irregularity = clamp(irregularity, 0, 1) * PIx2 / numVerts;
+  irregularity = (clamp(irregularity, 0, 1) * PIx2) / numVerts;
   spikeyness = clamp(spikeyness, 0, 1) * aveRadius;
 
   var i;
 
   // generate n angle steps
   var angleSteps = [];
-  var lower = (PIx2 / numVerts) - irregularity;
-  var upper = (PIx2 / numVerts) + irregularity;
-  var sum = 0
+  var lower = PIx2 / numVerts - irregularity;
+  var upper = PIx2 / numVerts + irregularity;
+  var sum = 0;
   for (var i = 0; i < numVerts; i++) {
     var tmp = lower + (upper - lower) * Math.random();
     angleSteps.push(tmp);
@@ -69,7 +76,7 @@ function generatePolygon(ctrX, ctrY, aveRadius, irregularity, spikeyness, numVer
   }
 
   // normalize the steps so that point 0 and point n+1 are the same
-  var k = sum / (PIx2);
+  var k = sum / PIx2;
   for (i = 0; i < numVerts; i++) {
     angleSteps[i] /= k;
   }
@@ -79,14 +86,14 @@ function generatePolygon(ctrX, ctrY, aveRadius, irregularity, spikeyness, numVer
   var angle = PIx2 * Math.random();
 
   for (i = 0; i < numVerts; i++) {
-    var r_i = clamp(gauss(aveRadius, spikeyness), 0, 2 * aveRadius)
+    var r_i = clamp(gauss(aveRadius, spikeyness), 0, 2 * aveRadius);
     var x = ctrX + r_i * Math.cos(angle);
     var y = ctrY + r_i * Math.sin(angle);
     points.push([x, y]);
     angle += angleSteps[i];
   }
 
-  return points
+  return points;
 }
 
 /**
@@ -101,5 +108,3 @@ function clamp(x, min, max) {
   else if (x > max) return max;
   else return x;
 }
-
-module.exports = generatePolygon;

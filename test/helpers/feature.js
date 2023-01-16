@@ -1,77 +1,74 @@
-var project = require('geojson-project');
-var bboxUtils = require('../../src/bbox');
+import project from "geojson-project";
+import { extend, getDefault } from "../../src/bbox";
 
-function Feature(props, geometry) {
-  this._properties = props || {};
+export class Feature {
+  constructor(props, geometry) {
+    this._properties = props || {};
 
-  if (props)    this.properties(props);
-  if (geometry) this.geometry(geometry);
-}
+    if (props) this.properties(props);
+    if (geometry) this.geometry(geometry);
+  }
 
-Feature.prototype = {
-
-  properties: function (props) {
+  properties(props) {
     return this;
-  },
+  }
 
-
-  setProperty: function (key, value) {
+  setProperty(key, value) {
     this._properties[key] = value;
     return this;
-  },
+  }
 
-
-  geometry: function (geometry) {
+  geometry(geometry) {
     this._geometry = geometry;
     return this;
-  },
+  }
 
-
-  round: function () {
-    this.geometry(project({
-        type: 'Feature',
-        geometry: this._geometry
-    }, function (coord) {
-      return [Math.round(coord[0]), Math.round(coord[1])];
-    }).geometry);
+  round() {
+    this.geometry(
+      project(
+        {
+          type: "Feature",
+          geometry: this._geometry,
+        },
+        function (coord) {
+          return [Math.round(coord[0]), Math.round(coord[1])];
+        }
+      ).geometry
+    );
     return this;
-  },
+  }
 
-
-  bbox: function () {
-    var bbox = bboxUtils.getDefault();
-    project({
-      type: 'Feature',
-      geometry: this._geometry
-    }, function (coord) {
-      bboxUtils.extend(bbox, coord);
-      return coord;
-    });
+  bbox() {
+    var bbox = getDefault();
+    project(
+      {
+        type: "Feature",
+        geometry: this._geometry,
+      },
+      function (coord) {
+        extend(bbox, coord);
+        return coord;
+      }
+    );
     return bbox;
-  },
+  }
 
-
-  build: function () {
+  build() {
     return {
-      type: 'Feature',
+      type: "Feature",
       properties: JSON.parse(JSON.stringify(this._properties)),
-      geometry: JSON.parse(JSON.stringify(this._geometry))
+      geometry: JSON.parse(JSON.stringify(this._geometry)),
     };
   }
-};
+}
 
 Feature.calculateBounds = bbox;
 
 function bbox(b, ring) {
   if (Array.isArray(ring) && isFinite(ring[0])) {
-    bboxUtils.extend(b, ring);
+    extend(b, ring);
   } else {
-    ring.forEach(function (r) {
-      bbox(b, r);
-    });
+    ring.forEach((r) => bbox(b, r));
   }
   return b;
 }
-
-
-module.exports = Feature;

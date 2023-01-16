@@ -1,4 +1,4 @@
-import hash from "string-hash";
+import hash from "@sindresorhus/string-hash";
 import projectgj from "geojson-project";
 import { getFontData } from "./get_font_data";
 var Matrix = require("transformation-matrix-js").Matrix;
@@ -87,7 +87,7 @@ export class Renderer {
    *                                      preparation of Feature -> Feature
    */
   constructor(
-    gj: FeatureCollection,
+    gj?: FeatureCollection,
     styles?: Styles,
     extent?: BBox,
     projection?: Projection,

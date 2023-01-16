@@ -11,7 +11,7 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "geejson2svg",
       // the proper extensions will be added
-      fileName: name,
+      fileName: (format) => `index.${format}.js`,
     },
   },
 });

@@ -2,7 +2,11 @@
   "name": "geojson-to-svg",
   "version": "1.1.4",
   "description": "primitive SVG renderer for geojson with feature styles",
-  "main": "index.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.esm.js",
+  "unpkg": "./dist/index.umd.js",
+  "jsdelivr": "./dist/index.umd.js",
+  "types": "./dist/types/index.d.ts",
   "bin": {
     "geojson2svg": "bin/geojson2svg",
     "measure-font": "bin/measure_font"
@@ -14,13 +18,14 @@
     "fonts": "fonts"
   },
   "scripts": {
-    "test": "tape test/*.test.js | tap-spec",
-    "test:watch": "nodemon --exec 'npm run lint && npm test && npm run demo'",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
     "demo": "node test/render.js",
     "lint": "eslint ./src/",
     "build-js": "browserify index.js -v -o dist/geojson-to-svg-src.js",
     "compress-js": "uglifyjs dist/geojson-to-svg-src.js -o dist/geojson-to-svg.js -m --comments",
-    "build": "npm run lint && npm run test && npm run build-js && npm run compress-js"
+    "build": "vite build && npm run types",
+    "types": "tsc -d --emitDeclarationOnly --declarationDir dist/types src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -56,8 +61,9 @@
     "vitest": "^0.27.1"
   },
   "dependencies": {
+    "@sindresorhus/string-hash": "^2.0.0",
     "@types/geojson": "^7946.0.10",
-    "geojson-project": "^2.0.0",
+    "geojson-project": "^2.0.1",
     "gl-matrix": "^3.4.3",
     "json-extend": "^0.1.0",
     "minimist": "^1.2.5",
