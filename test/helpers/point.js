@@ -1,30 +1,23 @@
-var bboxUtils = require('../../src/bbox');
-var Feature = require('./feature');
+import * as bboxUtils from "../../src/bbox";
+import { Feature } from "./feature";
 
-function Point(props, geometry) {
-  Feature.call(this, props, geometry);
+export class Point extends Feature {
+  randomGeometry(center, bbox, R) {
+    const coords = center || [20, 20];
+
+    this.geometry({
+      type: "Point",
+      coordinates: coords,
+    });
+    return this;
+  }
+
+  bbox() {
+    const bbox = bboxUtils.getDefault();
+    bboxUtils.extend(bbox, this._geometry.coordinates);
+    bboxUtils.pad(bbox, this._properties.radius || 0);
+    bboxUtils.pad(this._properties.weight || 0);
+
+    return bbox;
+  }
 }
-Point.prototype = Object.create(Feature.prototype);
-
-
-Point.prototype.randomGeometry = function (center, bbox, R) {
-  var coords = center || [20, 20];
-
-  this.geometry({
-    type: 'Point',
-    coordinates: coords
-  });
-  return this;
-};
-
-
-Point.prototype.bbox = function () {
-  var bbox = bboxUtils.getDefault();
-  bboxUtils.extend(bbox, this._geometry.coordinates);
-  bboxUtils.pad(bbox, this._properties.radius || 0);
-  bboxUtils.pad(this._properties.weight || 0);
-
-  return bbox;
-};
-
-module.exports = Point;

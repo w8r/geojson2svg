@@ -1,6 +1,6 @@
-module.exports = function featureCollection () {
+export function featureCollection() {
   return {
-    type: 'FeatureCollection',
-    features: Array.prototype.slice.call(arguments)
+    type: "FeatureCollection",
+    features: Array.prototype.slice.call(arguments),
   };
-};
+}

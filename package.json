@@ -2,7 +2,11 @@
   "name": "geojson-to-svg",
   "version": "1.1.4",
   "description": "primitive SVG renderer for geojson with feature styles",
-  "main": "index.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.esm.js",
+  "unpkg": "./dist/index.umd.js",
+  "jsdelivr": "./dist/index.umd.js",
+  "types": "./dist/types/index.d.ts",
   "bin": {
     "geojson2svg": "bin/geojson2svg",
     "measure-font": "bin/measure_font"
@@ -14,13 +18,14 @@
     "fonts": "fonts"
   },
   "scripts": {
-    "test": "tape test/*.test.js | tap-spec",
-    "test:watch": "nodemon --exec 'npm run lint && npm test && npm run demo'",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
     "demo": "node test/render.js",
     "lint": "eslint ./src/",
     "build-js": "browserify index.js -v -o dist/geojson-to-svg-src.js",
     "compress-js": "uglifyjs dist/geojson-to-svg-src.js -o dist/geojson-to-svg.js -m --comments",
-    "build": "npm run lint && npm run test && npm run build-js && npm run compress-js"
+    "build": "vite build && npm run types",
+    "types": "tsc -d --emitDeclarationOnly --declarationDir dist/types src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -40,6 +45,7 @@
   },
   "homepage": "https://github.com/w8r/geojson2svg#readme",
   "devDependencies": {
+    "@types/string-hash": "^1.1.1",
     "browserify": "^17.0.0",
     "deep-extend": "^0.6.0",
     "eslint": "^6.8.0",
@@ -49,10 +55,16 @@
     "svg-polygon-decorator": "^1.0.7",
     "tap-spec": "^5.0.0",
     "tape": "^5.0.1",
-    "uglifyjs": "^2.4.10"
+    "typescript": "^4.9.4",
+    "uglifyjs": "^2.4.10",
+    "vite": "^4.0.4",
+    "vitest": "^0.27.1"
   },
   "dependencies": {
-    "geojson-project": "^1.0.1",
+    "@sindresorhus/string-hash": "^2.0.0",
+    "@types/geojson": "^7946.0.10",
+    "geojson-project": "^2.0.1",
+    "gl-matrix": "^3.4.3",
     "json-extend": "^0.1.0",
     "minimist": "^1.2.5",
     "string-hash": "^1.1.0",
